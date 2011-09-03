@@ -11,3 +11,6 @@ fuel/app/logs/*/*/*
 fuel/app/cache/*/*
 nbproject/
 .idea
+
+TESTING.md
+CHANGELOG.md
