@@ -14,3 +14,5 @@ nbproject/
 
 TESTING.md
 CHANGELOG.md
+
+fuel/app/config/db.php
