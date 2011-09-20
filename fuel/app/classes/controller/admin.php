@@ -13,6 +13,20 @@ class Controller_Admin extends Controller_Template {
 	public function before()
 	{
 		parent::before();
+
+		if ($this->request->action != 'login')
+		{
+
+			if (\Auth::check())
+			{
+				//ok
+			}
+			else
+			{
+				Response::redirect('admin/login');
+			}
+		}
+
 		$this->template->interface_topbar = View::factory('interface/topbar');
 	}
 
@@ -57,4 +71,4 @@ class Controller_Admin extends Controller_Template {
 
 }
 
-/* End of file login.php */
+/* End of file admin.php */
