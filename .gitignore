@@ -16,6 +16,8 @@ TESTING.md
 CHANGELOG.md
 
 fuel/app/config/db.php
+fuel/app/config/auth.php
+fuel/app/config/simpleauth.php
 
 deploy
 .syncignore
