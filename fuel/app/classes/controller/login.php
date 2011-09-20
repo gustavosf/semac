@@ -27,11 +27,11 @@ class Controller_Login extends Controller_Template {
 	public function action_index()
 	{
 		$data = array();
+
 		if ($_POST)
 		{
-			//$auth = Auth::instance();
-			//if ($auth->logni($_POST['username'], $_POST['password']))
-			if (0)
+			$auth = Auth::instance();
+			if ($auth->logni($_POST['username'], $_POST['password']))
 			{
 				Response::redirect('admin');
 			}
@@ -39,12 +39,9 @@ class Controller_Login extends Controller_Template {
 			{
 				$data['username'] = $_POST['username'];
 				$data['error'] = 'Email/Senha incorreto! Favor confira suas credenciais e tente novamente';
-				$this->template->content = View::factory('login/index', $data);
-				
 			}
 		}
-
-
+		$this->template->content = View::factory('login/index', $data);
 	}
 	
 }
