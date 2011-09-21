@@ -10,24 +10,47 @@
  */
 class Controller_Admin extends Controller_Template {
 
+	public $template = 'template_admin';
+
 	public function before()
 	{
+		if ($this->request->action == 'login')
+		{
+			// template do login não deve conter menus (o padrão do admin)
+			$this->template = 'template';
+		}
+
 		parent::before();
 
-		if ($this->request->action != 'login')
+		// redireciona para login caso não esteja logado.
+		// redireciona para admin caso esteja logado tentando acessar ~/login :)
+		if (\Auth::check())
 		{
-
-			if (\Auth::check())
+			if ($this->request->action == 'login')
 			{
-				//ok
+				Response::redirect('admin');
 			}
-			else
+
+			$auth = \Auth::instance();
+
+			$this->template->menu = View::factory('admin/menu', array(
+				'action' => $this->request->action
+			));
+			
+			$this->template->interface_topbar = View::factory('interface/topbar', array(
+				'user' => $auth->get_user_array()
+			));
+		}
+		else
+		{
+			if ($this->request->action != 'login')
 			{
 				Response::redirect('admin/login');
 			}
-		}
 
-		$this->template->interface_topbar = View::factory('interface/topbar');
+			$this->template->interface_topbar = View::factory('interface/topbar');
+		}
+		
 	}
 
 	/**
@@ -66,6 +89,7 @@ class Controller_Admin extends Controller_Template {
 				$data['error'] = 'Email/Senha incorreto! Favor confira suas credenciais e tente novamente';
 			}
 		}
+		$this->template->title = 'Identificação';
 		$this->template->content = View::factory('admin/login', $data);
 	}
 

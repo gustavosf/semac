@@ -14,7 +14,7 @@
 	<!-- CSS: implied media="all" -->
 	<?php echo Asset::css('bootstrap.min.css'); ?>
 	<?php echo Asset::css('semac.css'); ?>
-	<?php if (isset($admin)) echo Asset::css('semac.admin.css'); ?>
+	<?php echo Asset::css('semac.admin.css'); ?>
 
 	<?php if (isset($ogtags)): ?>
 		<!-- More ideas for your <head> here: h5bp.com/docs/#head-Tips -->
@@ -30,8 +30,17 @@
 	<?php echo $interface_topbar; ?>
 
 	<div class="container">
-	<?php echo $content; ?>
-	</div>
+		<div class="content">
+			<div class="row">
+				<div class="span4 menu">
+					<h3><?php echo $menu; ?></h3>
+				</div>
+				<div class="span10 data">
+					<h2><?php echo $content; ?></h2>
+				</div>
+			</div>
+		</div>
+	</div> <!-- /container -->
 
 	<!-- JavaScript at the bottom for fast page loading -->
 	<?php echo Asset::js('jquery/jquery-1.6.4.js'); ?>
