@@ -18,6 +18,8 @@ CHANGELOG.md
 fuel/app/config/db.php
 fuel/app/config/auth.php
 fuel/app/config/simpleauth.php
+fuel/app/config/crypt.php
+fuel/app/config/migrations.php
 
 deploy
 .syncignore
