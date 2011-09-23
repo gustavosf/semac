@@ -37,13 +37,17 @@ class Tests_Admin extends \PHPUnit_Extensions_SeleniumTestCase {
 
 		$this->waitForPageToLoad(3000); // 3 segundos
 
-		$this->assertTitle('Identificação*');
+		$this->assertTitle('Identificação');
 		$this->assertTextPresent('*Email/Senha incorreto!*');
 	}
 
 	public function testLoginWithValidCredentials()
 	{
 		// deve-se criar um usuário banido para este teste
+		// email: valid@credential.com
+		// senha: validPassword
+		// group: -1
+		// nome: qualquercoisa
 		$this->open('http://semac/admin/login');
 		$this->type('css=form input[type=text][name=username]', 'valid@credential.com');
 		$this->type('css=form input[type=password][name=password]', 'validPassword');
@@ -52,6 +56,22 @@ class Tests_Admin extends \PHPUnit_Extensions_SeleniumTestCase {
 		$this->waitForPageToLoad(3000); // 3 segundos
 
 		$this->assertNotTitle('Identificação*');
+	}
+
+	// Logout -----------------------------------------------------
+
+	public function testLogoutWithLoggedUser() {
+		// o usuário está logado, levando em conta que o teste anterior funciona
+		$this->open('http://semac/admin/logout');
+		$this->assertTitle('Sair');
+		$this->assertElementNotPresent('css=a[href$="/logout"]');
+		$this->waitForPageToLoad(5000); // 5 segundos
+		$this->assertLocation('semac/');
+	}
+
+	public function testLogoutWithUnloggedUser() {
+		$this->open('http://semac/admin/logout');
+		$this->assertTitle('Identificação');
 	}
 
 }

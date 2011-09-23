@@ -22,7 +22,7 @@
 					<input type="text" placeholder="Search">
 				</form>
 				
-				<?php if (isset($user)): ?>
+				<?php if (isset($user['profile_fields'])): ?>
 					<ul class="nav secondary-nav">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle"><?php echo $user['profile_fields']['nome']; ?></a>
@@ -30,7 +30,7 @@
 								<li><a href="#">Secondary link</a></li>
 								<li><a href="#">Something else here</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Another link</a></li>
+								<li><a href="<?php echo Uri::create('admin/logout'); ?>">Sair</a></li>
 							</ul>
 						</li>
 					</ul>

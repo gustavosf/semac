@@ -14,9 +14,9 @@ class Controller_Admin extends Controller_Template {
 
 	public function before()
 	{
-		if ($this->request->action == 'login')
+		if (in_array($this->request->action, array('login', 'logout')))
 		{
-			// template do login não deve conter menus (o padrão do admin)
+			// template do login/logout não deve conter menus (o padrão do admin)
 			$this->template = 'template';
 		}
 
@@ -33,13 +33,21 @@ class Controller_Admin extends Controller_Template {
 
 			$auth = \Auth::instance();
 
-			$this->template->menu = View::factory('admin/menu', array(
-				'action' => $this->request->action
-			));
-			
-			$this->template->interface_topbar = View::factory('interface/topbar', array(
-				'user' => $auth->get_user_array()
-			));
+			if ($this->request->action == 'logout')
+			{
+				Auth::instance()->logout();
+				$this->template->interface_topbar = View::factory('interface/topbar');
+			}
+			else
+			{
+				$this->template->menu = View::factory('admin/menu', array(
+					'action' => $this->request->action
+				));
+				
+				$this->template->interface_topbar = View::factory('interface/topbar', array(
+					'user' => $auth->get_user_array()
+				));
+			}
 		}
 		else
 		{
@@ -50,7 +58,6 @@ class Controller_Admin extends Controller_Template {
 
 			$this->template->interface_topbar = View::factory('interface/topbar');
 		}
-		
 	}
 
 	/**
@@ -91,6 +98,19 @@ class Controller_Admin extends Controller_Template {
 		}
 		$this->template->title = 'Identificação';
 		$this->template->content = View::factory('admin/login', $data);
+	}
+
+	/**
+	 * Logout do usuário
+	 * 
+	 * @access  public
+	 * @return  void
+	 */
+	public function action_logout()
+	{
+		Auth::instance()->logout();
+		$this->template->title = 'Sair';
+		$this->template->content = View::factory('admin/logout');
 	}
 
 }
