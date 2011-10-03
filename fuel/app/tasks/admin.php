@@ -68,10 +68,13 @@ class Admin {
 			copy(APPPATH.'config/simpleauth.php.dist', APPPATH.'config/simpleauth.php');
 		}
 
+		return "Inicialização concluída. Você deve editar o arquivo ".\Cli::color('fuel/app/config/db.php', 'red')." e atualizar as informações para acesso ao banco de dados";
+	}
+
+	public static function initdb()
+	{
 		system('php oil r migrate');
 		static::createuser('test@user.com', 'test', 64, 'Test User');
-
-		return "Inicialização concluída. Você deve editar o arquivo ".\Cli::color('fuel/app/config/db.php', 'red')." e atualizar as informações para acesso ao banco de dados";
 	}
 	
 	public static function test()
