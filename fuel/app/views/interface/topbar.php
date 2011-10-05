@@ -22,10 +22,10 @@
 					<input type="text" placeholder="Search">
 				</form>
 				
-				<?php if (isset($user['profile_fields'])): ?>
+				<?php if ($user != 'guest'): ?>
 					<ul class="nav secondary-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle"><?php echo $user['profile_fields']['nome']; ?></a>
+							<a href="#" class="dropdown-toggle"><?php echo $user; ?></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Secondary link</a></li>
 								<li><a href="#">Something else here</a></li>

@@ -8,7 +8,7 @@
  * @package  app
  * @extends  Controller_Template
  */
-class Controller_Admin extends Controller_Template {
+class Controller_Admin extends Controller_Semac {
 
 	public $template = 'template_admin';
 
@@ -22,42 +22,9 @@ class Controller_Admin extends Controller_Template {
 
 		parent::before();
 
-		// redireciona para login caso não esteja logado.
-		// redireciona para admin caso esteja logado tentando acessar ~/login :)
-		if (\Auth::check())
-		{
-			if ($this->request->action == 'login')
-			{
-				Response::redirect('admin');
-			}
-
-			$auth = \Auth::instance();
-
-			if ($this->request->action == 'logout')
-			{
-				Auth::instance()->logout();
-				$this->template->interface_topbar = View::factory('interface/topbar');
-			}
-			else
-			{
-				$this->template->menu = View::factory('admin/menu', array(
-					'action' => $this->request->action
-				));
-				
-				$this->template->interface_topbar = View::factory('interface/topbar', array(
-					'user' => $auth->get_user_array()
-				));
-			}
-		}
-		else
-		{
-			if ($this->request->action != 'login')
-			{
-				Response::redirect('admin/login');
-			}
-
-			$this->template->interface_topbar = View::factory('interface/topbar');
-		}
+		$this->template->menu = View::factory('admin/menu', array(
+			'action' => $this->request->action
+		));
 	}
 
 	/**
