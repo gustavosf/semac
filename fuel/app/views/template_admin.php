@@ -36,7 +36,7 @@
 					<h3><?php echo $menu; ?></h3>
 				</div>
 				<div class="span10 data">
-					<h2><?php echo $content; ?></h2>
+					<?php echo $content; ?>
 				</div>
 			</div>
 		</div>

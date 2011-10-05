@@ -80,6 +80,16 @@ class Controller_Admin extends Controller_Semac {
 		$this->template->content = View::factory('admin/logout');
 	}
 
+	/**
+	 * Cadastro de novos usuários
+	 *
+	 * @access public
+	 * @return void
+	 */
+	 public function action_novousuario()
+	 {
+	 	$this->template->content = View::factory('admin/novousuario');
+	 }
 }
 
 /* End of file admin.php */
