@@ -1,12 +1,6 @@
 <?php
 
-class Controller_E extends Controller_Template {
-
-	public function before()
-	{
-		parent::before();
-		$this->template->interface_topbar = View::factory('interface/topbar');
-	}
+class Controller_E extends Controller_Semac {
 
 	public function action_forbidden()
 	{
