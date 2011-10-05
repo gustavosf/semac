@@ -1,5 +1,24 @@
 <h2>Cadastro de Usuários no Sistema</h2>
 <hr/>
+<?php if ($_POST): ?>
+	<?php if (! $error): ?>
+		<div class="alert-message block-message success">
+			<p>
+				<strong>Usuário cadastrado no sistema!</strong><br/><br/>
+				O usuário <b><?php echo $nome; ?></b> foi cadastrado no sistema, com os direitos de acesso <b><?php echo $grupo; ?></b>.<br/>
+				Um e-mail foi enviado para o endereço <b><?php echo $email; ?></b> com as credenciais para acesso.
+			</p>
+		</div>
+		<hr/>
+		<?php unset($nome, $email, $grupo); ?>
+	<?php elseif (isset($error['global'])): ?>
+		<div class="alert-message error">
+			<p><?php echo $error['global']; ?></p>
+		</div>
+		<hr/>
+	<?php endif; ?>
+<?php endif; ?>
+
 <form method="post">
 	<fieldset>
 		<div class="clearfix<?php if (isset($error['nome'])) echo ' error'; ?>">
@@ -23,7 +42,7 @@
 		<div class="clearfix">
 			<label for="xlInput">Tipo</label>
 			<div class="input">
-				<select name="normalSelect" id="normalSelect">
+				<select name="grupo" id="grupo">
 					<option>Secretaria</option>
 					<option>COMEX</option>
 					<option>COMGRAD</option>

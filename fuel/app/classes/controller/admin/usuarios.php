@@ -34,11 +34,21 @@ class Controller_Admin_Usuarios extends Controller_Semac {
 			$errors = null;
 			if (Input::post('nome') == '') $errors['nome'] = "Nome inválido";
 			if ( ! filter_var(Input::post('email'), FILTER_VALIDATE_EMAIL)) $errors['email'] = "Email inválido";
-			if ($errors)
+			$data['email'] = Input::post('email');
+			$data['nome'] = Input::post('nome');
+			$data['grupo'] = Input::post('grupo');
+			$data['error'] = $errors;
+			if (! $errors)
 			{
-				$data['error'] = $errors;
-				$data['email'] = Input::post('email');
-				$data['nome'] = Input::post('nome');
+				$users = new Model_User;
+				if ($users->novo(Input::post('email'), Input::post('nome'), Input::post('grupo')))
+				{
+					// enviar e-mail aqui //
+				}
+				else 
+				{
+					$data['error']['global'] = 'Já existe um usuário cadastrado com este e-mail';
+				}
 			}
 		}
 		$this->template->content = View::factory('admin/usuarios/novo', $data);
