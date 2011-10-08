@@ -74,7 +74,7 @@ class Admin {
 	public static function initdb()
 	{
 		system('php oil r migrate');
-		static::createuser('test@user.com', 'test', 64, 'Test User');
+		static::createuser('test@user.com', 'test', 128, 'Test User');
 	}
 	
 	public static function test()
