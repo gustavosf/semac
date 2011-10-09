@@ -17,7 +17,7 @@
  * $mailer = new Util_Mailer();
  * $mailer->subject = 'titulo do email';
  * $mailer->view    = 'alguma_view';
- * $mailer->addAddress('some@address.here');
+ * $mailer->addTo('some@address.here');
  * $mailer->addCC('some@email.com');
  * $mailer->addCC('other@email.com');
  *
@@ -30,17 +30,17 @@ class Util_Mailer {
 	
 	/**
 	 * Variável que armazena o objeto phpmailer
-	 * @access private
+	 * @access protected
 	 * @var string
 	 */
-	private $mail;
+	protected $mail;
 
 	/**
 	 * Variável que armazena os dados a serem passados a view
-	 * @access private
+	 * @access protected
 	 * @var array
 	 */
-	private $data;
+	protected $data;
 
 	/**
 	 * Subject do email
@@ -55,6 +55,16 @@ class Util_Mailer {
 	 * @var string
 	 */
 	public $view;
+	
+	/**
+	 * Variáveis para armazenar os destinatários e replys
+	 * @access protected
+	 * @var array
+	 */
+	protected $to = array();
+	protected $cc = array();
+	protected $bcc = array();
+	protected $reply = array();
 
 	/**
 	 * Constructor
@@ -66,7 +76,7 @@ class Util_Mailer {
 	 * @param array $data    Dados a serem colocados na view
 	 * @return void
 	 */
-	public function __construct($options = array(), $data = array()) {
+	public function __construct(Array $options = array(), Array $data = array()) {
 		$config = Config::load('mailer');
 
 		$mail = new Util_Phpmailer_Main(true);
@@ -81,81 +91,104 @@ class Util_Mailer {
 		$mail->From       = $config['from']['email'];
 		$mail->FromName   = $config['from']['name'];
 		$this->mail       = $mail;
-		$this->data       = $data;
+		$this->setData($data);
 		
-		isset($options['to'])      and $this->addAddress($options['to']);
-		isset($options['cc'])      and $this->addCC($options['cc']);
-		isset($options['bcc'])     and $this->addBCC($options['bcc']);
-		isset($options['reply'])   and $this->addReplyTo($options['reply']);
-		isset($options['subject']) and $this->subject = $options['subject'];
-		isset($options['view'])    and $this->view = $options['view'];
+		isset($options['to'])        and $this->addTo($options['to']);
+		isset($options['cc'])        and $this->addCC($options['cc']);
+		isset($options['bcc'])       and $this->addBCC($options['bcc']);
+		isset($options['reply'])     and $this->addReplyTo($options['reply']);
+		isset($options['subject'])   and $this->subject = $options['subject'];
+		isset($options['view'])      and $this->view = $options['view'];
 	}
 
 	/**
 	 * Adiciona um endereço destinatário
 	 *
-	 * @param string $to
+	 * @param mixed $to
 	 */
-	public function addAddress($to)
+	public function addTo($to)
 	{
-		$this->addAnAddress('Address', $to);
+		$this->addAnAddress('to', $to);
 	}
 
 	/**
 	 * Adiciona um endereço destinatário, como CC
 	 *
-	 * @param string $cc
+	 * @param mixed $cc
 	 */
 	public function addCC($cc)
 	{
-		$this->addAnAddress('CC', $cc);
+		$this->addAnAddress('cc', $cc);
 	}
 	
 	/**
 	 * Adiciona um endereço destinatário, como BCC
 	 *
-	 * @param string $bcc
+	 * @param mixed $bcc
 	 */
 	public function addBCC($bcc)
 	{
-		$this->addAnAddress('BCC', $bcc);
+		$this->addAnAddress('bcc', $bcc);
 	}
 	
 	/**
 	 * Adiciona um endereço para a resposta
 	 *
-	 * @param string $to
+	 * @param mixed $to
 	 */
 	public function addReplyTo($to)
 	{
-		$this->addAnAddress('ReplyTo', $to);
+		$this->addAnAddress('reply', $to);
 	}
 
 	/**
 	 * Executa a inserção do endereço no objeto phpmailer
 	 *
 	 * @param string $type tipo (Address, CC, BCC, ReplyTo)
-	 * @param string $addr endereço de email
+	 * @param mixed  $addr endereço de email
+	 * @throws InvalidArgumentException
 	 */
 	private function addAnAddress($type, $addr)
 	{
-		$type = 'add'.$type;
-		if (is_array($addr)) foreach ($addr as $add)
-			$this->mail->$type($add);
-		else
-			$this->mail->$type($addr);
+		if (is_array($addr)) $this->$type = array_merge($this->$type, $addr);
+		elseif (is_string($addr)) array_push($this->$type, $addr);
+		else throw new \InvalidArgumentException('Parâmetro "addr" deve ser uma string ou um array');
 	}
 
 	/**
-	 * Envia a mensagem previamente configurada
+	 * Setter para os dados que serão utilizados na view
+	 *
+	 * @param array $data
+	 */
+	public function setData(Array $data) {
+		$this->data = $data;
+	}
+
+	/**
+	 * Prepara o envio da mensagem e chama doSend para enviar
 	 *
 	 * @return boolean
+	 * @throws DomainException
 	 */
 	public function send() {
 		if ( ! $this->view)	throw new \DomainException('Nenhuma view para o email foi informada.');
 		$view = View::factory('mailer/'.$this->view, $this->data);
 		$this->mail->Subject = $this->subject;
 		$this->mail->MsgHTML($view);
+		foreach ($this->to as $to)       $this->mail->addAddress($to);
+		foreach ($this->cc as $cc)       $this->mail->addCC($cc);
+		foreach ($this->bcc as $bcc)     $this->mail->addBCC($bcc);
+		foreach ($this->reply as $reply) $this->mail->addReplyTo($reply);
+		return $this->doSend();
+	}
+
+	/**
+	 * Envia a mensagem previamente configurada
+	 * Foi usado assim para poder abstrair um teste para o send sem o envio real
+	 *
+	 * @return boolean
+	 */
+	private function doSend() {
 		return $this->mail->Send();
 	}
 
