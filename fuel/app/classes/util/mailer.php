@@ -57,6 +57,13 @@ class Util_Mailer {
 	public $view;
 	
 	/**
+	 * Define se o e-mail enviado deve ser html ou text/plain (padrão)
+	 * @access public
+	 * @var boolean
+	 */
+	 public $html = false;
+
+	/**
 	 * Variáveis para armazenar os destinatários e replys
 	 * @access protected
 	 * @var array
@@ -65,6 +72,8 @@ class Util_Mailer {
 	protected $cc = array();
 	protected $bcc = array();
 	protected $reply = array();
+
+
 
 	/**
 	 * Constructor
@@ -99,6 +108,7 @@ class Util_Mailer {
 		isset($options['reply'])     and $this->addReplyTo($options['reply']);
 		isset($options['subject'])   and $this->subject = $options['subject'];
 		isset($options['view'])      and $this->view = $options['view'];
+		isset($options['html'])      and $this->html = $options['view'] == true;
 	}
 
 	/**
@@ -174,7 +184,8 @@ class Util_Mailer {
 		if ( ! $this->view)	throw new \DomainException('Nenhuma view para o email foi informada.');
 		$view = View::factory('mailer/'.$this->view, $this->data);
 		$this->mail->Subject = $this->subject;
-		$this->mail->MsgHTML($view);
+		if ($this->html) $this->mail->MsgHTML($view);
+		else $this->mail->Body = '<pre>'.$view.'</pre>';
 		foreach ($this->to as $to)       $this->mail->addAddress($to);
 		foreach ($this->cc as $cc)       $this->mail->addCC($cc);
 		foreach ($this->bcc as $bcc)     $this->mail->addBCC($bcc);
