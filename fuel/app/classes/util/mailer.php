@@ -4,6 +4,23 @@
  * Util_Mailer - Proxy PHP para o PHPMailer
  * NOTA: Requer o PHPMailer :)
  *
+ * Uso:
+ * $mailer = new Util_Mailer(array(
+ *     'subject' => 'titulo do email',
+ *     'view'    => 'alguma_view',
+ *     'to'      => 'some@address.here',
+ *     'cc'      => array('some@email.com', 'other@email.com'),
+ * ));
+ * $mailer->send();
+ *
+ * Uso Alternativo:
+ * $mailer = new Util_Mailer();
+ * $mailer->subject = 'titulo do email';
+ * $mailer->view    = 'alguma_view';
+ * $mailer->addAddress('some@address.here');
+ * $mailer->addCC('some@email.com');
+ * $mailer->addCC('other@email.com');
+ *
  * @package app
  * @author Gustavo Seganfredo
  */
@@ -131,12 +148,15 @@ class Util_Mailer {
 
 	/**
 	 * Envia a mensagem previamente configurada
+	 *
+	 * @return boolean
 	 */
 	public function send() {
+		if ( ! $this->view)	throw new \DomainException('Nenhuma view para o email foi informada.');
 		$view = View::factory('mailer/'.$this->view, $this->data);
 		$this->mail->Subject = $this->subject;
 		$this->mail->MsgHTML($view);
-		$this->mail->Send();
+		return $this->mail->Send();
 	}
 
 }
