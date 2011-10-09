@@ -181,15 +181,21 @@ class Util_Mailer {
 	 * @throws DomainException
 	 */
 	public function send() {
+		
 		if ( ! $this->view)	throw new \DomainException('Nenhuma view para o email foi informada.');
-		$view = View::factory('mailer/'.$this->view, $this->data);
+		$view = View::factory('mailer/header')."\n";
+		$view .= View::factory('mailer/'.$this->view, $this->data)."\n";
+		$view .= View::factory('mailer/footer');
+		if ( ! $this->html) $view = '<pre style="font-size:12px">'.$view.'<pre>';
+		$this->mail->MsgHTML($view);
+		
 		$this->mail->Subject = $this->subject;
-		if ($this->html) $this->mail->MsgHTML($view);
-		else $this->mail->Body = '<pre>'.$view.'</pre>';
+
 		foreach ($this->to as $to)       $this->mail->addAddress($to);
 		foreach ($this->cc as $cc)       $this->mail->addCC($cc);
 		foreach ($this->bcc as $bcc)     $this->mail->addBCC($bcc);
 		foreach ($this->reply as $reply) $this->mail->addReplyTo($reply);
+
 		return $this->doSend();
 	}
 
