@@ -1,14 +1,55 @@
 <?php
 
+/**
+ * Util_Mailer - Proxy PHP para o PHPMailer
+ * NOTA: Requer o PHPMailer :)
+ *
+ * @package app
+ * @author Gustavo Seganfredo
+ */
+
 class Util_Mailer {
 
+	
+	/**
+	 * Variável que armazena o objeto phpmailer
+	 * @access private
+	 * @var string
+	 */
 	private $mail;
+
+	/**
+	 * Variável que armazena os dados a serem passados a view
+	 * @access private
+	 * @var array
+	 */
 	private $data;
 
+	/**
+	 * Subject do email
+	 * @access public
+	 * @var string
+	 */
 	public $subject;
+
+	/**
+	 * View a ser utilizada para a geração do email
+	 * @access public
+	 * @var string
+	 */
 	public $view;
 
-	public function __construct($options = array(), $data) {
+	/**
+	 * Constructor
+	 *
+	 * Cria o objeto phpmailer, preenche ele com as configurações de SMTP
+	 * Recebe um array opcional com configurações.
+	 *
+	 * @param array $options Opções de configuração
+	 * @param array $data    Dados a serem colocados na view
+	 * @return void
+	 */
+	public function __construct($options = array(), $data = array()) {
 		$config = Config::load('mailer');
 
 		$mail = new Util_Phpmailer_Main(true);
@@ -33,26 +74,52 @@ class Util_Mailer {
 		isset($options['view'])    and $this->view = $options['view'];
 	}
 
+	/**
+	 * Adiciona um endereço destinatário
+	 *
+	 * @param string $to
+	 */
 	public function addAddress($to)
 	{
 		$this->addAnAddress('Address', $to);
 	}
 
+	/**
+	 * Adiciona um endereço destinatário, como CC
+	 *
+	 * @param string $cc
+	 */
 	public function addCC($cc)
 	{
 		$this->addAnAddress('CC', $cc);
 	}
 	
+	/**
+	 * Adiciona um endereço destinatário, como BCC
+	 *
+	 * @param string $bcc
+	 */
 	public function addBCC($bcc)
 	{
 		$this->addAnAddress('BCC', $bcc);
 	}
 	
+	/**
+	 * Adiciona um endereço para a resposta
+	 *
+	 * @param string $to
+	 */
 	public function addReplyTo($to)
 	{
 		$this->addAnAddress('ReplyTo', $to);
 	}
 
+	/**
+	 * Executa a inserção do endereço no objeto phpmailer
+	 *
+	 * @param string $type tipo (Address, CC, BCC, ReplyTo)
+	 * @param string $addr endereço de email
+	 */
 	private function addAnAddress($type, $addr)
 	{
 		$type = 'add'.$type;
@@ -62,8 +129,11 @@ class Util_Mailer {
 			$this->mail->$type($addr);
 	}
 
+	/**
+	 * Envia a mensagem previamente configurada
+	 */
 	public function send() {
-		$view          = View::factory('mailer/'.$this->view, $this->data);
+		$view = View::factory('mailer/'.$this->view, $this->data);
 		$this->mail->Subject = $this->subject;
 		$this->mail->MsgHTML($view);
 		$this->mail->Send();
