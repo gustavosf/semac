@@ -40,14 +40,19 @@ class Controller_Admin_Usuarios extends Controller_Semac {
 			$data['error'] = $errors;
 			if (! $errors)
 			{
-				$users = new Model_User;
-				if ($users->novo(Input::post('email'), Input::post('nome'), Input::post('grupo')))
+				list($user, $pass) = Model_User::novo(Input::post('email'), Input::post('nome'), Input::post('grupo'));
+				if ($pass)
 				{
-					// enviar e-mail aqui //
-				}
-				else 
-				{
-					$data['error']['global'] = 'Já existe um usuário cadastrado com este e-mail';
+					$mail = new \Util_Mailer(array(
+						'view' => 'admin/usuarios/novo',
+						'subject' => 'Cadastro no sistema da Semana Acadêmica da UFRGS',
+						'to' => Input::post('email'),
+					), array(
+						'nome' => Input::post('nome'),
+						'email' => $user->email,
+						'senha' => $pass,
+					));
+					$mail->send();
 				}
 			}
 		}
