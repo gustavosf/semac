@@ -27,9 +27,17 @@
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	background-color: #272727 !important;
-	color: white;
+	color: white !important;
 }
 
 .content .menu li:hover {
 	background-color: #eee;
+}
+
+.content .menu li a {
+	color: #222;
+}
+
+.content .menu li.selected a {
+	color: white;
 }

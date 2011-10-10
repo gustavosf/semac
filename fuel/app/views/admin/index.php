@@ -1,1 +1,1 @@
-<p>Index</p>
+Index

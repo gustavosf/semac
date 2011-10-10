@@ -14,18 +14,15 @@ class Controller_Semac extends Controller_Template {
 	{
 		parent::before();
 		
-		$module = $this->request->module;
-		$action = $this->request->controller.'/'.$this->request->action;
-
-		if( ! \Auth::has_access(array($module, array($action))))
+		$action = $this->request->controller.'.'.$this->request->action;
+		if ( ! Auth::has_access($action))
 		{
-			if (\Auth::check()) \Response::redirect('e/forbidden');
-			else \Response::redirect('admin/login');
-
+			if (Auth::check()) \Response::redirect('e/forbidden');
+			else Response::redirect('admin/login');
 		}
 		else
 		{
-			$auth = \Auth::instance();
+			$auth = Auth::instance();
 			$this->template->interface_topbar = View::factory('interface/topbar', array(
 				'user' => $auth->get_screen_name()
 			));

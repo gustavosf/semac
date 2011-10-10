@@ -36,13 +36,13 @@ return array(
 	 */
 	'groups' => array(
 		-1 => array('name' => 'Banned', 'roles' => array('banned')),
-		0  => array('name' => 'Guests', 'roles' => array()),
-		1  => array('name' => 'Participantes', 'roles' => array('participante')),
+		0  => array('name' => 'Visitante', 'roles' => array()),
+		1  => array('name' => 'Participante', 'roles' => array()),
 		2  => array('name' => 'Secretaria', 'roles' => array('secretaria')),
 		4  => array('name' => 'Comgrad', 'roles' => array('comgrad')),
 		8  => array('name' => 'Chair', 'roles' => array('chair')),
 		16 => array('name' => 'Comex', 'roles' => array('comex')),
-		32 => array('name' => 'Organizador Geral', 'roles' => array('organizador_geral')),
+		32 => array('name' => 'Organizador Geral', 'roles' => array('og')),
 		64 => array('name' => 'Admin', 'roles' => array('super')),
 	),
 
@@ -50,15 +50,25 @@ return array(
 	 * Roles as name => array(location => rights)
 	 */
 	'roles' => array(
-		'banned'            => false,
-		'#'                 => array('website' => array('read')), // default rights
-		'participante'      => array(),
-		'secretaria'        => array(),
-		'comgrad'           => array(),
-		'chair'             => array(),
-		'comex'             => array(),
-		'organizador_geral' => array(),
 		'super'             => true,
+		'banned'            => false,
+		'#'                 => array(
+			'admin' => array('login', 'logout'),
+			'e'     => array('forbidden'),
+		),
+		'secretaria' => array(
+			'admin' => array('index'),
+		),
+		'comgrad' => array(
+			'admin' => array('index'),
+		),
+		'comex' => array(
+			'admin' => array('index'),
+			'usuarios' => array('novo'),
+		),
+		'og' => array(
+			'admin' => array('index'),
+		),
 	),
 
 	/**
