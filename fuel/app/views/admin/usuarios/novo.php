@@ -43,9 +43,10 @@
 			<label for="xlInput">Tipo</label>
 			<div class="input">
 				<select name="grupo" id="grupo">
-					<option>Secretaria</option>
 					<option>COMEX</option>
 					<option>COMGRAD</option>
+					<option>Organizador Geral</option>
+					<option>Secretaria</option>
 				</select>
 			</div>
 		</div><!-- /clearfix -->

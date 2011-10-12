@@ -58,6 +58,23 @@ class Controller_Admin_Usuarios extends Controller_Semac {
 		}
 		$this->template->content = View::factory('admin/usuarios/novo', $data);
 	}
+
+	public function action_organizador_geral($id = null, $action = null)
+	{
+		$data = array();
+
+		if ($id != null && $action)
+		{
+			$og = Model_User::find($id);
+			if ($action = 'delete') $og->ungroup('Organizador Geral');
+			$data['revogado'] = $og->getProfile('nome');
+		}
+
+		$organizadores = Model_User::find()->where('group' ,'&', 64)->get();
+		$data['organizadores'] = $organizadores;
+
+		$this->template->content = View::factory('admin/usuarios/organizador_geral', $data);
+	}
 }
 
 /* End of file admin.php */

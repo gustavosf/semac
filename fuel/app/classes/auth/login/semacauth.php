@@ -17,6 +17,13 @@ class Auth_Login_SemacAuth extends \Auth\Auth_Login_SimpleAuth {
 		return array(array('SemacGroup', $this->user['group']));
 	}
 
+	public static function grupos()
+	{
+		$grupos = \Config::get('simpleauth.groups');
+		array_walk($grupos, function(&$g){ $g = strtolower($g['name']); });
+		return $grupos;
+	}
+
 	public function before()
 	{
 		parent::before();

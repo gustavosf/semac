@@ -1,8 +1,58 @@
 <?php
 
 class Model_User extends Orm\Model {
-
 	
+	/**
+	 * Provém acesso de leitura a variável guardada no profile_fields
+	 *
+	 * @var $property string
+	 * @return mixed
+	 */
+	public function getProfile($property)
+	{
+		$profile = unserialize(html_entity_decode($this->profile_fields));
+		if (isset($profile[$property]))
+		{
+			return $profile['nome'];
+		}
+		else
+		{
+			throw new \OutOfBoundsException('Property "'.$property.'" not found in profile.');
+		}
+	}
+
+	/**
+	 * Provém acesso de escrita a variável guardada no profile_fields
+	 *
+	 * @var $property string
+	 * @var $value string
+	 */
+	public function setProfile($property, $value)
+	{
+		$profile = unserialize(html_entity_decode($this->profile_fields));
+		$profile[$property] = $value;
+		$this->profile_fields = serialize($profile);
+	}
+
+	/**
+	 * Remove o acesso de um determinado usuario a um grupo
+	 *
+	 * O nome do grupo deve ser passado como string
+	 * Ex: "Organizador Geral"
+	 *
+	 * @var $grupo string
+	 */
+	public function ungroup($grupo)
+	{
+		$grupos = Auth::grupos();
+		$gid = array_search(strtolower($grupo), $grupos);		
+		if ($this->group & $gid)
+		{
+			$this->group = $this->group - $gid;
+			$this->save();
+		}
+	}
+		
 	/**
 	 * Cadastro de novos usuários no sistema
 	 *
@@ -14,11 +64,11 @@ class Model_User extends Orm\Model {
 	 * @param $grupo integer conforme definido nas configurações
 	 * @return array retorna o objeto user e o password, caso tenha sido criado um usuário
 	 **/
-	public static function novo($email, $nome, $grupo) {
+	public static function novo($email, $nome, $grupo)
+	{
 		
 		// validação e obtenção do ID do grupo
-		$grupos = \Config::get('simpleauth.groups');
-		array_walk($grupos, function(&$g){ $g = strtolower($g['name']); });
+		$grupos = Auth::grupos();
 		$gid = array_search(strtolower($grupo), $grupos);
 		if ($grupo === false)
 		{
