@@ -18,7 +18,7 @@ class Create_users {
 		), array('id'));
 		
 		// seta username e email como campos únicos (não aceitando duplicatas)
-		\DB::query('ALTER TABLE Persons ADD CONSTRAINT users_id UNIQUE (username, email)');
+		\DB::query('ALTER TABLE users ADD CONSTRAINT users_id UNIQUE (username, email)');
 	}
 
 	public function down()
