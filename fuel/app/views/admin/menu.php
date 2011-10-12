@@ -12,4 +12,9 @@
 			<a href='<?php echo URI::create('admin/usuarios/organizador_geral'); ?>'>Organizador Geral</a>
 		</li>
 	<?php endif; ?>
+	<?php if (Auth::has_access('atividades.nova')): ?>
+		<li<?php if ($action == 'nova') echo ' class="selected"'; ?>>
+			<a href='<?php echo URI::create('admin/atividades/nova'); ?>'>Nova Atividade</a>
+		</li>
+	<?php endif; ?>
 </ul>

@@ -1,10 +1,18 @@
 <?php
 
 class Model_Atividade extends Orm\Model {
-	protected static $_observers = array(
-		'Orm\Observer_CreatedAt' => array('before_insert'),
-		'Orm\Observer_UpdatedAt' => array('before_save'),
+
+	static $atividades = array(
+		0 => 'Coding Dojos',
+		1 => 'Cursos',
+		2 => 'Lightning Talks',
+		3 => 'Maratonas de Programação',
+		4 => 'Mini-Cursos',
+		5 => 'Painéis',
+		6 => 'Palestras',
+		7 => 'Reuniões',
 	);
+	
 }
 
 /* End of file atividade.php */
