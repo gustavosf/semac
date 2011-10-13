@@ -24,11 +24,50 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 	/**
 	 * Cadastro de Novas atividades na semana acadêmica
+	 *
+	 * Acessível apenas pelo Organizador Geral (ver acesso no config/simpleauth)
+	 * Registra um atividade, e cadastra um chair caso necessário.
+	 * Dispoara um e-mail para o chair, avisando do registro
 	 */
 	public function action_nova()
 	{
 		$data = array();
 
+		if ($_POST)
+		{
+			$errors = null;
+			if (Input::post('nome') == '') $errors['nome'] = "Nome inválido";
+			if ( ! filter_var(Input::post('email'), FILTER_VALIDATE_EMAIL)) $errors['email'] = "Email inválido";
+			$atividades = Model_Atividade::$atividades;
+			if ( ! isset($atividades[Input::post('atividade')])) $errors['atividade'] = "Atividade Inválida!";
+
+			$data['email'] = Input::post('email');
+			$data['nome'] = Input::post('nome');
+			$data['atividade'] = Input::post('atividade');
+			$data['error'] = $errors;
+			if (! $errors)
+			{
+				list($user, $pass) = Model_User::novo(Input::post('email'), Input::post('nome'), 'Chair');
+				
+				$atividade = new Model_Atividade;
+				$atividade->chair = $user->id;
+				$atividade->tipo = Input::post('atividade');
+				$atividade->save();
+				
+				$data['pass'] = $pass;
+				$mail = new \Util_Mailer(array(
+					'view' => 'admin/atividades/nova',
+					'subject' => 'Você foi incluído como Chair em uma atividade da Semana Acadêmica da Informática',
+					'to' => Input::post('email'),
+				), array(
+					'nome' => Input::post('nome'),
+					'email' => $user->email,
+					'senha' => $pass,
+				));
+				$mail->send();
+			}
+		}
+		
 		$data['atividades'] = Model_Atividade::$atividades;
 		$this->template->title = 'Nova Atividade';
 		$this->template->content = View::factory('admin/atividades/nova', $data);

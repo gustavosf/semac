@@ -12,6 +12,12 @@ class Model_Atividade extends Orm\Model {
 		6 => 'Palestras',
 		7 => 'Reuniões',
 	);
+
+	static $status = array(
+		0 => 'Inativo',
+		1 => 'Ativo',
+		2 => 'Cancelado',
+	);
 	
 }
 
