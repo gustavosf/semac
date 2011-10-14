@@ -100,4 +100,29 @@ class Tests_Admin_Usuarios extends \PHPUnit_Extensions_SeleniumTestCase {
 		$this->assertTextPresent('*e-mail foi enviado para o endereço*'.$this->uniqid.'@dev.semac.info*');
 	}
 
+	/**
+	 * Testes da funcionalidade de gerência de organizadores gerais
+	 * para visualização e revogação de acesso
+	 */
+
+	public function testOgListPreview()
+	{
+		$this->open('http://semac/admin/usuarios/organizador_geral');
+		
+		// verifica usuário recém adicionado acima
+		$this->assertTextPresent('TestUser');
+		$this->assertTextPresent($this->uniqid.'@dev.semac.info');
+	}
+
+	public function testOgListRevokeUserRights()
+	{
+		$this->open('http://semac/admin/usuarios/organizador_geral');
+		$this->click('css=td:contains("TestUser") + td + td > a');
+
+		$this->waitForPageToLoad(3000);
+		$this->assertTextPresent('*revogado*TestUser*');
+		$this->assertTextNotPresent('<td>TestUser<\/td>');
+		$this->assertTextNotPresent($this->uniqid.'@dev.semac.info');	
+	}
+
 }
