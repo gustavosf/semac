@@ -48,6 +48,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			if (! $errors)
 			{
 				list($user, $pass) = Model_User::novo(Input::post('email'), Input::post('nome'), 'Chair');
+				$data['new'] = $pass ? true : false;
 				
 				$atividade = new Model_Atividade;
 				$atividade->chair = $user->id;

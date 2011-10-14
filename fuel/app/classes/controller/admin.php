@@ -55,7 +55,9 @@ class Controller_Admin extends Controller_Semac {
 			$auth = Auth::instance();
 			if ($auth->login(Input::post('username'), Input::post('password')))
 			{
-				Response::redirect('admin');
+				$goto = Cookie::get('redirect', 'admin');
+				Cookie::delete('redirect');
+				Response::redirect($goto);
 			}
 			else
 			{
@@ -75,6 +77,7 @@ class Controller_Admin extends Controller_Semac {
 	 */
 	public function action_logout()
 	{
+		if ( ! Auth::check()) Response::redirect('admin/login');
 		Auth::instance()->logout();
 		$this->template->title = 'Sair';
 		$this->template->content = View::factory('admin/logout');

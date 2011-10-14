@@ -16,6 +16,7 @@ class Tests_Admin extends \PHPUnit_Extensions_SeleniumTestCase {
 
 	public function testLoginRedirection()
 	{
+		$this->deleteAllVisibleCookies();
 		$this->open('http://semac/admin');
 		$this->assertTitle('Identificação*');
 	}
@@ -35,27 +36,23 @@ class Tests_Admin extends \PHPUnit_Extensions_SeleniumTestCase {
 		$this->type('css=form input[type=password][name=password]', 'invalidPassword');
 		$this->click('css=form input[type=submit]');
 
-		$this->waitForPageToLoad(3000); // 3 segundos
-
-		$this->assertTitle('Identificação');
+		$this->waitForPageToLoad(3000);
+		$this->assertTitle('*Identificação*');
 		$this->assertTextPresent('*Email/Senha incorreto!*');
 	}
 
 	public function testLoginWithValidCredentials()
 	{
-		// deve-se criar um usuário banido para este teste
+		// deve-se criar um usuário para este teste
 		// email: valid@credential.com
 		// senha: validPassword
-		// group: -1
-		// nome: qualquercoisa
 		$this->open('http://semac/admin/login');
 		$this->type('css=form input[type=text][name=username]', 'valid@credential.com');
 		$this->type('css=form input[type=password][name=password]', 'validPassword');
 		$this->click('css=form input[type=submit]');
 
-		$this->waitForPageToLoad(3000); // 3 segundos
-
-		$this->assertNotTitle('Identificação*');
+		$this->waitForPageToLoad(3000);
+		$this->assertNotTitle('*Identificação*');
 	}
 
 	// Logout -----------------------------------------------------
@@ -71,7 +68,7 @@ class Tests_Admin extends \PHPUnit_Extensions_SeleniumTestCase {
 
 	public function testLogoutWithUnloggedUser() {
 		$this->open('http://semac/admin/logout');
-		$this->assertTitle('Identificação');
+		$this->assertTitle('*Identificação*');
 	}
 
 }
