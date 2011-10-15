@@ -74,6 +74,22 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$this->template->content = View::factory('admin/atividades/nova', $data);
 	}
 
+
+	/**
+	 * Listagem de atividades associadas a um chair
+	 */
+	public function action_listar() {
+		$data = array();
+
+		$atividades = Model_Atividade::find()
+			->where('chair', Auth::instance()->get_user_id())
+			->get();
+		$data['atividades'] = $atividades;
+
+		$this->template->title = 'Lista de Atividades';
+		$this->template->content = View::factory('admin/atividades/listar', $data);
+	}
+
 }
 
 /* End of file atividades.php */

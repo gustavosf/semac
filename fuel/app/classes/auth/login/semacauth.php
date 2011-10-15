@@ -24,9 +24,14 @@ class Auth_Login_SemacAuth extends \Auth\Auth_Login_SimpleAuth {
 		return $grupos;
 	}
 
-	public function before()
+	public function get_user_id()
 	{
-		parent::before();
+		if (empty($this->user))
+		{
+			return false;
+		}
+
+		return $this->user['id'];
 	}
 
 }
