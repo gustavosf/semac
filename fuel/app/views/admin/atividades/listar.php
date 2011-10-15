@@ -18,5 +18,8 @@
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 			</tr>
 		<?php endforeach ?>
+		<?php if ( ! sizeof($atividades)): ?>
+			<tr><td colspan=4>Você não possui nenhuma atividade associada</td></tr>
+		<?php endif ?>
 	</tbody>
 </table>
