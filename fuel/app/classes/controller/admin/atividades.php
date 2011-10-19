@@ -78,7 +78,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 	/**
 	 * Listagem de atividades associadas a um chair
 	 */
-	public function action_listar() {
+	public function action_listar()
+	{
 		$data = array();
 
 		$atividades = Model_Atividade::find()
@@ -90,6 +91,45 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$this->template->content = View::factory('admin/atividades/listar', $data);
 	}
 
+	/**
+	 * Edição de Atividades da SEMAC
+	 */
+	public function action_editar($id)
+	{
+		$data = array();
+		$data['salvo'] = false;
+
+		$atividade = Model_Atividade::find()
+			->where(array('id' => $id, 'chair' => Auth::instance()->get_user_id()))
+			->get_one();
+		
+		if ($_POST)
+		{
+			$val = Validation::factory();
+			$val->add_field('titulo', 'Título', 'max_length[255]');
+			$val->add_field('responsavel', 'Responsável', 'max_length[255]');
+			$val->add_field('carga_horaria', 'Carga Horária', 'match_pattern[/^[0-9]{0,3}$/]');
+			$val->add_field('vagas', 'Vagas', 'match_pattern[/^[0-9]{0,3}$/]');
+			$val->set_message('match_pattern', 'Valor inválido!');
+			$data['salvo'] = $val->run($_POST);
+			
+			$atividade->titulo = $val->validated('titulo');
+			$atividade->responsavel = $val->validated('responsavel');
+			$atividade->carga_horaria = $val->validated('carga_horaria');
+			$atividade->vagas = $val->validated('vagas');
+			$atividade->setMore('descricao', $val->input('descricao'));
+			$atividade->setMore('shortbio', $val->input('shortbio'));
+			$atividade->setMore('afiliacao', $val->input('afiliacao'));
+			if ($data['salvo']) $atividade->save();
+
+			$data['erros'] = $val->errors();
+		}
+
+		$data['atividade'] = $atividade;
+		
+		$this->template->title = 'Edição de Atividade';
+		$this->template->content = View::factory('admin/atividades/editar', $data);
+	}
 }
 
 /* End of file atividades.php */
