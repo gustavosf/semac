@@ -84,7 +84,7 @@
 		</div><!-- /clearfix -->
 
 		<hr>
-		<input type="submit" class="btn primary" value="Salvar">&nbsp;<input type="reset" class="btn" value="Cancelar">
+		<input type="submit" class="btn primary" value="Salvar">
 	</fieldset>
 </form>
 

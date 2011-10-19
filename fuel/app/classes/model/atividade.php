@@ -47,7 +47,7 @@ class Model_Atividade extends Orm\Model {
 	 */
 	public function more($property)
 	{
-		$more = unserialize(html_entity_decode($this->more));
+		$more = unserialize(base64_decode($this->more));
 		return @$more[$property] ?: null;
 	}
 
@@ -61,9 +61,9 @@ class Model_Atividade extends Orm\Model {
 	 */
 	public function setMore($property, $value)
 	{
-		$more = unserialize(html_entity_decode($this->more));
+		$more = unserialize(base64_decode($this->more));
 		$more[$property] = $value;
-		$this->more = serialize($more);
+		$this->more = base64_encode(serialize($more));
 	}
 	
 }

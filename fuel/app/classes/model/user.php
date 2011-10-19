@@ -10,7 +10,7 @@ class Model_User extends Orm\Model {
 	 */
 	public function getProfile($property)
 	{
-		$profile = unserialize(html_entity_decode($this->profile_fields));
+		$profile = unserialize(base64_decode($this->profile_fields));
 		if (isset($profile[$property]))
 		{
 			return $profile['nome'];
@@ -29,9 +29,13 @@ class Model_User extends Orm\Model {
 	 */
 	public function setProfile($property, $value)
 	{
-		$profile = unserialize(html_entity_decode($this->profile_fields));
+		$profile = unserialize(base64_decode($this->profile_fields));
 		$profile[$property] = $value;
-		$this->profile_fields = serialize($profile);
+
+		// Neste ponto eu tenho que usar base64_encode simplesmente 
+		// porque o serialize e unserialize tem sérios problemas com 
+		// aspas, vírgulas e principalmente acentos.
+		$this->profile_fields = base64_encode(serialize($profile));
 	}
 
 	/**
@@ -93,7 +97,7 @@ class Model_User extends Orm\Model {
 			$user->password = \Auth::instance()->hash_password($pass);
 			$user->last_login = '';
 			$user->login_hash = '';
-			$user->profile_fields = serialize(array('nome' => $nome));
+			$user->setProfile('nome', $nome);
 			$user->save();
 		}
 		
