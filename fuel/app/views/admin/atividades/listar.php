@@ -14,7 +14,7 @@
 		<?php foreach ($atividades as $id => $atividade): ?>
 			<tr>
 				<td><?php echo $atividade->getTipo(); ?></td>
-				<td><?php echo $atividade->getDataFormatada('d/m H:i'); ?></td>
+				<td><?php echo $atividade->getData('d/m H:i'); ?></td>
 				<td><?php echo $atividade->titulo ?: '-'; ?></td>
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>

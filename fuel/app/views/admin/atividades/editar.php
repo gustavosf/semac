@@ -52,11 +52,26 @@
 			<label for="xlInput">Vagas</label>
 			<div class="input">
 				<input class="span2<?php echo @$erros['vagas']?' error':'' ?>" id="vagas" name="vagas" type="number" min=0 max=100 value="<?php echo $atividade->vagas ?>">
-			</div>
-			<?php if (isset($erros['vagas'])): ?>
+				<?php if (isset($erros['vagas'])): ?>
 					<span class="help-inline"><?php echo $erros['vagas']; ?></span>
 				<?php endif; ?>
-		</div><!-- /clearfix -->		
+			</div>
+		</div><!-- /clearfix -->
+
+		<div class="clearfix<?php echo @$erros['data']?' error':'' ?>">
+			<label for="xlInput">Data</label>
+			<?php foreach ($atividade->getData() as $data): ?>
+				<div class="input">
+					<input class="span2" name="data[]" type="date" value="<?php echo $data['data'] ?>"> ás 
+					<input class="span2" name="as[]" type="time" value="<?php echo $data['as'] ?>"> até 
+					<input class="span2" name="ate[]" type="time" value="<?php echo $data['ate'] ?>">
+					<a data-original-title="Adicionar nova data" class="plus" href="javascript:;" onclick="novaData(this)">+</a>
+				</div>
+			<?php endforeach ?>
+			<?php if (isset($erros['data'])): ?>
+				<span class="help-inline"><?php echo $erros['data']; ?></span>
+			<?php endif; ?>
+		</div><!-- /clearfix -->
 
 		<br><br>
 
@@ -88,4 +103,25 @@
 	</fieldset>
 </form>
 
+<script>
+$(function() {
+	$.datepicker.setDefaults({'dateFormat': 'dd/mm/yy'});
+	$('.plus').twipsy();
+});
+
+$("body").delegate("input[type=date]", "focusin", function(){
+	$(this).datepicker();
+});
+
+var novaData = function(el) {
+	var html = '<div class="input">' +
+		'<input class="span2" name="data[]" type="date"> ás ' + 
+		'<input class="span2" name="as[]" type="time"> até ' + 
+		'<input class="span2" name="ate[]" type="time"> ' +
+		'<a data-original-title="Adicionar nova data" class="plus" href="javascript:;" onclick="novaData(this)">+</a>' +
+		'</div>';
+	$(el).parent().after($(html));
+	$('.plus').twipsy();
+};
+</script>
 <?php endif ?>

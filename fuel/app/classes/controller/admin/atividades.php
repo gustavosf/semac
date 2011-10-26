@@ -110,6 +110,9 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$val->add_field('responsavel', 'Responsável', 'max_length[255]');
 			$val->add_field('carga_horaria', 'Carga Horária', 'match_pattern[/^[0-9]{0,3}$/]');
 			$val->add_field('vagas', 'Vagas', 'match_pattern[/^[0-9]{0,3}$/]');
+			$val->add_field('data', 'Data', 'date_array');
+			$val->add_field('as', 'Ás', 'time_array');
+			$val->add_field('ate', 'Até', 'time_array');
 			$val->set_message('match_pattern', 'Valor inválido!');
 			$data['salvo'] = $val->run($_POST);
 			
@@ -120,6 +123,11 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->setMore('descricao', $val->input('descricao'));
 			$atividade->setMore('shortbio', $val->input('shortbio'));
 			$atividade->setMore('afiliacao', $val->input('afiliacao'));
+			$datas = array_map(function($d, $a, $t){
+				return array('data' => $d, 'as' => $a, 'ate' => $t);
+			}, $val->input('data'), $val->input('as'), $val->input('ate'));
+			$atividade->setData($datas);
+
 			if ($data['salvo']) $atividade->save();
 
 			$data['erros'] = $val->errors();

@@ -24,14 +24,44 @@ class Model_Atividade extends Orm\Model {
 		return Model_Atividade::$atividades[$this->tipo];
 	}
 
-	public function getDataFormatada($format = 'd/m H:i')
+	/**
+	 * Retorna as datas setadas
+	 *
+	 * Como o campo data pode permitir mais de uma entrada, foi escolhido
+	 * serializar os campos na forma de um array
+	 *
+	 * @return array
+	 */
+	public function getData()
 	{
-		if ( ! $this->data)
-		{
-			return '-';
-		}
-		$date = new DateTime($this->data);
-		return $date->format($format);
+		return unserialize(base64_decode($this->data));
+	}
+
+	/**
+	 * Seta datas
+	 *
+	 * Pega um array contendo datas, serializa e salva no banco de dados
+	 *
+	 * @param $data array Array com as datas
+	 */
+
+	public function setData($data = array())
+	{
+		$this->data = base64_encode(serialize($data));
+	}
+
+	/**
+	 * Adiciona uma data ao array de datas
+	 *
+	 * Deserializa as datas no bd, adiciona a data e salva novamente
+	 * 
+	 * @param $nova_data array
+	 */
+	public function addData($nova_data)
+	{
+		$data = $this->getData();
+		$data[] = $nova_data;
+		$this->setData($data);
 	}
 
 	/**
@@ -65,7 +95,7 @@ class Model_Atividade extends Orm\Model {
 		$more[$property] = $value;
 		$this->more = base64_encode(serialize($more));
 	}
-	
+
 }
 
 /* End of file atividade.php */
