@@ -34,7 +34,9 @@ class Model_Atividade extends Orm\Model {
 	 */
 	public function getData()
 	{
-		return unserialize(base64_decode($this->data));
+		$data = unserialize(base64_decode($this->data))
+			or $data = array(array('data' => null, 'as' => null, 'ate' => null));
+		return $data;
 	}
 
 	/**
