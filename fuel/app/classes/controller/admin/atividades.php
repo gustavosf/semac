@@ -146,9 +146,25 @@ class Controller_Admin_Atividades extends Controller_Semac
 	 */
 	public function action_locais()
 	{
-		$data = array();
-		$this->template->title = 'Locais das Atividades';
-		$this->template->content = View::factory('admin/atividades/locais', $data);
+		if ($_POST)
+		{
+			$atividade = Model_Atividade::find(Input::post('id'));
+			$atividade->local = Input::post('local');
+			$atividade->save();
+			die(); // retorna status 200 (ok)
+		}
+		else
+		{
+			$data = array();
+
+			$atividades = Model_Atividade::find()
+				->where('carga_horaria', 'is not', null)
+				->get();
+			
+			$data['atividades'] = $atividades;
+			$this->template->title = 'Locais das Atividades';
+			$this->template->content = View::factory('admin/atividades/locais', $data);
+		}
 	}
 
 }

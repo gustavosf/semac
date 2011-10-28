@@ -22,4 +22,9 @@
 			<a href='<?php echo URI::create('admin/atividades/listar'); ?>'>Listar Atividades</a>
 		</li>
 	<?php endif; ?>
+	<?php if (Auth::has_access('atividades.locais')): ?>
+		<li<?php if ($action == 'locais') echo ' class="selected"'; ?>>
+			<a href='<?php echo URI::create('admin/atividades/locais'); ?>'>Locais das Atividades</a>
+		</li>
+	<?php endif; ?>
 </ul>
