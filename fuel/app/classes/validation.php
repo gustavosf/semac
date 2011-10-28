@@ -24,16 +24,18 @@ class Validation extends Fuel\Core\Validation {
 	{
 		foreach ($dates as $date)
 		{
-			if ( ! $this->_validation_valid_date($date)) return false;
+			if ( ! $this->_validation_valid_date($date)) return 0;
 		}
+		return 1;
 	}
 
 	public function _validation_time_array($times)
 	{
 		foreach ($times as $time)
 		{
-			if ( ! $this->_validation_valid_time($time)) return false;
+			if ( ! $this->_validation_valid_time($time)) return 0;
 		}
+		return 1;
 	}
 
 
