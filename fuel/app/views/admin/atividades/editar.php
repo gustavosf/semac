@@ -58,7 +58,7 @@
 			</div>
 		</div><!-- /clearfix -->
 
-		<div class="clearfix<?php echo @$erros['data']?' error':'' ?>">
+		<div class="clearfix<?php echo @$erros['data']||@$erros['as']||@$erros['ate']?' error':'' ?>">
 			<label for="xlInput">Data</label>
 			<?php foreach ($atividade->getData() as $data): ?>
 				<div class="input">
@@ -68,8 +68,8 @@
 					<a data-original-title="Adicionar nova data" class="plus" href="javascript:;" onclick="novaData(this)">+</a>
 				</div>
 			<?php endforeach ?>
-			<?php if (isset($erros['data'])): ?>
-				<span class="help-inline"><?php echo $erros['data']; ?></span>
+			<?php if (isset($erros['data'])||isset($erros['as'])||isset($erros['ate'])): ?>
+				<span class="help-inline"><?php echo implode('<br>',array(@$erros['data'],@$erros['as'],@$erros['ate'])); ?></span>
 			<?php endif; ?>
 		</div><!-- /clearfix -->
 

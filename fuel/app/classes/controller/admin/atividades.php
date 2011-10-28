@@ -114,6 +114,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$val->add_field('as', 'Ás', 'time_array');
 			$val->add_field('ate', 'Até', 'time_array');
 			$val->set_message('match_pattern', 'Valor inválido!');
+			$val->set_message('date_array', 'Uma das datas está formatada incorretamente!');
+			$val->set_message('time_array', 'Um dos horários está formatado incorretamente!');
 			$data['salvo'] = $val->run($_POST);
 			
 			$atividade->titulo = $val->validated('titulo');
