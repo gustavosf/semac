@@ -140,6 +140,17 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$this->template->title = 'Edição de Atividade';
 		$this->template->content = View::factory('admin/atividades/editar', $data);
 	}
+
+	/**
+	 * Edição de locais de atividades da SEMAC
+	 */
+	public function action_locais()
+	{
+		$data = array();
+		$this->template->title = 'Locais das Atividades';
+		$this->template->content = View::factory('admin/atividades/locais', $data);
+	}
+
 }
 
 /* End of file atividades.php */
