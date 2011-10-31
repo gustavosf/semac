@@ -40,6 +40,19 @@ class Model_Atividade extends Orm\Model {
 	}
 
 	/**
+	 * Retorna as datas setadas serializado em uma string
+	 *
+	 * @return string
+	 */
+	public function getDataSerial()
+	{
+		$data = $this->getData();
+		foreach ($data as $k => $d)
+			$data[$k] = substr($d['data'], 0, 5).", {$d['as']} - {$d['ate']}";
+		return implode("<br>", $data);
+	}
+
+	/**
 	 * Seta datas
 	 *
 	 * Pega um array contendo datas, serializa e salva no banco de dados
