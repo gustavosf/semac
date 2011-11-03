@@ -75,9 +75,9 @@ return array(
 		'notices'      => true,
 	),
 
-	'language'		=> 'en',
+	'language'		=> 'pt',
 
-	'locale'		=> 'en_US',
+	'locale'		=> 'pt_BR',
 
 	'encoding'		=> 'UTF-8',
 
@@ -194,7 +194,8 @@ return array(
 		 * );
 		 */
 		'packages'	=> array(
-			//'orm',
+			'orm',
+			'auth',
 		),
 
 		/**

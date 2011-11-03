@@ -1,0 +1,43 @@
+.content {
+	padding-top: 15px;
+}
+
+.content > .row > div {
+	padding-top: 20px;
+}
+
+.content .menu {
+	margin-right: 0;
+	border-right: 1px solid #eee;
+	text-align: right;
+}
+
+.content .menu ul {
+	font-size: 80%;
+	list-style: none;
+}
+
+.content .menu li {
+	padding: 5px;
+	padding-right: 19px;
+	cursor: pointer;
+}
+
+.content .menu li.selected {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background-color: #272727 !important;
+	color: white !important;
+}
+
+.content .menu li:hover {
+	background-color: #eee;
+}
+
+.content .menu li a {
+	color: #222;
+}
+
+.content .menu li.selected a {
+	color: white;
+}
