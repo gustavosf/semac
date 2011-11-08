@@ -14,6 +14,8 @@
 			<b>Horário(s):</b> <?php echo $data ?><br>
 			<hr>
 			Documentação Extra
+			<hr>
+			<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
 		</div>
 	</div>
 	<?php if ($shortbio): ?>
