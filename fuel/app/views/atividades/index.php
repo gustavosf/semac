@@ -4,6 +4,12 @@
 	</div>
 	<div class="row">
 		<div class="span12">
+			<?php if ($inscricao_efetuada): ?>
+				<div class="alert-message block-message success">
+					<a class="close" href="#">×</a>
+					<p>Sua inscrição foi efetuada com sucesso!</p>
+				</div>
+			<?php endif ?>
 			<h2><?php echo $titulo ?> <small><?php echo $responsavel ?></small></h2>
 			<br>
 			<p><?php echo $descricao ?></p>
@@ -15,7 +21,9 @@
 			<hr>
 			Documentação Extra
 			<hr>
-			<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
+			<?php if ( ! $inscrito): ?>
+				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
+			<?php endif ?>
 		</div>
 	</div>
 	<?php if ($shortbio): ?>
