@@ -2,6 +2,12 @@
 
 class Model_Inscricao extends Orm\Model {
 
+	private static $statuses = array(
+		0 => 'Cadastrado',
+		1 => 'Inscrito',
+		2 => 'Recusado',
+	);
+
 	/* Configuração */
 	protected static $_table_name = 'inscricoes';
 	
@@ -46,6 +52,11 @@ class Model_Inscricao extends Orm\Model {
 			'id_atividade' => $atividade->id,
 		));
 		$ins->save();
+	}
+
+	public function getStatus()
+	{
+		return Model_Inscricao::$statuses[$this->status];
 	}
 
 	
