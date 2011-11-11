@@ -86,7 +86,6 @@ class Controller_A extends Controller_Semac {
 					$email = $user->email;
 					if ($pass)
 					{
-						/*
 						$mail = new \Util_Mailer(array(
 							'view' => 'admin/usuarios/novo',
 							'subject' => 'Cadastro no sistema da Semana Acadêmica da UFRGS',
@@ -97,7 +96,6 @@ class Controller_A extends Controller_Semac {
 							'senha' => $pass,
 						));
 						$mail->send();
-						*/
 					}
 				}
 				else
