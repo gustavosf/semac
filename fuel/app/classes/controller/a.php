@@ -6,6 +6,10 @@ class Controller_A extends Controller_Semac {
 
 	public function action_index($id)
 	{
+		$post = Model_User::query()->related('inscricoes')
+		    ->where('inscricoes.id_atividade', $id)
+		    ->get();
+		
 		$atividade = Model_Atividade::find($id);
 		if ( ! $atividade->id) Response::redirect(404);
 
@@ -20,7 +24,9 @@ class Controller_A extends Controller_Semac {
 		$data['descricao'] = $atividade->more('descricao');
 		$data['shortbio'] = $atividade->more('shortbio');
 		$data['inscricao_efetuada'] = Session::get('inscrito', false);
-		$data['inscrito'] = false;
+		$data['inscrito'] = $post ? true : false;
+
+		Session::delete('inscrito');
 
 		$this->template->title = $atividade->titulo;
 		$this->template->content = View::factory('atividades/index', $data);
@@ -52,9 +58,16 @@ class Controller_A extends Controller_Semac {
 		}
 		else // cadastra o gaijo e redireciona
 		{
-			// cadastro pendente
-
-			Session::set('inscrito', true);
+			try {
+				$ins = new Model_Inscricao(array(
+					'id_user' => Auth::get_user_id(),
+					'id_atividade' => $id,
+				));
+				$ins->save();
+				Session::set('inscrito', true);
+			} catch (Database_Exception $e) {
+				Session::set('inscrito', 'already');
+			}
 			Response::redirect('a/'.$id);
 		}
 	}

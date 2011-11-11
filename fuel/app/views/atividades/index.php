@@ -4,10 +4,16 @@
 	</div>
 	<div class="row">
 		<div class="span12">
-			<?php if ($inscricao_efetuada): ?>
+			<?php if ($inscricao_efetuada === true): ?>
 				<div class="alert-message block-message success">
 					<a class="close" href="#">×</a>
 					<p>Sua inscrição foi efetuada com sucesso!</p>
+				</div>
+			<?php endif ?>
+			<?php if ($inscricao_efetuada === 'already'): ?>
+				<div class="alert-message block-message error">
+					<a class="close" href="#">×</a>
+					<p>Você já está inscrito nesta atividade!</p>
 				</div>
 			<?php endif ?>
 			<h2><?php echo $titulo ?> <small><?php echo $responsavel ?></small></h2>
