@@ -2,6 +2,18 @@
 
 class Model_User extends Orm\Model {
 	
+	/* Relacionamentos */
+	protected static $_has_many = array(
+		'inscricoes' => array(
+			'model_to' => 'Model_Inscricao',
+			'key_to' => 'id_user'
+		),
+		'atividades' => array(
+			'key_to' => 'chair'
+		),
+	);
+
+	/* Métodos */
 	/**
 	 * Provém acesso de leitura a variável guardada no profile_fields
 	 *
@@ -13,7 +25,7 @@ class Model_User extends Orm\Model {
 		$profile = unserialize(base64_decode($this->profile_fields));
 		if (isset($profile[$property]))
 		{
-			return $profile['nome'];
+			return $profile[$property];
 		}
 		else
 		{
