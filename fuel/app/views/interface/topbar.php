@@ -27,6 +27,9 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle"><?php echo $user; ?></a>
 							<ul class="dropdown-menu">
+								<?php if (Auth::has_access('a.minhas')): ?>
+									<li><a href="<?php echo URI::create('a/minhas') ?>">Minhas Atividades</a></li>	
+								<?php endif ?>
 								<li><a href="#">Secondary link</a></li>
 								<li><a href="#">Something else here</a></li>
 								<li class="divider"></li>

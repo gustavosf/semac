@@ -4,6 +4,17 @@
 	</div>
 	<div class="row">
 		<div class="span12">
+			<?php if ($inscricao_efetuada === true): ?>
+				<div class="alert-message block-message success">
+					<a class="close" href="#">×</a>
+					<p>Sua inscrição foi efetuada com sucesso!</p>
+				</div>
+			<?php elseif ($inscricao_efetuada): ?>
+				<div class="alert-message block-message error">
+					<a class="close" href="#">×</a>
+					<p><?php echo $inscricao_efetuada ?></p>
+				</div>
+			<?php endif ?>
 			<h2><?php echo $titulo ?> <small><?php echo $responsavel ?></small></h2>
 			<br>
 			<p><?php echo $descricao ?></p>
@@ -14,6 +25,12 @@
 			<b>Horário(s):</b> <?php echo $data ?><br>
 			<hr>
 			Documentação Extra
+			<hr>
+			<?php if ( ! $inscrito): ?>
+				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
+			<?php else: ?>
+				<span class="label success">Você está inscrito nesta atividade</span>	
+			<?php endif ?>
 		</div>
 	</div>
 	<?php if ($shortbio): ?>

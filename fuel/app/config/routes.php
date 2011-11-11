@@ -3,7 +3,11 @@ return array(
 	'_root_'  => 'welcome/index',  // The default route
 	'_404_'   => 'welcome/404',    // The main 404 route
 	
-	'a/(:any)'   => 'a/index/$1',
+	'a/cadastro'         => 'a/cadastro',
+	'a/minhas'           => 'a/minhas',
+	'a/(:num)/inscricao' => 'a/inscricao/$1',
+	'a/(:num)'           => 'a/index/$1',
+	
 	/**
 	 * This is an example of a BASIC named route (used in reverse routing).
 	 * The translated route MUST come first, and the 'name' element must come
