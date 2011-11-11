@@ -4,6 +4,7 @@ return array(
 	'_404_'   => 'welcome/404',    // The main 404 route
 	
 	'a/cadastro'         => 'a/cadastro',
+	'a/minhas'           => 'a/minhas',
 	'a/(:num)/inscricao' => 'a/inscricao/$1',
 	'a/(:num)'           => 'a/index/$1',
 	

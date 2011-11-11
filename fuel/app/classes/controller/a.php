@@ -132,6 +132,15 @@ class Controller_A extends Controller_Semac {
 		Response::redirect('a/'.$atividade->id.'/inscricao');
 	}
 
+	public function action_minhas()
+	{
+		$user = Model_User::instanceOfThis();
+		$data = array();
+		$data['inscricoes'] = $user->inscricoes;
+		$this->template->title = 'Minhas Atividades';
+		$this->template->content = View::factory('atividades/minhas', $data);
+	}
+
 }
 
 /* End of file a.php */

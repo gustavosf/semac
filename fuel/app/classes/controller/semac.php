@@ -37,7 +37,8 @@ class Controller_Semac extends Controller_Template {
 	public function after()
 	{
 		parent::after();
-		$data = array('user' => @Auth::instance()->get_screen_name());
+		$data = array();
+		$data['user'] = @Auth::instance()->get_screen_name();
 		$this->template->interface_topbar = View::factory('interface/topbar', @$data);
 	}
 
