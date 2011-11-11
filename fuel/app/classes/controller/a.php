@@ -6,12 +6,9 @@ class Controller_A extends Controller_Semac {
 
 	public function action_index($id)
 	{
-		$post = Model_User::query()->related('inscricoes')
-		    ->where('inscricoes.id_atividade', $id)
-		    ->get();
-		
 		$atividade = Model_Atividade::find($id);
 		if ( ! $atividade->id) Response::redirect(404);
+		$user = Model_User::instanceOfThis();
 
 		$data = array();
 		$data['id'] = $id;
@@ -24,7 +21,7 @@ class Controller_A extends Controller_Semac {
 		$data['descricao'] = $atividade->more('descricao');
 		$data['shortbio'] = $atividade->more('shortbio');
 		$data['inscricao_efetuada'] = Session::get('inscrito', false);
-		$data['inscrito'] = $post ? true : false;
+		$data['inscrito'] = @$user->id && $user->estaInscrito($id);
 
 		Session::delete('inscrito');
 

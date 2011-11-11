@@ -29,6 +29,8 @@
 			<hr>
 			<?php if ( ! $inscrito): ?>
 				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
+			<?php else: ?>
+				<span class="label success">Você está inscrito nesta atividade</span>	
 			<?php endif ?>
 		</div>
 	</div>
