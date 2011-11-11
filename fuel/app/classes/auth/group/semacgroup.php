@@ -30,4 +30,24 @@ class Auth_Group_SemacGroup extends \Auth\Auth_Group_SimpleGroup {
 		return $roles;
 	}
 
+	/* Sobrescrita simples da função group. A original está com erro */
+	public function member($group, $user = null)
+	{
+		if ($user === null)
+		{
+			$groups = \Auth::instance()->get_groups();
+		}
+		else
+		{
+			$groups = \Auth::instance()->get_groups();
+		}
+
+		if ( ! $groups || ! in_array((int) $group, static::$_valid_groups))
+		{
+			return false;
+		}
+
+		return in_array(array($this->id, $group), $groups);
+	}
+
 }

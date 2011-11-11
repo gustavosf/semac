@@ -2,6 +2,52 @@
 
 class Model_User extends Orm\Model {
 	
+	/* Relacionamentos */
+	protected static $_has_many = array(
+		'inscricoes' => array(
+			'model_to' => 'Model_Inscricao',
+			'key_to' => 'id_user'
+		),
+		'atividades' => array(
+			'key_to' => 'chair'
+		),
+	);
+
+	/* Métodos */
+	/**
+	 * Gera uma instância da classe user para o usuário atualmente logado,
+	 * ou para o usuário com o id repassado
+	 *
+	 * @var $id int
+	 * @return Model_User
+	 */
+	public static function instanceOfThis($id = null)
+	{
+		static $instance;
+		if ( ! is_object($instance))
+		{
+			if ( ! $id) $id = Auth::get_user_id();
+			$instance = Model_User::find($id);
+		}
+		return $instance;
+	}
+
+	/**
+	 * Função simples para dizer se um usuário está inscrito em uma atividade
+	 *
+	 * @var $atividade int id da atividade
+	 * @return bool
+	 */
+	public function estaInscrito($atividade)
+	{
+		foreach ($this->inscricoes as $inscricao)
+		{
+			if ($inscricao->id_atividade == $atividade)
+				return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Provém acesso de leitura a variável guardada no profile_fields
 	 *
@@ -13,7 +59,7 @@ class Model_User extends Orm\Model {
 		$profile = unserialize(base64_decode($this->profile_fields));
 		if (isset($profile[$property]))
 		{
-			return $profile['nome'];
+			return $profile[$property];
 		}
 		else
 		{

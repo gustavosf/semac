@@ -2,6 +2,21 @@
 
 class Model_Atividade extends Orm\Model {
 
+	/* Relacionamentos */
+	protected static $_has_many  = array(
+		'inscricoes' => array(
+			'model_to' => 'Model_Inscricao',
+			'key_to' => 'id_user',
+		),
+	);
+
+	protected static $_belongs_to  = array(
+		'user' => array(
+			'key_from' => 'chair',
+		),
+	);	
+
+	/* Variávies */
 	static $atividades = array(
 		0 => 'Coding Dojos',
 		1 => 'Cursos',
@@ -19,6 +34,12 @@ class Model_Atividade extends Orm\Model {
 		2 => 'Cancelado',
 	);
 
+	/* Métodos */
+	/**
+	 * Retorna o tipo de atividade
+	 *
+	 * @return string
+	 */
 	public function getTipo()
 	{
 		return Model_Atividade::$atividades[$this->tipo];
