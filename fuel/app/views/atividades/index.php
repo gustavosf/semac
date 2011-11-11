@@ -9,11 +9,10 @@
 					<a class="close" href="#">×</a>
 					<p>Sua inscrição foi efetuada com sucesso!</p>
 				</div>
-			<?php endif ?>
-			<?php if ($inscricao_efetuada === 'already'): ?>
+			<?php elseif ($inscricao_efetuada): ?>
 				<div class="alert-message block-message error">
 					<a class="close" href="#">×</a>
-					<p>Você já está inscrito nesta atividade!</p>
+					<p><?php echo $inscricao_efetuada ?></p>
 				</div>
 			<?php endif ?>
 			<h2><?php echo $titulo ?> <small><?php echo $responsavel ?></small></h2>

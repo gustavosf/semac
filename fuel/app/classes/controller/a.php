@@ -56,14 +56,12 @@ class Controller_A extends Controller_Semac {
 		else // cadastra o gaijo e redireciona
 		{
 			try {
-				$ins = new Model_Inscricao(array(
-					'id_user' => Auth::get_user_id(),
-					'id_atividade' => $id,
-				));
-				$ins->save();
+				$ins = Model_Inscricao::inscreve(Auth::get_user_id(), $id);
 				Session::set('inscrito', true);
 			} catch (Database_Exception $e) {
-				Session::set('inscrito', 'already');
+				Session::set('inscrito', 'Você já está inscrito nesta atividade!');
+			} catch (Exception $e) {
+				Session::set('inscrito', $e->getMessage());
 			}
 			Response::redirect('a/'.$id);
 		}
