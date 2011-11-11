@@ -20,13 +20,17 @@ class Create_inscricoes {
 			'id_user' => array('constraint' => 11, 'type' => 'int'),
 			'id_atividade' => array('constraint' => 11, 'type' => 'int'),
 			'dados' => array('type' => 'text', 'null' => true),
-			'cadastrado_em' => array('type' => 'timestamp', 'null' => true, 'default' => \DB::expr('CURRENT_TIMESTAMP')),
+			'cadastrado_em' => array('type' => 'timestamp', 'default' => \DB::expr('CURRENT_TIMESTAMP')),
 			'status' => array('constraint' => 1, 'type' => 'int', 'null' => true, 'default' => 0),
 		), array('id'), false, 'InnoDB');
 
 		/* Adiciona as benditas chaves estrangeiras */
 		\DB::Query('ALTER TABLE inscricoes ADD CONSTRAINT fk_inscricoes_user FOREIGN KEY (id_user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE')->execute();
 		\DB::Query('ALTER TABLE inscricoes ADD CONSTRAINT fk_inscricoes_atividade FOREIGN KEY (id_atividade) REFERENCES atividades(id) ON UPDATE RESTRICT ON DELETE RESTRICT')->execute();
+
+		/* Adiciona um índice UNIQUE para o par user-atividade, impedindo cadastros duplicados */
+		\DB::Query('ALTER TABLE inscricoes ADD UNIQUE (id_user, id_atividade)')->execute();
+		
 	}
 
 	public function down()
