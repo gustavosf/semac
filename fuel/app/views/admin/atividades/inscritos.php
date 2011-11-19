@@ -36,27 +36,6 @@
 <span id="aceitos"></span> aceitos /
 <span id="vagas"><?php echo $vagas; ?></span> vagas
 
-<hr>
-
-<a class="btn" data-controls-modal="my-modal" data-backdrop="static" >Confirmar Inscrições</a>
-
-<div id="my-modal" class="modal hide fade">
-	<div class="modal-header">
-		<a href="#" class="close">&times;</a>
-		<h3>Confirmar Inscrições</h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			Você tem certeza que deseja confirmar as incrições?<br>
-			Este processo irá enviar e-mails para os inscritos, informando da confirmação ou recusa da matrícula nesta atividade.
-		</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn primary">Confirmar</a>
-		<a href="#" class="btn secondary" onclick="$('#my-modal').modal('toggle')">Cancelar</a>
-	</div>
-</div>
-
 <style>
 td > a:not(.inscrito) {
 	opacity: 0.1;
