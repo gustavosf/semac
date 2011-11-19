@@ -6,7 +6,7 @@ class Model_Atividade extends Orm\Model {
 	protected static $_has_many  = array(
 		'inscricoes' => array(
 			'model_to' => 'Model_Inscricao',
-			'key_to' => 'id_user',
+			'key_to' => 'id_atividade',
 		),
 	);
 

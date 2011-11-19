@@ -6,7 +6,7 @@
 			<th>Tipo</th>
 			<th>Título</th>
 			<th>Responsável</th>
-			<th width=16></th>
+			<th width=36></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,7 +17,10 @@
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>
 					<a href="<?php echo URI::create('admin/atividades/editar/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/edit.png', array('alt' => 'editar')); ?>
+						<?php echo Asset::img('ico/edit.png', array('title' => 'editar')); ?>
+					</a>
+					<a href="<?php echo URI::create('admin/atividades/inscritos/'.$atividade->id); ?>">
+						<?php echo Asset::img('ico/user.png', array('title' => 'Inscritos')); ?>
 					</a>
 				</td>
 			</tr>
