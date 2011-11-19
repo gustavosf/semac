@@ -16,14 +16,19 @@
 	<?php echo Asset::css('semac.css'); ?>
 	<?php echo Asset::css('semac.admin.css'); ?>
 	<?php echo Asset::css('smoothness/jquery-ui-1.8.16.custom.css'); ?>
-
-
+	<?php if (isset($assets['css'])) foreach (@$assets['css'] as $asset): ?>
+		<?php echo Asset::css($asset); ?>
+	<?php endforeach; ?>
+	
 	<!-- JavaScript at the bottom for fast page loading -->
 	<?php echo Asset::js('jquery/jquery-1.6.4.js'); ?>
 	<?php echo Asset::js('jquery/jquery-ui-1.8.16.custom.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-alerts.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
+	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
+		<?php echo Asset::js($asset); ?>
+	<?php endforeach; ?>
 
 	<!-- scripts concatenated and minified via ant build script -->
 	<?php echo Asset::js('application.js'); ?>

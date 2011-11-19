@@ -167,6 +167,51 @@ class Controller_Admin_Atividades extends Controller_Semac
 		}
 	}
 
+	/**
+	 * Listagem de inscritos em atividades, visualizadas pelo chair
+	 *
+	 * @param $id int id da atividade
+	 */
+	public function action_inscritos($id)
+	{
+		$data = array();
+	 	
+	 	$atividade = Model_Atividade::find($id);
+		if ( ! $atividade->id) Response::redirect(404);
+
+		$data['inscritos'] = $atividade->inscricoes;
+		$data['vagas'] = $atividade->vagas;
+		$data['titulo'] = $atividade->titulo;
+	
+		$this->template->title = 'Inscritos | '.$atividade->titulo;
+		$this->template->content = View::factory('admin/atividades/inscritos', $data);
+	}
+
+	/**
+	 * Efetua o 'toggle' na inscrição do usuário.
+	 * O retorno desta funcão deve ser apenas o código HTML (200OK ou 301 )
+	 *
+	 *
+	 */
+	public function action_inscrever()
+	{
+		$i = Model_Inscricao::find(Input::post('inscricao'));
+
+		if (!$i)
+		{
+			$this->response->status = 400;
+		}
+		else
+		{
+			$status = Input::post('status') ? 1 : 2;
+			$i->status = $i->status == $status ? 0 : $status;
+			$i->save();
+		}
+
+		// evita renderização do template
+		die();
+	}
+
 }
 
 /* End of file atividades.php */

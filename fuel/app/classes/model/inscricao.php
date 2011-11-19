@@ -59,5 +59,15 @@ class Model_Inscricao extends Orm\Model {
 		return Model_Inscricao::$statuses[$this->status];
 	}
 
+	public function getStatusDesc()
+	{
+		$desc = array(
+			0 => 'Você está cadastrado na atividade e aguarda confirmação do responsável',
+			1 => 'Você está inscrito na atividade',
+			2 => 'Sua inscrição nesta atividade não foi aceita',
+		);
+		return $desc[$this->status];
+	}
+
 	
 }
