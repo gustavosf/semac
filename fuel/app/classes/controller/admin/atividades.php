@@ -172,7 +172,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 	 *
 	 * @param $id int id da atividade
 	 */
-	 public function action_inscritos($id) {
+	public function action_inscritos($id)
+	{
 		$data = array();
 	 	
 	 	$atividade = Model_Atividade::find($id);
@@ -180,9 +181,35 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 		$data['inscritos'] = $atividade->inscricoes;
 		$data['titulo'] = $atividade->titulo;
+	
 		$this->template->title = 'Inscritos | '.$atividade->titulo;
 		$this->template->content = View::factory('admin/atividades/inscritos', $data);
-	 }
+	}
+
+	/**
+	 * Efetua o 'toggle' na inscrição do usuário.
+	 * O retorno desta funcão deve ser apenas o código HTML (200OK ou 301 )
+	 *
+	 *
+	 */
+	public function action_inscrever()
+	{
+		$i = Model_Inscricao::find(Input::post('inscricao'));
+
+		if (!$i)
+		{
+			$this->response->status = 400;
+		}
+		else
+		{
+			$i->status = ! $i->status;
+			$i->save();
+			
+		}
+
+		// evita renderização do template
+		die();
+	}
 
 }
 
