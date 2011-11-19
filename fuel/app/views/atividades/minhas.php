@@ -22,7 +22,11 @@
 							</a>
 						</td>
 						<td><?php echo $inscricao->atividade->getDataSerial() ?></td>
-						<td><?php echo $inscricao->getStatus() ?></td>
+						<td>
+							<a href="#" rel='twipsy' title='<?php echo $inscricao->getStatusDesc(); ?>'>
+								<?php echo $inscricao->getStatus() ?>
+							</a>
+						</td>
 					</tr>
 				<?php endforeach ?>
 				</tbody>
@@ -30,3 +34,8 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a[rel=twipsy]').twipsy();
+});
+</script>
