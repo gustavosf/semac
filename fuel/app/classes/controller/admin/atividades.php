@@ -180,6 +180,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		if ( ! $atividade->id) Response::redirect(404);
 
 		$data['inscritos'] = $atividade->inscricoes;
+		$data['vagas'] = $atividade->vagas;
 		$data['titulo'] = $atividade->titulo;
 	
 		$this->template->title = 'Inscritos | '.$atividade->titulo;
