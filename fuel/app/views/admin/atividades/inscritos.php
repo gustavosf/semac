@@ -17,10 +17,16 @@
 				<td><?php echo $inscrito->cadastrado_em; ?></td>
 				<td>
 					<a href="javascript:;"
-					   onclick="inscrever(<?php echo $inscrito->id ?>, this)"
+					   onclick="inscrever(<?php echo $inscrito->id ?>, 1, this)"
 					   <?php if ($inscrito->status == 1): ?>class="inscrito"<?php endif;?>
 					>
 						<?php echo Asset::img('check-alt.png'); ?>
+					</a>
+					<a href="javascript:;"
+					   onclick="inscrever(<?php echo $inscrito->id ?>, 0, this)"
+					   <?php if ($inscrito->status == 2): ?>class="inscrito"<?php endif;?>
+					>
+						<?php echo Asset::img('cancel.png'); ?>
 					</a>
 				</td>
 			</tr>
@@ -44,11 +50,14 @@ td > a:not(.inscrito) {
 }
 </style>
 <script>
-var inscrever = function(id, el) {
+var inscrever = function(id, oper, el) {
 	$.post(
 		'<?php echo URI::create("admin/atividades/inscrever"); ?>',
-		{'inscricao': id},
+		{'inscricao': id, 'status': oper},
 		function(data) {
+			if ( ! $(el).hasClass('inscrito')) {
+				$(el).parent().find('a').removeClass('inscrito');
+			}
 			$(el).toggleClass('inscrito');
 			updateAceitos();
 		},
