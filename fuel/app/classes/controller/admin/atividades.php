@@ -113,6 +113,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$val->add_field('data', 'Data', 'date_array');
 			$val->add_field('as', 'Ás', 'time_array');
 			$val->add_field('ate', 'Até', 'time_array');
+			$val->add_field('descricao', 'Resumo', 'max_length[255]');
 			$val->set_message('match_pattern', 'Valor inválido!');
 			$val->set_message('date_array', 'Uma das datas está formatada incorretamente!');
 			$val->set_message('time_array', 'Um dos horários está formatado incorretamente!');
@@ -123,6 +124,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->carga_horaria = $val->validated('carga_horaria');
 			$atividade->vagas = $val->validated('vagas');
 			$atividade->setMore('descricao', $val->input('descricao'));
+			$atividade->setMore('descricao_ext', $val->input('descricao_ext'));
 			$atividade->setMore('shortbio', $val->input('shortbio'));
 			$atividade->setMore('afiliacao', $val->input('afiliacao'));
 			$datas = array_map(function($d, $a, $t){

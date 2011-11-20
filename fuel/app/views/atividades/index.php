@@ -18,6 +18,11 @@
 			<h2><?php echo $titulo ?> <small><?php echo $responsavel ?></small></h2>
 			<br>
 			<p><?php echo $descricao ?></p>
+			<?php if ($descricao_ext): ?>
+				<hr>
+				<?php echo html_entity_decode($descricao_ext); ?>
+				<hr>
+			<?php endif ?>
 		</div>
 		<div class="span4">
 			<b>Local:</b> <?php echo $local ?><br>
