@@ -77,17 +77,26 @@
 
 		<h6>Campos Opcionais</h6>
 
-		<div class="clearfix">
-			<label for="xlInput">Descrição da Atividade</label>
+		<div class="clearfix<?php echo @$erros['descricao']?' error':'' ?>">
+			<label for="xlInput">Resumo da Atividade</label>
 			<div class="input">
-				<textarea class="span5" name="descricao" id="descricao" rows="5"><?php echo $atividade->more('descricao'); ?></textarea>
+				<textarea class="span8<?php echo @$erros['descricao']?' error':'' ?>" name="descricao" maxlength=255 id="descricao" rows="5"><?php echo $atividade->more('descricao'); ?></textarea>
+				<span class="help-block">Máximo de 255 caracteres</span>
+			</div>
+		</div><!-- /clearfix -->
+
+		<div class="clearfix">
+			<label for="xlInput">Descrição Extensa da Atividade</label>
+			<div class="input">
+				<textarea class="span8" name="descricao_ext" id="descricao_ext" rows="10"><?php echo $atividade->more('descricao_ext'); ?></textarea>
+				<span class="help-block">Este campo aceita o formato <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a></span>
 			</div>
 		</div><!-- /clearfix -->
 
 		<div class="clearfix">
 			<label for="xlInput">Short-Bio do Responsável</label>
 			<div class="input">
-				<textarea class="span5" name="shortbio" id="shortbio" rows="5"><?php echo $atividade->more('shortbio'); ?></textarea>
+				<textarea class="span8" name="shortbio" id="shortbio" rows="5"><?php echo $atividade->more('shortbio'); ?></textarea>
 			</div>
 		</div><!-- /clearfix -->
 
