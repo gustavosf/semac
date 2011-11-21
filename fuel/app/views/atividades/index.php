@@ -42,10 +42,14 @@
 				Nenhuma documentação foi anexada para esta atividade
 			<?php endif ?>
 			<hr>
-			<?php if ( ! $inscrito): ?>
+			<?php if ($inscrito === false): ?>
 				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
-			<?php else: ?>
-				<span class="label success">Você está inscrito nesta atividade</span>	
+			<?php elseif ($inscrito == 0): ?>
+				<span class="label warning">Cadastrado nesta atividade</span>	
+			<?php elseif ($inscrito == 1): ?>
+				<span class="label success">Inscrito nesta atividade</span>	
+			<?php elseif ($inscrito == 2): ?>
+				<span class="label important">Não-cadastrado nesta atividade</span>	
 			<?php endif ?>
 		</div>
 	</div>

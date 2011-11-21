@@ -73,7 +73,7 @@ class Model_Atividade extends Orm\Model {
 		$data = $this->getData();
 		foreach ($data as $k => $d)
 			$data[$k] = substr($d['data'], 0, 5).", {$d['as']} - {$d['ate']}";
-		return implode("<br>", $data);
+		return implode("\n", $data);
 	}
 
 	/**
