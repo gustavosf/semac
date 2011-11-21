@@ -8,6 +8,9 @@ class Model_Atividade extends Orm\Model {
 			'model_to' => 'Model_Inscricao',
 			'key_to' => 'id_atividade',
 		),
+		'documentos' => array(
+			'key_to' => 'id_atividade'
+		),
 	);
 
 	protected static $_belongs_to  = array(
@@ -70,7 +73,7 @@ class Model_Atividade extends Orm\Model {
 		$data = $this->getData();
 		foreach ($data as $k => $d)
 			$data[$k] = substr($d['data'], 0, 5).", {$d['as']} - {$d['ate']}";
-		return implode("<br>", $data);
+		return implode("\n", $data);
 	}
 
 	/**

@@ -20,13 +20,13 @@
 					   onclick="inscrever(<?php echo $inscrito->id ?>, 1, this)"
 					   <?php if ($inscrito->status == 1): ?>class="inscrito"<?php endif;?>
 					>
-						<?php echo Asset::img('check-alt.png'); ?>
+						<?php echo Asset::img('ico/check-alt.png'); ?>
 					</a>
 					<a href="javascript:;"
 					   onclick="inscrever(<?php echo $inscrito->id ?>, 0, this)"
 					   <?php if ($inscrito->status == 2): ?>class="inscrito"<?php endif;?>
 					>
-						<?php echo Asset::img('cancel.png'); ?>
+						<?php echo Asset::img('ico/cancel.png'); ?>
 					</a>
 				</td>
 			</tr>

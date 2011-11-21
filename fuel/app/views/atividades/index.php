@@ -29,12 +29,27 @@
 			<b>Trilha:</b> <?php echo @$trilha ?><br>
 			<b>Horário(s):</b> <?php echo $data ?><br>
 			<hr>
-			Documentação Extra
+			<strong>Documentação Extra</strong><br><br>
+			<?php foreach ($documentos as $key => $documento): ?>
+				<a href="<?php echo $documento->getPath() ?>"
+				   target="_blank"
+				   rel="popover"
+				   data-content="<?php echo $documento->descricao ?>"
+				   data-original-title="<?php echo $documento->titulo ?>">
+					<img src="<?php echo $documento->getIco() ?>"></a>
+			<?php endforeach ?>
+			<?php if ( ! isset($documento)): ?>
+				Nenhuma documentação foi anexada para esta atividade
+			<?php endif ?>
 			<hr>
-			<?php if ( ! $inscrito): ?>
+			<?php if ($inscrito === false): ?>
 				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
-			<?php else: ?>
-				<span class="label success">Você está inscrito nesta atividade</span>	
+			<?php elseif ($inscrito == 0): ?>
+				<span class="label warning">Cadastrado nesta atividade</span>	
+			<?php elseif ($inscrito == 1): ?>
+				<span class="label success">Inscrito nesta atividade</span>	
+			<?php elseif ($inscrito == 2): ?>
+				<span class="label important">Não-cadastrado nesta atividade</span>	
 			<?php endif ?>
 		</div>
 	</div>
@@ -47,3 +62,11 @@
 		</div>
 	<?php endif ?>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a[rel=popover]').popover({
+		placement: 'below'
+	});
+});
+</script>
