@@ -8,6 +8,9 @@ class Model_Atividade extends Orm\Model {
 			'model_to' => 'Model_Inscricao',
 			'key_to' => 'id_atividade',
 		),
+		'documentos' => array(
+			'key_to' => 'id_atividade'
+		),
 	);
 
 	protected static $_belongs_to  = array(
