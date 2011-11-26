@@ -2,9 +2,9 @@
 	<div class="topbar">
 		<div class="topbar-inner">
 			<div class="container">
-				<h3><a href="#">SEMAC</a></h3>
+				<h3><a href="<?php echo URI::create('') ?>">SEMAC</a></h3>
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="<?php echo URI::create('') ?>">Home</a></li>
 					<li><a href="javascript:callModal()">Link</a></li>
 					<li><a href="#">Link</a></li>
 					<li><a href="#">Link</a></li>
@@ -29,6 +29,9 @@
 							<ul class="dropdown-menu">
 								<?php if (Auth::has_access('a.minhas')): ?>
 									<li><a href="<?php echo URI::create('a/minhas') ?>">Minhas Atividades</a></li>	
+								<?php endif ?>
+								<?php if (Auth::has_access('atividades.listar')): ?>
+									<li><a href="<?php echo URI::create('admin/atividades/listar') ?>">Listar Atividades</a></li>	
 								<?php endif ?>
 								<li><a href="#">Secondary link</a></li>
 								<li><a href="#">Something else here</a></li>

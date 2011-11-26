@@ -35,15 +35,15 @@ return array(
 	 * Groups as id => array(name => <string>, roles => <array>)
 	 */
 	'groups' => array(
-		-1 => array('name' => 'Banned', 'roles' => array('banned')),
-		0  => array('name' => 'Visitante', 'roles' => array()),
-		1  => array('name' => 'Participante', 'roles' => array()),
-		2  => array('name' => 'Secretaria', 'roles' => array('secretaria')),
-		4  => array('name' => 'Comgrad', 'roles' => array('comgrad')),
-		8  => array('name' => 'Chair', 'roles' => array('chair')),
-		16 => array('name' => 'Comex', 'roles' => array('comex')),
-		32 => array('name' => 'Organizador Geral', 'roles' => array('og')),
-		64 => array('name' => 'Admin', 'roles' => array('super')),
+		0   => array('name' => 'Banned', 'roles' => array('banned')),
+		1   => array('name' => 'Visitante', 'roles' => array()),
+		2   => array('name' => 'Participante', 'roles' => array('participante')),
+		4   => array('name' => 'Secretaria', 'roles' => array('secretaria')),
+		8   => array('name' => 'Comgrad', 'roles' => array('comgrad')),
+		16  => array('name' => 'Chair', 'roles' => array('chair')),
+		32  => array('name' => 'Comex', 'roles' => array('comex')),
+		64  => array('name' => 'Organizador Geral', 'roles' => array('og')),
+		128 => array('name' => 'Admin', 'roles' => array('super')),
 	),
 
 	/**
@@ -55,26 +55,37 @@ return array(
 		'#'                 => array(
 			'admin' => array('login', 'logout'),
 			'e'     => array('forbidden'),
+			'a'     => array('index', 'inscricao', 'cadastro'),
+			'home'  => array('index', 'atividades'),
+		),
+		'participante' => array(
+			'a' => array('minhas'),
 		),
 		'secretaria' => array(
 			'admin' => array('index'),
+			'atividades' => array('locais'),
 		),
 		'comgrad' => array(
 			'admin' => array('index'),
 		),
+		'chair' => array(
+			'admin' => array('index'),
+			'atividades' => array('listar', 'editar', 'inscritos', 'inscrever', 'docs', 'docs_delete'),
+		),
 		'comex' => array(
 			'admin' => array('index'),
-			'usuarios' => array('novo'),
+			'usuarios' => array('novo', 'organizador_geral'),
 		),
 		'og' => array(
 			'admin' => array('index'),
+			'atividades' => array('nova'),
 		),
 	),
 
 	/**
 	 * Salt for the login hash
 	 */
-	'login_hash_salt' => 'semac-salt', // this is not our current salt :)
+	'login_hash_salt' => 'some_salt', // this is our current salt :)
 	
 	/**
 	 * $_POST key for login username

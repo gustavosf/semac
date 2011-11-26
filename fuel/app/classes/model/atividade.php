@@ -21,14 +21,14 @@ class Model_Atividade extends Orm\Model {
 
 	/* Variávies */
 	static $atividades = array(
-		0 => 'Coding Dojos',
-		1 => 'Cursos',
-		2 => 'Lightning Talks',
-		3 => 'Maratonas de Programação',
-		4 => 'Mini-Cursos',
-		5 => 'Painéis',
-		6 => 'Palestras',
-		7 => 'Reuniões',
+		0 => 'Coding Dojo',
+		1 => 'Curso',
+		2 => 'Lightning Talk',
+		3 => 'Maratona de Programação',
+		4 => 'Mini-Curso',
+		5 => 'Painel',
+		6 => 'Palestra',
+		7 => 'Reunião',
 	);
 
 	static $status = array(
@@ -72,7 +72,7 @@ class Model_Atividade extends Orm\Model {
 	{
 		$data = $this->getData();
 		foreach ($data as $k => $d)
-			$data[$k] = substr($d['data'], 0, 5).", {$d['as']} - {$d['ate']}";
+			$data[$k] = substr($d['data'], 0, 5).', '.substr($d['as'], 0, 5).' - '.substr($d['ate'], 0, 5);
 		return implode("\n", $data);
 	}
 
