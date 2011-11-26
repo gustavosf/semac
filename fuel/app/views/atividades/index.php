@@ -20,14 +20,14 @@
 			<p><?php echo $descricao ?></p>
 			<?php if ($descricao_ext): ?>
 				<hr>
-				<?php echo html_entity_decode($descricao_ext); ?>
+				<?php echo utf8_encode(html_entity_decode($descricao_ext)); ?>
 				<hr>
 			<?php endif ?>
 		</div>
 		<div class="span4">
 			<b>Local:</b> <?php echo $local ?><br>
 			<b>Trilha:</b> <?php echo @$trilha ?><br>
-			<b>Horário(s):</b> <?php echo $data ?><br>
+			<b>Horário(s):</b> <?php echo str_replace("\n", "<br>", $data) ?><br>
 			<hr>
 			<strong>Documentação Extra</strong><br><br>
 			<?php foreach ($documentos as $key => $documento): ?>
@@ -49,7 +49,7 @@
 			<?php elseif ($inscrito == 1): ?>
 				<span class="label success">Inscrito nesta atividade</span>	
 			<?php elseif ($inscrito == 2): ?>
-				<span class="label important">Não-cadastrado nesta atividade</span>	
+				<span class="label important">Inscrição recusada nesta atividade</span>	
 			<?php endif ?>
 		</div>
 	</div>

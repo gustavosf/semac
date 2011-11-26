@@ -23,7 +23,7 @@ class Controller_A extends Controller_Semac {
 		$data['descricao_ext'] = $desc->transform($atividade->more('descricao_ext'));
 		$data['shortbio'] = $atividade->more('shortbio');
 		$data['inscricao_efetuada'] = Session::get('inscrito', false);
-		$data['inscrito'] = $user->estaInscrito($id);
+		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
 		$data['documentos'] = $atividade->documentos;
 
 		Session::delete('inscrito');
