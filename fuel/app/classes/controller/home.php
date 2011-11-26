@@ -34,6 +34,10 @@ class Controller_Home extends Controller_Semac {
 			$this->template->title = $data['tipo'];
 			$this->template->content = View::factory('home/atividades', $data);
 		}
+		else
+		{
+			
+		}
 	}
 
 }

@@ -30,6 +30,9 @@
 								<?php if (Auth::has_access('a.minhas')): ?>
 									<li><a href="<?php echo URI::create('a/minhas') ?>">Minhas Atividades</a></li>	
 								<?php endif ?>
+								<?php if (Auth::has_access('atividades.listar')): ?>
+									<li><a href="<?php echo URI::create('admin/atividades/listar') ?>">Listar Atividades</a></li>	
+								<?php endif ?>
 								<li><a href="#">Secondary link</a></li>
 								<li><a href="#">Something else here</a></li>
 								<li class="divider"></li>

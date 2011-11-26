@@ -14,7 +14,7 @@
 				<tbody>
 					<?php foreach ($atividades as $id => $atividade): ?>
 						<tr style='cursor:pointer'>
-							<td><a href="<?php echo URI::create($uri.'/'.$atividade->id) ?>"><?php echo $atividade->titulo ?></a></td>
+							<td><a href="<?php echo URI::create('a/'.$atividade->id) ?>"><?php echo $atividade->titulo ?></a></td>
 							<td><?php echo $atividade->responsavel ?></td>
 							<td><?php echo str_replace("\n", "<br>", $atividade->getDataSerial()) ?></td>
 						</tr>
