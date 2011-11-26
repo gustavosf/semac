@@ -19,12 +19,16 @@ class Controller_A extends Controller_Semac {
 		$data['local'] = $atividade->local;
 		$data['data'] = $atividade->getDataSerial();
 		$data['descricao'] = $atividade->more('descricao');
+		$desc = new Util_Markdown;
+		$data['descricao_ext'] = $desc->transform($atividade->more('descricao_ext'));
 		$data['shortbio'] = $atividade->more('shortbio');
 		$data['inscricao_efetuada'] = Session::get('inscrito', false);
-		$data['inscrito'] = @$user->id && $user->estaInscrito($id);
+		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
+		$data['documentos'] = $atividade->documentos;
 
 		Session::delete('inscrito');
 
+		$this->template->addAsset('js', 'bootstrap/bootstrap-popover.js');
 		$this->template->title = $atividade->titulo;
 		$this->template->content = View::factory('atividades/index', $data);
 	}

@@ -43,7 +43,7 @@ class Model_User extends Orm\Model {
 		foreach ($this->inscricoes as $inscricao)
 		{
 			if ($inscricao->id_atividade == $atividade)
-				return true;
+				return $inscricao->status;
 		}
 		return false;
 	}

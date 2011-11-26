@@ -13,6 +13,9 @@
 
 	<!-- CSS: implied media="all" -->
 	<?php echo Asset::css('bootstrap.min.css'); ?>
+	<?php if (isset($assets['css'])) foreach (@$assets['css'] as $asset): ?>
+		<?php echo Asset::css($asset); ?>
+	<?php endforeach; ?>
 	<?php echo Asset::css('semac.css'); ?>
 	<?php if (isset($admin)) echo Asset::css('semac.admin.css'); ?>
 
@@ -37,6 +40,9 @@
 	<?php echo Asset::js('jquery/jquery-1.6.4.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
+	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
+		<?php echo Asset::js($asset); ?>
+	<?php endforeach; ?>
 
 	<!-- scripts concatenated and minified via ant build script -->
 	<?php echo Asset::js('application.js'); ?>

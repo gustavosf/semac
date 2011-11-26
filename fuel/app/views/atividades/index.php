@@ -18,18 +18,38 @@
 			<h2><?php echo $titulo ?> <small><?php echo $responsavel ?></small></h2>
 			<br>
 			<p><?php echo $descricao ?></p>
+			<?php if ($descricao_ext): ?>
+				<hr>
+				<?php echo utf8_encode(html_entity_decode($descricao_ext)); ?>
+				<hr>
+			<?php endif ?>
 		</div>
 		<div class="span4">
 			<b>Local:</b> <?php echo $local ?><br>
 			<b>Trilha:</b> <?php echo @$trilha ?><br>
-			<b>Horário(s):</b> <?php echo $data ?><br>
+			<b>Horário(s):</b> <?php echo str_replace("\n", "<br>", $data) ?><br>
 			<hr>
-			Documentação Extra
+			<strong>Documentação Extra</strong><br><br>
+			<?php foreach ($documentos as $key => $documento): ?>
+				<a href="<?php echo $documento->getPath() ?>"
+				   target="_blank"
+				   rel="popover"
+				   data-content="<?php echo $documento->descricao ?>"
+				   data-original-title="<?php echo $documento->titulo ?>">
+					<img src="<?php echo $documento->getIco() ?>"></a>
+			<?php endforeach ?>
+			<?php if ( ! isset($documento)): ?>
+				Nenhuma documentação foi anexada para esta atividade
+			<?php endif ?>
 			<hr>
-			<?php if ( ! $inscrito): ?>
+			<?php if ($inscrito === false): ?>
 				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
-			<?php else: ?>
-				<span class="label success">Você está inscrito nesta atividade</span>	
+			<?php elseif ($inscrito == 0): ?>
+				<span class="label warning">Cadastrado nesta atividade</span>	
+			<?php elseif ($inscrito == 1): ?>
+				<span class="label success">Inscrito nesta atividade</span>	
+			<?php elseif ($inscrito == 2): ?>
+				<span class="label important">Inscrição recusada nesta atividade</span>	
 			<?php endif ?>
 		</div>
 	</div>
@@ -42,3 +62,11 @@
 		</div>
 	<?php endif ?>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a[rel=popover]').popover({
+		placement: 'below'
+	});
+});
+</script>

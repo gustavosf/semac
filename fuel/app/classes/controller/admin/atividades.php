@@ -113,6 +113,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$val->add_field('data', 'Data', 'date_array');
 			$val->add_field('as', 'Ás', 'time_array');
 			$val->add_field('ate', 'Até', 'time_array');
+			$val->add_field('descricao', 'Resumo', 'max_length[255]');
 			$val->set_message('match_pattern', 'Valor inválido!');
 			$val->set_message('date_array', 'Uma das datas está formatada incorretamente!');
 			$val->set_message('time_array', 'Um dos horários está formatado incorretamente!');
@@ -123,6 +124,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->carga_horaria = $val->validated('carga_horaria');
 			$atividade->vagas = $val->validated('vagas');
 			$atividade->setMore('descricao', $val->input('descricao'));
+			$atividade->setMore('descricao_ext', $val->input('descricao_ext'));
 			$atividade->setMore('shortbio', $val->input('shortbio'));
 			$atividade->setMore('afiliacao', $val->input('afiliacao'));
 			$datas = array_map(function($d, $a, $t){
@@ -139,6 +141,90 @@ class Controller_Admin_Atividades extends Controller_Semac
 		
 		$this->template->title = 'Edição de Atividade';
 		$this->template->content = View::factory('admin/atividades/editar', $data);
+	}
+
+	/**
+	 * Edição de documentação de atividades da SEMAC
+	 */
+	public function action_docs($id)
+	{
+		$data = array();
+		$data['salvo'] = false;
+
+		$atividade = Model_Atividade::find()
+			->where(array('id' => $id, 'chair' => Auth::instance()->get_user_id()))
+			->get_one();
+		if ( ! $atividade->id) Response::redirect('e/forbidden');
+		
+		if ($_POST)
+		{
+			/* Validação do formulário (upload validado separadamente) */
+			$val = Validation::factory();
+			$val->add_field('titulo', 'Título', 'required|max_length[255]');
+			$val->add_field('descricao', 'Descriçao', 'required|max_length[255]');
+			$val->set_message('max_length', 'Máximo de :param:1 caracteres');
+			$val->set_message('required', 'Campo :label obrigatório!');
+			$data['salvo'] = $val->run($_POST);
+			$data['erros'] = $val->errors();
+			
+			/* Processar e validar os uploads */
+			Upload::process(array(
+				'path'        => DOCROOT.DS.'doc'.DS.$atividade->id,
+				'max_size'    => 10485760, # 10MB
+				'create_path' => true,
+				'normalize'   => true,
+			));
+			
+			if ( ! Upload::is_valid())
+			{
+				$data['erros_upload'] = Upload::get_errors();
+				$data['salvo'] = false;
+			}
+
+			/* No caso de formulário sem erros, salva */
+			if ($data['salvo'])
+			{
+				Upload::save();
+				$file = Upload::get_files();
+				$doc = new Model_Documento;
+				$doc->titulo = $val->validated('titulo');
+				$doc->descricao = $val->validated('descricao');
+				$doc->id_atividade = $atividade->id;
+				$doc->arquivo = $file[0]['saved_as'];
+				$doc->save();
+			}
+			else
+			{
+				$data['titulo'] = Input::post('titulo');
+				$data['descricao'] = Input::post('descricao');
+			}
+		}
+
+		$data['atividade'] = $atividade;
+		$data['docs'] = $atividade->documentos;
+		
+		$data['upload'] = Upload::get_files();
+
+		$this->template->title = 'Documentos | '.$atividade->titulo;
+		$this->template->content = View::factory('admin/atividades/docs', $data);
+	}
+
+	public function action_docs_delete()
+	{
+		$id = Input::post('id');
+		$doc = Model_Documento::find()
+			->where(array('id' => $id))
+			->get_one();
+		if ( ! $doc->id OR $doc->atividade->chair != Auth::instance()->get_user_id())
+		{
+			$this->response->status = 403;
+		}
+		else
+		{
+			$doc->destroi();
+		}
+		$this->response->send_headers();
+		die();
 	}
 
 	/**
