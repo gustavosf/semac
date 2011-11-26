@@ -65,7 +65,7 @@ var inscrever = function(id, oper, el) {
 	);
 };
 var updateAceitos = function() {
-	var aceitos = $("a.inscrito").length,
+	var aceitos = $("td > a.inscrito:first-child").length,
 		vagas = parseInt($("#vagas").text(), 10);
 
 	$("#aceitos").text(aceitos);
