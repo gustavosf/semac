@@ -2,9 +2,9 @@
 	<div class="topbar">
 		<div class="topbar-inner">
 			<div class="container">
-				<h3><a href="#">SEMAC</a></h3>
+				<h3><a href="<?php echo URI::create('') ?>">SEMAC</a></h3>
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="<?php echo URI::create('') ?>">Home</a></li>
 					<li><a href="javascript:callModal()">Link</a></li>
 					<li><a href="#">Link</a></li>
 					<li><a href="#">Link</a></li>
