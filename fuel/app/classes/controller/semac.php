@@ -13,7 +13,9 @@ class Controller_Semac extends Controller_Template {
 	public function before()
 	{
 		parent::before();
-		$action = $this->request->controller.'.'.$this->request->action;
+
+		$action = preg_replace('/.*_(\w+)/', '\1', $this->request->controller);
+		$action = strtolower($action.'.'.$this->request->action);
 		if ( ! Auth::has_access($action))
 		{
 			if (Auth::check()) \Response::redirect('e/forbidden');
@@ -34,9 +36,9 @@ class Controller_Semac extends Controller_Template {
 		*/
 	}
 
-	public function after()
+	public function after($response)
 	{
-		parent::after();
+		parent::after($response);
 		$data = array();
 		$data['user'] = @Auth::instance()->get_screen_name();
 		$this->template->interface_topbar = View::factory('interface/topbar', @$data);

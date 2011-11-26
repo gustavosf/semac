@@ -26,7 +26,7 @@
 		</div>
 		<div class="span4">
 			<b>Local:</b> <?php echo $local ?><br>
-			<b>Trilha:</b> <?php echo @$trilha ?><br>
+			<b>Trilha:</b> <?php //echo $trilha ?><br>
 			<b>Horário(s):</b> <?php echo str_replace("\n", "<br>", $data) ?><br>
 			<hr>
 			<strong>Documentação Extra</strong><br><br>
