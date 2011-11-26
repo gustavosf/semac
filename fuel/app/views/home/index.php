@@ -42,3 +42,18 @@
 		<p><a class="btn" href="<?php echo URI::create('coding_dojos') ?>">Var atividades &raquo;</a></p>
 	</div>
 </div>
+
+<hr>
+
+<div class="row">
+	<div class="span6">
+		<h2>Cursos</h2>
+		<p>de maior duração sobre tecnologias/temas recentes não abordados nas grades curriculares</p>
+		<p><a class="btn" href="<?php echo URI::create('cursos') ?>">Var atividades &raquo;</a></p>
+	</div>
+	<div class="span5">
+		<h2>Painéis</h2>
+		<p>para oportunizar discussões em torno de temas relevantes em Ciência da Computação e Engenharia de Computação</p>
+		<p><a class="btn" href="<?php echo URI::create('paineis') ?>">Var atividades &raquo;</a></p>
+	</div>
+</div>

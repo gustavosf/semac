@@ -56,7 +56,7 @@ return array(
 			'admin' => array('login', 'logout'),
 			'e'     => array('forbidden'),
 			'a'     => array('index', 'inscricao', 'cadastro'),
-			'home'  => array('index'),
+			'home'  => array('index', 'atividades'),
 		),
 		'participante' => array(
 			'a' => array('minhas'),
