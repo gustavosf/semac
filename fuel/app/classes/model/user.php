@@ -6,10 +6,13 @@ class Model_User extends Orm\Model {
 	protected static $_has_many = array(
 		'inscricoes' => array(
 			'model_to' => 'Model_Inscricao',
-			'key_to' => 'id_user'
+			'key_to' => 'id_user',
 		),
 		'atividades' => array(
-			'key_to' => 'chair'
+			'key_to' => 'chair',
+		),
+		'chamadas' => array(
+			'key_to' => 'id_user',
 		),
 	);
 
