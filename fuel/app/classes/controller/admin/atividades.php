@@ -102,7 +102,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$atividade = Model_Atividade::find()
 			->where(array('id' => $id, 'chair' => Auth::instance()->get_user_id()))
 			->get_one();
-		
+
 		if ($_POST)
 		{
 			$val = Validation::factory();
@@ -127,9 +127,9 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->setMore('descricao_ext', $val->input('descricao_ext'));
 			$atividade->setMore('shortbio', $val->input('shortbio'));
 			$atividade->setMore('afiliacao', $val->input('afiliacao'));
-			$datas = array_map(function($d, $a, $t){
-				return array('data' => $d, 'as' => $a, 'ate' => $t);
-			}, $val->input('data'), $val->input('as'), $val->input('ate'));
+			$datas = array_map(function($i, $d, $a, $t){
+				return array('id' => $i, 'data' => $d, 'as' => $a, 'ate' => $t);
+			}, $val->input('id_data'), $val->input('data'), $val->input('as'), $val->input('ate'));
 			$atividade->setData($datas);
 
 			if ($data['salvo']) $atividade->save();

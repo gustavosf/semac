@@ -60,8 +60,9 @@
 
 		<div class="clearfix<?php echo @$erros['data']||@$erros['as']||@$erros['ate']?' error':'' ?>">
 			<label for="xlInput">Data</label>
-			<?php foreach ($atividade->getData() as $data): ?>
+			<?php foreach ($atividade->getData() as $id => $data): ?>
 				<div class="input">
+					<input type="hidden" name="id_data[]" value="<?php echo $id; ?>">
 					<input class="span2" name="data[]" type="date" value="<?php echo $data['data'] ?>"> ás 
 					<input class="span2" name="as[]" type="time" value="<?php echo $data['as'] ?>"> até 
 					<input class="span2" name="ate[]" type="time" value="<?php echo $data['ate'] ?>">

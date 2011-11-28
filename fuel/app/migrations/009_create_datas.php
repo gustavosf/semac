@@ -9,8 +9,9 @@ class Create_datas {
 		\DBUtil::create_table('datas', array(
 			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
 			'id_atividade' => array('constraint' => 11, 'type' => 'int'),
-			'data' => array('type' => 'timestamp'),
-			'local' => array('constraint' => 255, 'type' => 'varchar'),
+			'inicio' => array('type' => 'timestamp'),
+			'fim' => array('type' => 'timestamp'),
+			'local' => array('constraint' => 255, 'type' => 'varchar', 'null' => true),
 		), array('id'), false, 'InnoDB');
 
 		/* Adiciona as benditas chaves estrangeiras */
