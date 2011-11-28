@@ -298,6 +298,83 @@ class Controller_Admin_Atividades extends Controller_Semac
 		die();
 	}
 
+	/**
+	 * Lista de chamada de uma determinada atividade
+	 *
+	 * @param $atividade int id da atividade
+	 */
+	public function action_chamada($atividade, $dia = null)
+	{
+		$atividade = Model_Atividade::find($atividade);
+		if ( ! $atividade->id) Response::redirect(404);
+
+		$data = array();
+		$data['titulo'] = $atividade->titulo;
+
+		if ( ! $dia)
+		{
+			$data['datas'] = $atividade->datas;
+			$data['id_atividade'] = $atividade->id;
+
+			$this->template->title = 'Lista de Chamada | '.$atividade->titulo;
+			$this->template->content = View::factory('admin/atividades/chamada/dias', $data);
+		}
+		else
+		{
+			$dia = Model_Data::find($dia);
+			$chamada = array();
+			
+			foreach ($atividade->inscricoes as $id => $inscrito)
+			{
+				if ($inscrito->estaInscrito())
+				{
+					$chamada[$id]['id'] = $inscrito->id_user;
+					$chamada[$id]['nome'] = $inscrito->user->getProfile('nome');
+					$chamada[$id]['cartao'] = $inscrito->user->getProfile('cartao');
+					$chamada[$id]['presente'] = false;
+					foreach ($dia->chamadas as $k => $c)
+					{
+						if ($c->id_user == $inscrito->id_user)
+						{
+							$chamada[$id]['presente'] = true;
+						}
+					}
+				}
+			}
+
+			$data['id_data'] = $dia->id;
+			$data['chamada'] = $chamada;
+
+			$this->template->title = 'Lista de Chamada | '.$atividade->titulo;
+			$this->template->content = View::factory('admin/atividades/chamada/lista', $data);
+		}
+	}
+	/**
+	 * Lista de chamada de uma determinada atividade
+	 *
+	 * @param $atividade int id da atividade
+	 */
+	public function action_presenca()
+	{
+		$data = Input::post('data');
+		$user = Input::post('user');
+
+		$d = Model_Data::find($data);
+		
+		if ( ! $d->id OR $d->atividade->chair != Auth::instance()->get_user_id())
+		{
+			$this->response->status = 403; // forbidden
+		}
+		else
+		{
+			$presenca = $d->marcaPresenca($user);
+			if ($presenca === false) $this->response->status = 400;
+		}
+
+		$this->response->send_headers();
+		// evita renderização do template
+		die();
+	}
 }
 
 /* End of file atividades.php */

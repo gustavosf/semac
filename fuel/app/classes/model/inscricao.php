@@ -59,6 +59,11 @@ class Model_Inscricao extends Orm\Model {
 		return Model_Inscricao::$statuses[$this->status];
 	}
 
+	public function estaInscrito()
+	{
+		return $this->status == 1;
+	}
+
 	public function getStatusDesc()
 	{
 		$desc = array(

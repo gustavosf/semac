@@ -11,12 +11,12 @@ class Create_chamadas {
 			'id_user' => array('constraint' => 11, 'type' => 'int'),
 			'id_data' => array('constraint' => 11, 'type' => 'int'),
 			'status' => array('type' => 'bool', 'null' => true, 'default' => 0),
-			'inicio' => array('type' => 'timestamp'),
 		), array('id'), false, 'InnoDB');
 
 		/* Adiciona as benditas chaves estrangeiras */
 		\DB::Query('ALTER TABLE chamadas ADD CONSTRAINT fk_chamadas_user FOREIGN KEY (id_user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE')->execute();
 		\DB::Query('ALTER TABLE chamadas ADD CONSTRAINT fk_chamadas_data FOREIGN KEY (id_data) REFERENCES datas(id) ON UPDATE CASCADE ON DELETE CASCADE')->execute();
+		\DB::Query('ALTER TABLE chamadas ADD UNIQUE (id_data, id_user)')->execute();
 	}
 
 	public function down()

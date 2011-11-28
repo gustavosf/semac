@@ -6,7 +6,7 @@
 			<th>Tipo</th>
 			<th>Título</th>
 			<th>Responsável</th>
-			<th width=56></th>
+			<th width=76></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,6 +22,8 @@
 						<?php echo Asset::img('ico/file-add.png', array('title' => 'Adicionar Documento')); ?></a>
 					<a href="<?php echo URI::create('admin/atividades/inscritos/'.$atividade->id); ?>">
 						<?php echo Asset::img('ico/user.png', array('title' => 'Inscritos')); ?></a>
+					<a href="<?php echo URI::create('admin/atividades/chamada/'.$atividade->id); ?>">
+						<?php echo Asset::img('ico/presenca.png', array('title' => 'Lista de Chamada')); ?></a>
 				</td>
 			</tr>
 		<?php endforeach ?>
