@@ -11,6 +11,9 @@ class Model_Atividade extends Orm\Model {
 		'documentos' => array(
 			'key_to' => 'id_atividade'
 		),
+		'datas' => array(
+			'key_to' => 'id_atividade'
+		),
 	);
 
 	protected static $_belongs_to  = array(
