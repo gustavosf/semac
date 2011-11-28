@@ -27,9 +27,4 @@
 			<a href='<?php echo URI::create('admin/atividades/locais'); ?>'>Locais das Atividades</a>
 		</li>
 	<?php endif; ?>
-	<?php if (Auth::has_access('atividades.chamada')): ?>
-		<li<?php if ($action == 'locais') echo ' class="selected"'; ?>>
-			<a href='<?php echo URI::create('admin/atividades/chamada'); ?>'>Lista de Chamada</a>
-		</li>
-	<?php endif; ?>
 </ul>
