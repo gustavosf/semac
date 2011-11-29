@@ -88,7 +88,7 @@ class Admin {
 		{
 			$atividade = explode("\t", $atividade);
 			$a = new \Model_Atividade;
-			$a->chair = 1;
+			$a->chair = 53;
 			$a->tipo = array_search($atividade[1], \Model_Atividade::$atividades);
 			$a->titulo = $atividade[2];
 			$a->responsavel = $atividade[3];
@@ -96,11 +96,13 @@ class Admin {
 			$a->local = $atividade[5];
 			$a->vagas = 60;
 			$a->carga_horaria = 8;
+			$a->save();
+			$datas = explode(';', $atividade[0]);
 			$datas = array_map(function($d){
 				$d1 = explode(',', $d);
 				$d2 = explode('-', $d1[1]);
-				return array('data' => $d1[0], 'as' => $d2[0], 'ate' => $d2[1]);
-			}, explode(';', $atividade[0]));
+				return array('id' => 0, 'data' => $d1[0], 'as' => $d2[0], 'ate' => $d2[1]);
+			}, $datas);
 			$a->setData($datas);
 			$a->save();
 		}
