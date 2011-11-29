@@ -74,20 +74,14 @@ class Admin {
 	public static function initdb()
 	{
 		system('php oil r migrate');
-		static::createuser('comex@test.mail', '12345', 32, 'Test User');
-		static::createuser('og@test.mail', '12345', 64, 'Test User');
-		static::createuser('adm@test.mail', '12345', 128, 'Test User');
+		static::createuser('chair@test.mail', '12345', 16, 'Test Chair');
+		static::createuser('comex@test.mail', '12345', 32, 'Test Comex');
+		static::createuser('og@test.mail', '12345', 64, 'Test OG');
+		static::createuser('adm@test.mail', '12345', 128, 'Test Admin');
+		static::loadAtividades();
 	}
 	
-	public static function test()
-	{
-		$auth = \Auth::instance();
-		$auth->login('gustavosf@gmail.com', 'TtdoNcM5gK');
-		print_r($auth->has_access('welcome.update'));
-	}
-
-
-	public static function novaAtividade()
+	public static function loadAtividades()
 	{
 		$atividades = file('/home/gustavo/Desktop/eventos.txt');
 		foreach ($atividades as $atividade)
@@ -102,11 +96,13 @@ class Admin {
 			$a->local = $atividade[5];
 			$a->vagas = 60;
 			$a->carga_horaria = 8;
+			$a->save();
+			$datas = explode(';', $atividade[0]);
 			$datas = array_map(function($d){
 				$d1 = explode(',', $d);
 				$d2 = explode('-', $d1[1]);
-				return array('data' => $d1[0], 'as' => $d2[0], 'ate' => $d2[1]);
-			}, explode(';', $atividade[0]));
+				return array('id' => 0, 'data' => $d1[0], 'as' => $d2[0], 'ate' => $d2[1]);
+			}, $datas);
 			$a->setData($datas);
 			$a->save();
 		}
