@@ -141,6 +141,7 @@ class Controller_A extends Controller_Semac {
 		$user = Model_User::instanceOfThis();
 		$data = array();
 		$data['inscricoes'] = $user->inscricoes;
+		$data['user_id'] = $user->id;
 		$this->template->title = 'Minhas Atividades';
 		$this->template->content = View::factory('atividades/minhas', $data);
 	}

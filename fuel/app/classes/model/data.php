@@ -52,4 +52,18 @@ class Model_Data extends Orm\Model {
 		return 1;
 	}
 
+	public function isPresente($user)
+	{
+		foreach ($this->chamadas as $chamada)
+		{
+			if ($chamada->user->id == $user)
+				return true;
+		}
+	}
+
+	public function jaPassou()
+	{
+		return time() > strtotime($this->fim);
+	}
+
 }
