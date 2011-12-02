@@ -3,9 +3,11 @@
 
 <table>
 	<thead>
-		<th width=15>P</th>
-		<th>Nome</th>
-		<th>Cartão</th>
+		<tr>
+			<th width=15>P</th>
+			<th>Nome</th>
+			<th>Cartão</th>
+		</tr>
 	</thead>
 	<tbody>
 		<?php foreach ($chamada as $id => $user): ?>
