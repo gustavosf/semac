@@ -349,6 +349,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$this->template->content = View::factory('admin/atividades/chamada/lista', $data);
 		}
 	}
+
+
 	/**
 	 * Lista de chamada de uma determinada atividade
 	 *
@@ -374,6 +376,48 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$this->response->send_headers();
 		// evita renderização do template
 		die();
+	}
+
+	/**
+	 * Lista de chamada de uma determinada atividade
+	 *
+	 * @param $atividade int id da atividade
+	 */
+	public function action_extrato_chamadas($atividade = null)
+	{
+		if ($atividade !== null)
+		{
+			$atividade = Model_Atividade::find($atividade);
+			if ( ! $atividade->id) Response::redirect(404);
+				
+			$presencas = array();
+			foreach ($atividade->inscricoes as $id => $inscricao)
+			{
+				if ( ! $inscricao->estaInscrito()) continue;
+				$presencas[$id]['nome'] = $inscricao->user->getProfile('nome');
+				$presencas[$id]['cartao'] = $inscricao->user->getProfile('cartao');
+				foreach ($atividade->datas as $data)
+				{
+					$presencas[$id]['dias'][$data->getData()] = $data->isPresente($inscricao->user->id) ? 'P' : '-';
+				}
+			}
+
+			$data = array();
+			$data['dias'] = end($presencas);
+			$data['dias'] = $data['dias']['dias'] ?: array();
+			$data['atividade_titulo'] = $atividade->titulo;
+			$data['presencas'] = $presencas;
+			$this->template->title = 'Lista de Chamada | '.$atividade->titulo;
+			$this->template->content = View::factory('admin/atividades/chamadas', $data);
+		}
+		else
+		{
+			$atividades = Model_Atividade::find()->get();
+			$data = array();
+			$data['atividades'] = $atividades;
+			$this->template->title = 'Lista de Chamada';
+			$this->template->content = View::factory('admin/atividades/chamada/listar_atividades', $data);
+		}
 	}
 }
 
