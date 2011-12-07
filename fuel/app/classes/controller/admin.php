@@ -14,7 +14,7 @@ class Controller_Admin extends Controller_Semac {
 
 	public function before()
 	{
-		if (in_array($this->request->action, array('login', 'logout')))
+		if (in_array($this->request->action, array('login', 'logout', 'esqueci_minha_senha')))
 		{
 			// template do login/logout não deve conter menus (o padrão do admin)
 			$this->template = 'template';
@@ -67,6 +67,57 @@ class Controller_Admin extends Controller_Semac {
 		}
 		$this->template->title = 'Identificação';
 		$this->template->content = View::factory('admin/login', $data);
+	}
+
+	/**
+	 * Recuperação de Senha
+	 * 
+	 * @access  public
+	 * @return  void
+	 */
+	public function action_esqueci_minha_senha()
+	{
+		$data = array();
+		if ($_POST)
+		{
+			$user = Model_User::find()
+					->where('username', Input::post('email'))
+					->get_one();
+			if ( ! $user)
+			{
+				if ( ! Validation::is_valid_email(Input::post('email')))
+				{
+					Session::set_flash('error', 'Endereço de e-mail inválido');
+				}
+				else
+				{
+					Session::set_flash('error', 'O e-mail "<i>'.Input::post('email').'"</i> não está cadastrado no sistema');
+					$data['email'] = Input::post('email');
+				}
+			}
+			else
+			{
+				$pass = substr(str_shuffle('abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789'),0,6);
+				$pass = $user->resetar_senha(); // já efetua o salvamento do registro
+
+				$mail = new \Util_Mailer(array(
+					'view' => 'admin/usuarios/esqueci_minha_senha',
+					'subject' => 'SEMAC/UFRGS - Recuperação de senha',
+					'to' => Input::post('email'),
+				), array(
+					'nome' => $user->getProfile('nome'),
+					'email' => $user->email,
+					'senha' => $pass,
+				));
+				$mail->send();				
+
+				Session::set_flash('success', 'Suas novas credenciais para acesso foram enviadas para o e-mail <b>'.Input::post('email').'</b>');
+				
+				Response::redirect('admin/login');
+			}
+		}
+		$this->template->title = 'Recuperação de Senha';
+		$this->template->content = View::factory('admin/esqueci_minha_senha', $data);
 	}
 
 	/**
