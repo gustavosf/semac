@@ -4,8 +4,14 @@
 
 	<hr/>
 
-	<?php if (isset($error)): ?>
-		<div class="alert-message error"><?php echo $error; ?></div>
+	<?php if (isset($error) || Session::get_flash('error')): ?>
+		<?php $error = (@$error ?: Session::get_flash('error')) ?>
+		<div class="alert-message error"><?php echo $error ?></div>
+		<hr/>
+	<?php endif; ?>
+
+	<?php if (Session::get_flash('success')): ?>
+		<div class="alert-message success"><?php echo Session::get_flash('success') ?></div>
 		<hr/>
 	<?php endif; ?>
 
@@ -23,8 +29,10 @@
 					<input class="xlarge" placeholder="senha" id="passwd" name="password" size="30" type="password">
 				</div>
 			</div><!-- /clearfix -->
-			<hr/>
-			<input type="submit" class="btn primary" value="Acessar">&nbsp;<input type="reset" class="btn" value="Cancelar">
+			<hr>
+			<input type="submit" class="btn primary" value="Acessar">&nbsp;<input type="reset" class="btn" value="Cancelar"><br>
+			<br>
+			<a href="<?php echo Uri::create('admin/esqueci_minha_senha') ?>">Esqueceu a senha?</a>
 		</fieldset>
 	</form>
 </div>

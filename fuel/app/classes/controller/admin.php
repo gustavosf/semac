@@ -111,7 +111,7 @@ class Controller_Admin extends Controller_Semac {
 				));
 				$mail->send();				
 
-				Session::set_flash('success', 'Suas novas credenciais para acesso foram enviadas para o e-mail '.Input::post('email'));
+				Session::set_flash('success', 'Suas novas credenciais para acesso foram enviadas para o e-mail <b>'.Input::post('email').'</b>');
 				
 				Response::redirect('admin/login');
 			}
