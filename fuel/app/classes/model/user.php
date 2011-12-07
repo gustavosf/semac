@@ -162,7 +162,7 @@ class Model_User extends Orm\Model {
 	public function resetar_senha($nova_senha = null)
 	{
 		$pass = $nova_senha OR $pass = substr(str_shuffle('abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789'),0,6);
-		$this->password = $pass;
+		$this->password = Auth::instance()->hash_password($pass);
 		$this->save();
 		return $pass;
 	}

@@ -34,6 +34,10 @@
 								<?php if (Auth::has_access('atividades.listar')): ?>
 									<li><a href="<?php echo URI::create('admin/atividades/listar') ?>">Listar Atividades</a></li>	
 								<?php endif ?>
+								<?php if (Auth::has_access('admin.index')): ?>
+									<li class="divider"></li>
+									<li><a href="<?php echo URI::create('admin') ?>">Administração</a></li>	
+								<?php endif ?>
 								<li class="divider"></li>
 								<li><a href="<?php echo Uri::create('admin/logout'); ?>">Sair</a></li>
 							</ul>
