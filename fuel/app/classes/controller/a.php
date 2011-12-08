@@ -86,6 +86,17 @@ class Controller_A extends Controller_Semac {
 		{
 			if (Input::post('form') == 'cadastro')
 			{
+				$user = Model_User::find()->where('username', Input::post('email'));
+				if ($user->count())
+				{
+					Session::set('login_errors', array(
+						'form' => 'cadastro',
+						'errors' => array('email' => 'O e-mail '.Input::post('email').' já está cadastrado no sistema'),
+						'values' => $_POST
+					));
+					Response::redirect('a/'.$atividade->id.'/inscricao');
+				}
+				
 				$val = Validation::factory();
 				$val->add_field('nome', 'Nome', 'required|max_length[255]');
 				$val->add_field('matricula', 'Número de Matrícula', 'required|match_pattern[/^[0-9]{8}$/]');
@@ -141,6 +152,7 @@ class Controller_A extends Controller_Semac {
 		$user = Model_User::instanceOfThis();
 		$data = array();
 		$data['inscricoes'] = $user->inscricoes;
+		$data['user_id'] = $user->id;
 		$this->template->title = 'Minhas Atividades';
 		$this->template->content = View::factory('atividades/minhas', $data);
 	}

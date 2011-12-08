@@ -6,10 +6,13 @@ class Model_User extends Orm\Model {
 	protected static $_has_many = array(
 		'inscricoes' => array(
 			'model_to' => 'Model_Inscricao',
-			'key_to' => 'id_user'
+			'key_to' => 'id_user',
 		),
 		'atividades' => array(
-			'key_to' => 'chair'
+			'key_to' => 'chair',
+		),
+		'chamadas' => array(
+			'key_to' => 'id_user',
 		),
 	);
 
@@ -139,15 +142,29 @@ class Model_User extends Orm\Model {
 			$user = new Model_User;
 			$user->email = $user->username = $email;
 			$user->group = $gid;
-			$pass = substr(str_shuffle('abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789'),0,10);
-			$user->password = \Auth::instance()->hash_password($pass);
 			$user->last_login = '';
 			$user->login_hash = '';
 			$user->setProfile('nome', $nome);
-			$user->save();
+			$pass = $user->resetar_senha(); // já efetua o salvamento do registro
 		}
 		
 		return array($user, @$pass);
+	}
+
+	/**
+	 * Reset da senha do usuário
+	 *
+	 * Cria uma nova senha randômica (ou seta uma senha) na conta do usuário
+	 *
+	 * @param $senha string
+	 * @return string nova senha
+	 **/
+	public function resetar_senha($nova_senha = null)
+	{
+		$pass = $nova_senha OR $pass = substr(str_shuffle('abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789'),0,6);
+		$this->password = Auth::instance()->hash_password($pass);
+		$this->save();
+		return $pass;
 	}
 
 }

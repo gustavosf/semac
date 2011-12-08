@@ -16,13 +16,7 @@
 				<td><?php echo $atividade->titulo ?: '-'; ?></td>
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>
-					<a href="<?php echo URI::create('admin/atividades/editar/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/edit.png', array('title' => 'editar')); ?></a>
-					<a href="<?php echo URI::create('admin/atividades/docs/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/file-add.png', array('title' => 'Adicionar Documento')); ?></a>
-					<a href="<?php echo URI::create('admin/atividades/inscritos/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/user.png', array('title' => 'Inscritos')); ?></a>
-					<a href="<?php echo URI::create('admin/atividades/chamada/'.$atividade->id); ?>">
+					<a href="<?php echo URI::create('admin/atividades/extrato_chamadas/'.$atividade->id); ?>">
 						<?php echo Asset::img('ico/presenca.png', array('title' => 'Lista de Chamada')); ?></a>
 				</td>
 			</tr>

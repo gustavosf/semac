@@ -11,6 +11,9 @@ class Model_Atividade extends Orm\Model {
 		'documentos' => array(
 			'key_to' => 'id_atividade'
 		),
+		'datas' => array(
+			'key_to' => 'id_atividade'
+		),
 	);
 
 	protected static $_belongs_to  = array(
@@ -58,9 +61,16 @@ class Model_Atividade extends Orm\Model {
 	 */
 	public function getData()
 	{
-		$data = unserialize(base64_decode($this->data))
-			or $data = array(array('data' => null, 'as' => null, 'ate' => null));
-		return $data;
+		$datas = array();
+		foreach ($this->datas as $id => $data)
+		{
+			$time_i = strtotime($data->inicio);
+			$time_f = strtotime($data->fim);
+			$datas[$id]['data'] = date('d/m/Y', $time_i);
+			$datas[$id]['as']   = date('H:i', $time_i);
+			$datas[$id]['ate']  = date('H:i', $time_f);
+		}
+		return $datas ?: array(array('data' => null, 'as' => null, 'ate' => null));
 	}
 
 	/**
@@ -86,7 +96,20 @@ class Model_Atividade extends Orm\Model {
 
 	public function setData($data = array())
 	{
-		$this->data = base64_encode(serialize($data));
+		$r_in = '/([0-9]+)\/([0-9]+)\/([0-9]+) ([0-9]+)[h:]([0-9]+)/';
+		$r_out = '\3-\2-\1 \4:\5:00';
+		foreach ($data as $d)
+		{
+			$data_inicio = preg_replace($r_in, $r_out, $d['data'].' '.$d['as']);
+			$data_fim = preg_replace($r_in, $r_out, $d['data'].' '.$d['ate']);
+
+			if ($d['id']) $data_model = Model_Data::find($d['id']);
+			else $data_model = new Model_Data;
+			$data_model->id_atividade = $this->id;
+			$data_model->inicio = $data_inicio;
+			$data_model->fim = $data_fim;
+			$data_model->save();
+		}
 	}
 
 	/**

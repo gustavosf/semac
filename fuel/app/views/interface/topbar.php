@@ -2,26 +2,27 @@
 	<div class="topbar">
 		<div class="topbar-inner">
 			<div class="container">
-				<h3><a href="<?php echo URI::create('') ?>">SEMAC</a></h3>
+				<h3><a href="<?php echo URI::create('/') ?>">SEMAC</a></h3>
 				<ul class="nav">
-					<li class="active"><a href="<?php echo URI::create('') ?>">Home</a></li>
-					<li><a href="javascript:callModal()">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle">Dropdown</a>
+						<a href="#" class="dropdown-toggle">Atividades</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Secondary link</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Another link</a></li>
+							<li><a href="<?php echo URI::create('/coding_dojos') ?>">Coding Dojos</a></li>
+							<li><a href="<?php echo URI::create('/cursos') ?>">Cursos</a></li>
+							<li><a href="<?php echo URI::create('/lightning_talks') ?>">Lightning Talks</a></li>
+							<li><a href="<?php echo URI::create('/maratonas') ?>">Maratonas de Prog.</a></li>
+							<li><a href="<?php echo URI::create('/minicursos') ?>">Minicursos</a></li>
+							<li><a href="<?php echo URI::create('/paineis') ?>">Painéis</a></li>
+							<li><a href="<?php echo URI::create('/palestras') ?>">Palestras</a></li>
+							<li><a href="<?php echo URI::create('/reunioes') ?>">Reuniões</a></li>
 						</ul>
 					</li>
 				</ul>
+				<!--
 				<form action="">
 					<input type="text" placeholder="Search">
 				</form>
-				
+				-->
 				<?php if ($user != 'guest'): ?>
 					<ul class="nav secondary-nav">
 						<li class="dropdown">
@@ -33,8 +34,10 @@
 								<?php if (Auth::has_access('atividades.listar')): ?>
 									<li><a href="<?php echo URI::create('admin/atividades/listar') ?>">Listar Atividades</a></li>	
 								<?php endif ?>
-								<li><a href="#">Secondary link</a></li>
-								<li><a href="#">Something else here</a></li>
+								<?php if (Auth::has_access('admin.index')): ?>
+									<li class="divider"></li>
+									<li><a href="<?php echo URI::create('admin') ?>">Administração</a></li>	
+								<?php endif ?>
 								<li class="divider"></li>
 								<li><a href="<?php echo Uri::create('admin/logout'); ?>">Sair</a></li>
 							</ul>
