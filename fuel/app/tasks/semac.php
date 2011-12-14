@@ -29,12 +29,12 @@ class Semac {
 		is_file(APPPATH.'config/mailer.php') OR
 			copy(APPPATH.'config/mailer.php.dist', APPPATH.'config/mailer.php');
 
-		return "Inicialização concluída. Você deve editar os arquivos \n".
+		return "Inicialização concluída. Você deve editar os arquivos ".
 				\Cli::color('fuel/app/config/db.php', 'red').' e '.
-				\Cli::color('fuel/app/config/mailer.php', 'red')."\n".
+				\Cli::color('fuel/app/config/mailer.php', 'red')."".
 				"para atualizar as informações de acesso.\n".
 				"Após configurar o acesso ao banco de dados, digite o comando ".
-				\Cli::color('php oil refine db:migrate', 'green').
+				\Cli::color('php oil refine db:config', 'green').
 				" para configurar as tabelas no mesmo";
 	}
 }

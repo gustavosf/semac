@@ -2,6 +2,7 @@
 
 No terminal, clone a aplicação da semana acadêmica usando o Git
 git clone git://github.com/gustavosf/semac.git
+cd semac
 
 Atualize os submódulos
 git submodule init
