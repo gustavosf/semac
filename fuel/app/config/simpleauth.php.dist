@@ -74,8 +74,7 @@ return array(
 		),
 		'secretaria' => array(
 			'admin' => array('index'),
-			'atividades' => array('locais'),
-			'atividades' => array('extrato_chamadas'),
+			'atividades' => array('extrato_chamadas', 'locais'),
 		),
 		'comgrad' => array(
 			'admin' => array('index'),
