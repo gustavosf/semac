@@ -28,7 +28,7 @@
 		</li>
 	<?php endif; ?>
 	<?php if (Auth::has_access('atividades.extrato_chamadas')): ?>
-		<li<?php if ($action == 'locais') echo ' class="selected"'; ?>>
+		<li<?php if ($action == 'extrato_chamadas') echo ' class="selected"'; ?>>
 			<a href='<?php echo URI::create('admin/atividades/extrato_chamadas'); ?>'>Extrato das Chamadas</a>
 		</li>
 	<?php endif; ?>
