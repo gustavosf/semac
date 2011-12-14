@@ -17,8 +17,7 @@ class Db {
 	public static function config()
 	{
 		\Migrate::latest();
-		return "Banco de dados atualizado para a versão ".
-				\Cli::color(\Migrate::version(), 'green')."\n".
+		return "Banco de dados atualizado.\n".
 				"Caso queira popular o mesmo com dados da Semana Acadêmica passada, digite ".
 				\Cli::color('php oil db:populate', 'green');
 	}
