@@ -16,26 +16,25 @@ class Semac {
 	 */
 	public static function init()
 	{
-		if (!is_file(APPPATH.'config/db.php'))
-		{
+		is_file(APPPATH.'config/db.php') OR
 			copy(APPPATH.'config/db.php.dist', APPPATH.'config/db.php');
-		}
 		
-		if (!is_file(APPPATH.'config/auth.php'))
-		{
+		is_file(APPPATH.'config/auth.php') OR 
 			copy(APPPATH.'config/auth.php.dist', APPPATH.'config/auth.php');
-		}
 		
-		if (!is_file(APPPATH.'config/simpleauth.php'))
-		{
+		is_file(APPPATH.'config/simpleauth.php') OR
 			copy(APPPATH.'config/simpleauth.php.dist', APPPATH.'config/simpleauth.php');
-		}
 
-		return "Inicialização concluída. Você deve editar o arquivo ".
-				\Cli::color(APPPATH.'config/db.php', 'red').
-				" e atualizar as informações para acesso ao banco de dados\n\n".
+
+		is_file(APPPATH.'config/mailer.php') OR
+			copy(APPPATH.'config/mailer.php.dist', APPPATH.'config/mailer.php');
+
+		return "Inicialização concluída. Você deve editar os arquivos \n".
+				\Cli::color('fuel/app/config/db.php', 'red').' e '.
+				\Cli::color('fuel/app/config/mailer.php', 'red')."\n".
+				"para atualizar as informações de acesso.\n".
 				"Após configurar o acesso ao banco de dados, digite o comando ".
 				\Cli::color('php oil refine db:migrate', 'green').
-				" para configurar as tabelas no banco de dados";
+				" para configurar as tabelas no mesmo";
 	}
 }
