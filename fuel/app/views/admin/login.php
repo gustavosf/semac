@@ -15,22 +15,22 @@
 		<hr/>
 	<?php endif; ?>
 
-	<form method="post">
+	<form method="post" class="form-horizontal">
 		<fieldset>
-			<div class="clearfix">
-				<label for="xlInput">E-Mail</label>
-				<div class="input">
-					<input class="xlarge" placeholder="email" id="login" name="username" size="30" type="text" value="<?php echo @$username; ?>">
+			<div class="control-group">
+				<label class="control-label" for="username">E-Mail</label>
+				<div class="controls">
+					<input class="input-xlarge" placeholder="email" id="username" name="username" type="text" value="<?php echo @$username; ?>">
 				</div>
-			</div><!-- /clearfix -->
-			<div class="clearfix">
-				<label for="xlInput">Senha</label>
-				<div class="input">
-					<input class="xlarge" placeholder="senha" id="passwd" name="password" size="30" type="password">
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="password">Senha</label>
+				<div class="controls">
+					<input class="input-xlarge" placeholder="senha" id="password" name="password" size="30" type="password">
 				</div>
-			</div><!-- /clearfix -->
+			</div>
 			<hr>
-			<input type="submit" class="btn primary" value="Acessar">&nbsp;<input type="reset" class="btn" value="Cancelar"><br>
+			<input type="submit" class="btn btn-primary" value="Acessar">&nbsp;<input type="reset" class="btn" value="Cancelar"><br>
 			<br>
 			<a href="<?php echo Uri::create('admin/esqueci_minha_senha') ?>">Esqueceu a senha?</a>
 		</fieldset>
