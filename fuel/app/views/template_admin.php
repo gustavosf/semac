@@ -26,7 +26,7 @@
 	<?php echo Asset::js('jquery/jquery-ui-1.8.16.custom.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-alert.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap-tooltip.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-collapse.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
@@ -53,10 +53,12 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
-				<div class="span4 menu">
-					<h3><?php echo $menu; ?></h3>
+				<div class="span3">
+					<div class="well sidebar-nav">
+						<?php echo $menu; ?>
+					</div>
 				</div>
-				<div class="span10 data">
+				<div class="span9 data">
 					<?php echo $content; ?>
 				</div>
 			</div>

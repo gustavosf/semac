@@ -1,7 +1,7 @@
 <h2>Lista de Chamada <small><?php echo $titulo; ?></small></h2>
 <hr>
 
-<table>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th width=15>P</th>

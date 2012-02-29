@@ -1,7 +1,7 @@
 <h2>Lista de Chamada <small><?php echo $atividade_titulo; ?></small></h2>
 <hr>
 
-<table>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th rowspan=2>Nome</th>
