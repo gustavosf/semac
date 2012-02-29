@@ -29,9 +29,9 @@
 				</form>
 				-->
 				<?php if ($user != 'guest'): ?>
-					<ul class="nav secondary-nav">
+					<ul class="nav pull-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle"><?php echo $user; ?></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user; ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<?php if (Auth::has_access('usuarios.novo')): ?>
 									<li><a href="<?php echo URI::create('admin/usuarios/novo') ?>">Adicionar novo Usuário</a></li>
