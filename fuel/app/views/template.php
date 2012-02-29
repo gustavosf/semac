@@ -12,7 +12,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- CSS: implied media="all" -->
-	<?php echo Asset::css('bootstrap.min.css'); ?>
+	<?php echo Asset::css('bootstrap.css'); ?>
+	<?php echo Asset::css('bootstrap-responsive.css'); ?>
 	<?php if (isset($assets['css'])) foreach (@$assets['css'] as $asset): ?>
 		<?php echo Asset::css($asset); ?>
 	<?php endforeach; ?>
@@ -37,7 +38,7 @@
 	</div>
 
 	<!-- JavaScript at the bottom for fast page loading -->
-	<?php echo Asset::js('jquery/jquery-1.6.4.js'); ?>
+	<?php echo Asset::js('jquery/jquery-1.7.1.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
