@@ -9,16 +9,16 @@
 		<hr/>
 	<?php endif; ?>
 
-	<form method="post">
+	<form method="post" class="form-horizontal">
 		<fieldset>
-			<div class="clearfix">
-				<label for="xlInput">E-Mail</label>
-				<div class="input">
-					<input class="xlarge" placeholder="email" id="login" name="email" size="30" type="text" value="<?php echo @$email; ?>">
+			<div class="control-group">
+				<label for="username" class="control-label">E-Mail</label>
+				<div class="controls">
+					<input class="input-xlarge" placeholder="email" id="username" name="email" size="30" type="text" value="<?php echo @$email; ?>">
 				</div>
-			</div><!-- /clearfix -->
+			</div>
 			<hr/>
-			<input type="submit" class="btn primary" value="Enviar nova senha">
+			<input type="submit" class="btn btn-primary" value="Enviar nova senha">
 		</fieldset>
 	</form>
 </div>

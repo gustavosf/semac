@@ -4,8 +4,8 @@
 		<p><?php echo $descricao ?></p>
 	</div>
 	<div class="row">
-		<div class="span16">
-			<table class="zebra-striped">
+		<div class="span12">
+			<table class="table table-striped">
 				<thead>
 					<th>Atividade</th>
 					<th>Responsável</th>

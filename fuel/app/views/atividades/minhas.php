@@ -3,8 +3,8 @@
 		<h1>Minhas Atividades</h1>
 	</div>
 	<div class="row">
-		<div class="span16">
-			<table>
+		<div class="span12">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>Atividade</th>
@@ -60,6 +60,6 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('a[rel=twipsy],img[rel=twipsy]').twipsy();
+	$('a[rel=twipsy],img[rel=twipsy]').tooltip();
 });
 </script>
