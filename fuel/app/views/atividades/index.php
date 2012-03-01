@@ -25,9 +25,19 @@
 			<?php endif ?>
 		</div>
 		<div class="span4">
-			<b>Local:</b> <?php echo $local ?><br>
+			<table class='table table-striped'>
+				<tbody>
+					<?php foreach ($datas as $data): ?>
+						<tr>
+							<td>
+								<strong><?php echo $data['data'].' - '.$data['as'].' até '.$data['ate'] ?></strong><br>
+								<?php echo $data['local'] ?>
+							</td>
+						</tr>
+					<?php endforeach ?>
+				</tbody>
+			</table>
 			<b>Trilha:</b> <?php //echo $trilha ?><br>
-			<b>Horário(s):</b> <?php echo str_replace("\n", "<br>", $data) ?><br>
 			<hr>
 			<strong>Documentação Extra</strong><br><br>
 			<?php foreach ($documentos as $key => $documento): ?>

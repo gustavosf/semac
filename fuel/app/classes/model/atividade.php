@@ -71,7 +71,7 @@ class Model_Atividade extends Orm\Model {
 			$datas[$id]['ate']   = date('H:i', $time_f);
 			$datas[$id]['local'] = $data->local;
 		}
-		return $datas ?: array(array('data' => null, 'as' => null, 'ate' => null));
+		return $datas ?: array(array('data' => null, 'as' => null, 'ate' => null, 'local' => null));
 	}
 
 	/**
