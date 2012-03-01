@@ -66,9 +66,10 @@ class Model_Atividade extends Orm\Model {
 		{
 			$time_i = strtotime($data->inicio);
 			$time_f = strtotime($data->fim);
-			$datas[$id]['data'] = date('d/m/Y', $time_i);
-			$datas[$id]['as']   = date('H:i', $time_i);
-			$datas[$id]['ate']  = date('H:i', $time_f);
+			$datas[$id]['data']  = date('d/m/Y', $time_i);
+			$datas[$id]['as']    = date('H:i', $time_i);
+			$datas[$id]['ate']   = date('H:i', $time_f);
+			$datas[$id]['local'] = $data->local;
 		}
 		return $datas ?: array(array('data' => null, 'as' => null, 'ate' => null));
 	}
@@ -156,6 +157,22 @@ class Model_Atividade extends Orm\Model {
 		$more = unserialize(base64_decode($this->more));
 		$more[$property] = $value;
 		$this->more = base64_encode(serialize($more));
+	}
+
+	/**
+	 * Atualiza o local de uma (ou várias) datas associadas a essa atividade
+	 * @param  string $place
+	 * @param  int    $data_id id da data no banco de dados
+	 */
+	public function update_locais($place, $data_id)
+	{
+		$query = DB::update('datas')
+					->value('local', $place)
+					->where('id_atividade', $this->id);
+		
+		if ($data_id != 0) $query->and_where('id', $data_id);
+
+		$query->execute();
 	}
 
 }
