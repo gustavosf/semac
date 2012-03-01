@@ -1,6 +1,6 @@
 <h2>Locais das Atividades</h2>
 <hr/>
-<table>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Tipo</th>
