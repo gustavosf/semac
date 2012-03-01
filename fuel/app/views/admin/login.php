@@ -1,6 +1,8 @@
-<div style="text-align:center;padding-top:20px;width:500px;margin:auto">
-	<span style="font-size:120%"><b>Área de Administração da Semana Acadêmica</b></span><br/>
-	Para acessar, você precisa digitar o seu usuário e senha
+<div class='span6 offset3'>
+	<div style="text-align:center">
+		<h3>Área de Administração da Semana Acadêmica</h3>
+		Para acessar, você precisa digitar o seu usuário e senha
+	</div>
 
 	<hr/>
 

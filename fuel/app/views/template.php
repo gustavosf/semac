@@ -39,6 +39,7 @@
 
 	<!-- JavaScript at the bottom for fast page loading -->
 	<?php echo Asset::js('jquery/jquery-1.7.1.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-alert.js'); ?>
