@@ -17,7 +17,7 @@ class Controller_A extends Controller_Semac {
 		$data['responsavel'] = $atividade->responsavel;
 		$data['titulo'] = $atividade->titulo;
 		$data['local'] = $atividade->local;
-		$data['data'] = $atividade->getDataSerial();
+		$data['datas'] = $atividade->getData();
 		$data['descricao'] = $atividade->more('descricao');
 		$desc = new Util_Markdown;
 		$data['descricao_ext'] = $desc->transform($atividade->more('descricao_ext'));

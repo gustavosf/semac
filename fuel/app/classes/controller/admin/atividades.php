@@ -235,8 +235,10 @@ class Controller_Admin_Atividades extends Controller_Semac
 		if ($_POST)
 		{
 			$atividade = Model_Atividade::find(Input::post('id'));
-			$atividade->local = Input::post('local');
-			$atividade->save();
+			$atividade->update_locais(
+				Input::post('local'),
+				Input::post('data_id'));
+			
 			die(); // retorna status 200 (ok)
 		}
 		else

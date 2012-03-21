@@ -12,7 +12,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- CSS: implied media="all" -->
-	<?php echo Asset::css('bootstrap.min.css'); ?>
+	<?php echo Asset::css('bootstrap.css'); ?>
+	<?php echo Asset::css('bootstrap-responsive.css'); ?>
 	<?php echo Asset::css('semac.css'); ?>
 	<?php echo Asset::css('semac.admin.css'); ?>
 	<?php echo Asset::css('smoothness/jquery-ui-1.8.16.custom.css'); ?>
@@ -21,11 +22,13 @@
 	<?php endforeach; ?>
 	
 	<!-- JavaScript at the bottom for fast page loading -->
-	<?php echo Asset::js('jquery/jquery-1.6.4.js'); ?>
+	<?php echo Asset::js('jquery/jquery-1.7.1.js'); ?>
 	<?php echo Asset::js('jquery/jquery-ui-1.8.16.custom.min.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap-alerts.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap-alert.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap-tooltip.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap-collapse.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
@@ -51,10 +54,12 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
-				<div class="span4 menu">
-					<h3><?php echo $menu; ?></h3>
+				<div class="span3">
+					<div class="well sidebar-nav">
+						<?php echo $menu; ?>
+					</div>
 				</div>
-				<div class="span10 data">
+				<div class="span9 data">
 					<?php echo $content; ?>
 				</div>
 			</div>
