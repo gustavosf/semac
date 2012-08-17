@@ -15,12 +15,14 @@ nbproject/
 TESTING.md
 CHANGELOG.md
 
-semac/app/config/db.php
 semac/app/config/auth.php
 semac/app/config/simpleauth.php
 semac/app/config/crypt.php
 semac/app/config/migrations.php
 semac/app/config/mailer.php
+
+semac/app/config/development/*.php
+semac/app/config/production/*.php
 
 public/doc/*
 
