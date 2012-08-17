@@ -22,9 +22,20 @@
 return array(
 
 	/**
+	 * DB connection, leave null to use default
+	 */
+	'db_connection' => null,
+
+	/**
 	 * DB table name for the user table
 	 */
 	'table_name' => 'users',
+
+	/**
+	 * Choose which columns are selected, must include: username, password, email, last_login,
+	 * login_hash, group & profile_fields
+	 */
+	'table_columns' => array('*'),
 
 	/**
 	 * This will allow you to use the group & acl driver for non-logged in users
@@ -53,7 +64,7 @@ return array(
 		'super'             => true,
 		'banned'            => false,
 		'#'                 => array(
-			'admin' => array('login', 'logout'),
+			'admin' => array('login', 'logout', 'esqueci_minha_senha'),
 			'e'     => array('forbidden'),
 			'a'     => array('index', 'inscricao', 'cadastro'),
 			'home'  => array('index', 'atividades'),
@@ -64,34 +75,40 @@ return array(
 		'secretaria' => array(
 			'admin' => array('index'),
 			'atividades' => array('locais'),
+			'atividades' => array('extrato_chamadas'),
 		),
 		'comgrad' => array(
 			'admin' => array('index'),
+			'atividades' => array('extrato_chamadas'),
 		),
 		'chair' => array(
 			'admin' => array('index'),
-			'atividades' => array('listar', 'editar', 'inscritos', 'inscrever', 'docs', 'docs_delete'),
+			'atividades' => array(
+				'listar',
+				'editar',
+				'inscritos',
+				'inscrever',
+				'docs',
+				'docs_delete',
+				'chamada',
+				'presenca',
+			),
 		),
 		'comex' => array(
 			'admin' => array('index'),
-			'usuarios' => array('novo', 'organizador_geral'),
+			'usuarios' => array('novo', 'organizador_geral', 'extrato_chamadas'),
 		),
 		'og' => array(
 			'admin' => array('index'),
-			'atividades' => array('nova'),
+			'atividades' => array('nova', 'extrato_chamadas'),
 		),
 	),
 
 	/**
-	 * Salt for the login hash
-	 */
-	'login_hash_salt' => 'some_salt', // this is our current salt :)
-	
-	/**
 	 * $_POST key for login username
 	 */
 	'username_post_key' => 'username',
-	
+
 	/**
 	 * $_POST key for login password
 	 */

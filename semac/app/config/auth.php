@@ -20,8 +20,10 @@
  */
 
 return array(
-	'driver' => 'SimpleAuth',
+	// SemacAuth é basicamente igual a simpleauth, exceto a parte de acl
+	// A implementação está em app/classes/auth
+	'driver' => 'SemacAuth',
 	'verify_multiple_logins' => false,
-	'salt' => 'semac-salt', // this is not our current salt :)
+	'salt' => 'S3M@c--s41t=hEr3',
 );
 

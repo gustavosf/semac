@@ -15,8 +15,6 @@ nbproject/
 TESTING.md
 CHANGELOG.md
 
-semac/app/config/auth.php
-semac/app/config/simpleauth.php
 semac/app/config/crypt.php
 semac/app/config/migrations.php
 
