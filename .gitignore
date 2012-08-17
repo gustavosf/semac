@@ -7,20 +7,20 @@ desktop.ini
 .project
 .settings
 .tmpoj
-fuel/app/logs/*/*/*
-fuel/app/cache/*/*
+semac/app/logs/*/*/*
+semac/app/cache/*/*
 nbproject/
 .idea
 
 TESTING.md
 CHANGELOG.md
 
-fuel/app/config/db.php
-fuel/app/config/auth.php
-fuel/app/config/simpleauth.php
-fuel/app/config/crypt.php
-fuel/app/config/migrations.php
-fuel/app/config/mailer.php
+semac/app/config/db.php
+semac/app/config/auth.php
+semac/app/config/simpleauth.php
+semac/app/config/crypt.php
+semac/app/config/migrations.php
+semac/app/config/mailer.php
 
 public/doc/*
 
