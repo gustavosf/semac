@@ -7,11 +7,11 @@ return array(
 	 */
 	'smtp' => array(
 		'secure' => 'ssl',
-		'host'   => 'smtp.inf.ufrgs.br',
+		'host'   => 'smtp.email.com',
 		'port'   => 465,
 		'credentials' => array(
-			'user' => 'email@inf.ufrgs.br',
-			'pass' => 'password',
+			'user' => 'user@email.com',
+			'pass' => 'sua_senha',
 		),
 	),
 	
@@ -20,8 +20,8 @@ return array(
 	 */
 	'charset' => 'utf-8',
 	'from'    => array(
-		'name'  => 'SEMAC',
-		'email' => 'email@inf.ufrgs.br',
+		'name'  => 'Seu nome',
+		'email' => 'user@email.com',
 	),
 
 );
