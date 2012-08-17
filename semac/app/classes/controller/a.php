@@ -30,7 +30,7 @@ class Controller_A extends Controller_Semac {
 
 		$this->template->addAsset('js', 'bootstrap/bootstrap-popover.js');
 		$this->template->title = $atividade->titulo;
-		$this->template->content = View::factory('atividades/index', $data);
+		$this->template->content = View::forge('atividades/index', $data);
 	}
 
 	public function action_inscricao($id)
@@ -55,7 +55,7 @@ class Controller_A extends Controller_Semac {
 		if (!Auth::member(2)) // 2 == participante
 		{
 			$data['atividade'] = $atividade->titulo;
-			$this->template->content = View::factory('atividades/inscricao/login', $data);
+			$this->template->content = View::forge('atividades/inscricao/login', $data);
 		}
 		else // cadastra o gaijo e redireciona
 		{
@@ -97,7 +97,7 @@ class Controller_A extends Controller_Semac {
 					Response::redirect('a/'.$atividade->id.'/inscricao');
 				}
 				
-				$val = Validation::factory();
+				$val = Validation::forge();
 				$val->add_field('nome', 'Nome', 'required|max_length[255]');
 				$val->add_field('matricula', 'Número de Matrícula', 'required|match_pattern[/^[0-9]{8}$/]');
 				$val->add_field('email', 'Email', 'required|valid_email');
@@ -154,7 +154,7 @@ class Controller_A extends Controller_Semac {
 		$data['inscricoes'] = $user->inscricoes;
 		$data['user_id'] = $user->id;
 		$this->template->title = 'Minhas Atividades';
-		$this->template->content = View::factory('atividades/minhas', $data);
+		$this->template->content = View::forge('atividades/minhas', $data);
 	}
 
 }

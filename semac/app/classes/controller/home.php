@@ -6,7 +6,7 @@ class Controller_Home extends Controller_Semac {
 	{
 		$data = array();
 
-		$this->template->content = View::factory('home/index' ,$data);
+		$this->template->content = View::forge('home/index' ,$data);
 	}
 
 
@@ -32,7 +32,7 @@ class Controller_Home extends Controller_Semac {
 			$data['tipo'] = Model_Atividade::$atividades[$tipo];
 			$data['uri'] = $this->request->uri;
 			$this->template->title = $data['tipo'];
-			$this->template->content = View::factory('home/atividades', $data);
+			$this->template->content = View::forge('home/atividades', $data);
 		}
 		else
 		{

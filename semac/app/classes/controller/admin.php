@@ -4,7 +4,7 @@
  * Admin Controller.
  *
  * Ferramentas administrativas do sistema
- * 
+ *
  * @package  app
  * @extends  Controller_Template
  */
@@ -22,27 +22,27 @@ class Controller_Admin extends Controller_Semac {
 
 		parent::before();
 
-		$this->template->menu = View::factory('admin/menu', array(
+		$this->template->menu = View::forge('admin/menu', array(
 			'action' => $this->request->action
 		));
 	}
 
 	/**
 	 * The index action.
-	 * 
+	 *
 	 * @access  public
 	 * @return  void
 	 */
 	public function action_index()
 	{
 		$data = array();
-		$this->template->content = View::factory('admin/index', $data);
+		$this->template->content = View::forge('admin/index', $data);
 	}
 
 
 	/**
 	 * Tela de identificação do usuário
-	 * 
+	 *
 	 * @access  public
 	 * @return  void
 	 */
@@ -67,12 +67,12 @@ class Controller_Admin extends Controller_Semac {
 			}
 		}
 		$this->template->title = 'Identificação';
-		$this->template->content = View::factory('admin/login', $data);
+		$this->template->content = View::forge('admin/login', $data);
 	}
 
 	/**
 	 * Recuperação de Senha
-	 * 
+	 *
 	 * @access  public
 	 * @return  void
 	 */
@@ -110,20 +110,20 @@ class Controller_Admin extends Controller_Semac {
 					'email' => $user->email,
 					'senha' => $pass,
 				));
-				$mail->send();				
+				$mail->send();
 
 				Session::set_flash('success', 'Suas novas credenciais para acesso foram enviadas para o e-mail <b>'.Input::post('email').'</b>');
-				
+
 				Response::redirect('admin/login');
 			}
 		}
 		$this->template->title = 'Recuperação de Senha';
-		$this->template->content = View::factory('admin/esqueci_minha_senha', $data);
+		$this->template->content = View::forge('admin/esqueci_minha_senha', $data);
 	}
 
 	/**
 	 * Logout do usuário
-	 * 
+	 *
 	 * @access  public
 	 * @return  void
 	 */
@@ -132,7 +132,7 @@ class Controller_Admin extends Controller_Semac {
 		if ( ! Auth::check()) Response::redirect('admin/login');
 		Auth::instance()->logout();
 		$this->template->title = 'Sair';
-		$this->template->content = View::factory('admin/logout');
+		$this->template->content = View::forge('admin/logout');
 	}
 
 }

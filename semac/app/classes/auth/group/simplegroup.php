@@ -1,7 +1,7 @@
 <?php
 
-class Auth_Group_SemacGroup extends \Auth\Auth_Group_SimpleGroup {
-	
+class Auth_Group_SimpleGroup extends \Auth\Auth_Group_SimpleGroup {
+
 	public function get_roles($group = null)
 	{
 		// When group is empty, attempt to get groups from a current login
@@ -26,11 +26,11 @@ class Auth_Group_SemacGroup extends \Auth\Auth_Group_SimpleGroup {
 		{
 			$roles = array_merge($roles, $data['roles']);
 		}
-		
+
 		return $roles;
 	}
 
-	/* Sobrescrita simples da função group. A original está com erro */
+	/* Sobrescrita simples da função group. A original está com erro
 	public function member($group, $user = null)
 	{
 		if ($user === null)
@@ -49,5 +49,6 @@ class Auth_Group_SemacGroup extends \Auth\Auth_Group_SimpleGroup {
 
 		return in_array(array($this->id, $group), $groups);
 	}
+	*/
 
 }

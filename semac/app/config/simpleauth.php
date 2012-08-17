@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fuel is a fast, lightweight, community driven PHP5 framework.
  *
@@ -46,7 +47,8 @@ return array(
 	 * Groups as id => array(name => <string>, roles => <array>)
 	 */
 	'groups' => array(
-		0   => array('name' => 'Banned', 'roles' => array('banned')),
+		-0   => array('name' => 'Banned', 'roles' => array('banned')),
+		0   => array('name' => 'Visitante', 'roles' => array()),
 		1   => array('name' => 'Visitante', 'roles' => array()),
 		2   => array('name' => 'Participante', 'roles' => array('participante')),
 		4   => array('name' => 'Secretaria', 'roles' => array('secretaria')),

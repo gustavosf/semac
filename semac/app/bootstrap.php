@@ -10,9 +10,14 @@ require COREPATH.'bootstrap.php';
 
 Autoloader::add_classes(array(
 	// Add classes you want to override here
-	// Example: 'View' => APPPATH.'classes/view.php',
 	'Validation' => APPPATH.'classes/validation.php',
 	'View'       => APPPATH.'classes/view.php',
+
+	/* Extendido simplegroup e auth para adicionar algumas features necessárias */
+	'Auth_Login_SimpleAuth'  => APPPATH.'classes/auth/login/simpleauth.php',
+	'Auth_Login_SimpleGroup' => APPPATH.'classes/auth/login/simplegroup.php',
+
+
 ));
 
 // Register the autoloader

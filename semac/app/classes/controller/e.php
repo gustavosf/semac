@@ -24,7 +24,7 @@ class Controller_E extends Controller_Semac {
 
 		// Set a HTTP 404 output header
 		$this->response->status = 404;
-		$this->response->body = View::factory('welcome/404', $data);
+		$this->response->body = View::forge('welcome/404', $data);
 	}
 	
 	/**
@@ -36,7 +36,7 @@ class Controller_E extends Controller_Semac {
 	public function action_forbidden()
 	{
 		$this->template->title = 'Forbidden';
-		$this->template->content = View::factory('e/forbidden');
+		$this->template->content = View::forge('e/forbidden');
 	}
 
 }
