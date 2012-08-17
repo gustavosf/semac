@@ -6,7 +6,7 @@
 
 	<title><?php echo (isset($title) ? $title." | " : "")."SEMAC"; ?></title>
 	<meta name="description" content="">
-	<meta name="author" content="Gustavo Seganfredo, Glauber Hermany">
+	<meta name="author" content="Gustavo Seganfredo">
 
 	<!-- Mobile viewport optimized: j.mp/bplateviewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +20,9 @@
 		<?php echo Asset::css($asset); ?>
 	<?php endforeach; ?>
 
-	<?php echo Asset::js('jquery-1.8.0.js'); ?>
-	<?php echo Asset::js('jquery-ui-1.8.16.custom.min.js'); ?>
-	<?php echo Asset::js('bootstrap.min.js'); ?>
+	<?php echo Asset::js('jquery/jquery-1.8.0.js'); ?>
+	<?php echo Asset::js('jquery/jquery-ui-1.8.16.custom.min.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
