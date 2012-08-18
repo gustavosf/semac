@@ -6,26 +6,26 @@
 
 	<title><?php echo (isset($title) ? $title." | " : "")."SEMAC"; ?></title>
 	<meta name="description" content="">
-	<meta name="author" content="Gustavo Seganfredo, Glauber Hermany">
+	<meta name="author" content="Gustavo Seganfredo">
 
 	<!-- Mobile viewport optimized: j.mp/bplateviewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- CSS: implied media="all" -->
 	<?php echo Asset::css('bootstrap.min.css'); ?>
+	<?php echo Asset::css('bootstrap-responsive.min.css'); ?>
 	<?php echo Asset::css('semac.css'); ?>
-	<?php echo Asset::css('semac.admin.css'); ?>
 	<?php echo Asset::css('smoothness/jquery-ui-1.8.16.custom.css'); ?>
 	<?php if (isset($assets['css'])) foreach (@$assets['css'] as $asset): ?>
 		<?php echo Asset::css($asset); ?>
 	<?php endforeach; ?>
-	
+
 	<!-- JavaScript at the bottom for fast page loading -->
-	<?php echo Asset::js('jquery/jquery-1.6.4.js'); ?>
+	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
 	<?php echo Asset::js('jquery/jquery-ui-1.8.16.custom.min.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap-alerts.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap-twipsy.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap-alert.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
@@ -49,14 +49,14 @@
 	<?php echo $interface_topbar; ?>
 
 	<div class="container">
-		<div class="content">
-			<div class="row">
-				<div class="span4 menu">
-					<h3><?php echo $menu; ?></h3>
+		<div class="row">
+			<div class="span3">
+				<div class="well sidebar-nav">
+					<?php echo $menu; ?>
 				</div>
-				<div class="span10 data">
-					<?php echo $content; ?>
-				</div>
+			</div>
+			<div class="span9 data">
+				<?php echo $content; ?>
 			</div>
 		</div>
 	</div> <!-- /container -->

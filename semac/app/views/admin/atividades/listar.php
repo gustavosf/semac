@@ -1,6 +1,6 @@
 <h2>Lista de Atividades</h2>
 <hr/>
-<table>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Tipo</th>
@@ -16,14 +16,18 @@
 				<td><?php echo $atividade->titulo ?: '-'; ?></td>
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>
-					<a href="<?php echo URI::create('admin/atividades/editar/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/edit.png', array('title' => 'editar')); ?></a>
-					<a href="<?php echo URI::create('admin/atividades/docs/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/file-add.png', array('title' => 'Adicionar Documento')); ?></a>
-					<a href="<?php echo URI::create('admin/atividades/inscritos/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/user.png', array('title' => 'Inscritos')); ?></a>
-					<a href="<?php echo URI::create('admin/atividades/chamada/'.$atividade->id); ?>">
-						<?php echo Asset::img('ico/presenca.png', array('title' => 'Lista de Chamada')); ?></a>
+					<a href="<?php echo URI::create('admin/atividades/editar/'.$atividade->id); ?>"
+						rel="tooltip" title="Editar atividade">
+						<?php echo Asset::img('ico/edit.png'); ?></a>
+					<a href="<?php echo URI::create('admin/atividades/docs/'.$atividade->id); ?>"
+						rel="tooltip" title="Adicionar/Editar documentação">
+						<?php echo Asset::img('ico/file-add.png'); ?></a>
+					<a href="<?php echo URI::create('admin/atividades/inscritos/'.$atividade->id); ?>"
+						rel="tooltip" title="Inscritos">
+						<?php echo Asset::img('ico/user.png'); ?></a>
+					<a href="<?php echo URI::create('admin/atividades/chamada/'.$atividade->id); ?>"
+						rel="tooltip" title="Lista de Chamada">
+						<?php echo Asset::img('ico/presenca.png'); ?></a>
 				</td>
 			</tr>
 		<?php endforeach ?>
@@ -32,3 +36,8 @@
 		<?php endif ?>
 	</tbody>
 </table>
+<script>
+$(document).ready(function(){
+	$('a[rel=tooltip]').tooltip();
+});
+</script>

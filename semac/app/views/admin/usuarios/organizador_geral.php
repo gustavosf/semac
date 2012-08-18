@@ -7,12 +7,12 @@
 	</div>	
 <?php endif ?>
 
-<table>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Nome</th>
 			<th>Email</th>
-			<th width=50>Revogar<br>Acesso</th>
+			<th width=100>Revogar Acesso</th>
 		</tr>
 	</thead>
 	<tbody>
