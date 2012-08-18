@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	// $('body').dropdown() // catch any dropdowns on the page
+	$('a.dropdown-toggle').dropdown() // catch any dropdowns on the page
 
 	$(".alert-message").alert()
 

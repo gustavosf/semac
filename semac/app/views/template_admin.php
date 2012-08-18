@@ -15,7 +15,6 @@
 	<?php echo Asset::css('bootstrap.min.css'); ?>
 	<?php echo Asset::css('bootstrap-responsive.min.css'); ?>
 	<?php echo Asset::css('semac.css'); ?>
-	<?php echo Asset::css('semac.admin.css'); ?>
 	<?php echo Asset::css('smoothness/jquery-ui-1.8.16.custom.css'); ?>
 	<?php if (isset($assets['css'])) foreach (@$assets['css'] as $asset): ?>
 		<?php echo Asset::css($asset); ?>
@@ -50,14 +49,14 @@
 	<?php echo $interface_topbar; ?>
 
 	<div class="container">
-		<div class="content">
-			<div class="row">
-				<div class="span4 menu">
-					<h3><?php echo $menu; ?></h3>
+		<div class="row">
+			<div class="span3">
+				<div class="well sidebar-nav">
+					<?php echo $menu; ?>
 				</div>
-				<div class="span10 data">
-					<?php echo $content; ?>
-				</div>
+			</div>
+			<div class="span9 data">
+				<?php echo $content; ?>
 			</div>
 		</div>
 	</div> <!-- /container -->
