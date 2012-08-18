@@ -1,12 +1,12 @@
-[submodule "fuel/core"]
-	path = fuel/core
+[submodule "semac/core"]
+	path = semac/core
 	url = git://github.com/fuel/core.git
-[submodule "fuel/packages/orm"]
-	path = fuel/packages/orm
+[submodule "semac/packages/orm"]
+	path = semac/packages/orm
 	url = git://github.com/fuel/orm.git
-[submodule "fuel/packages/auth"]
-	path = fuel/packages/auth
+[submodule "semac/packages/auth"]
+	path = semac/packages/auth
 	url = git://github.com/fuel/auth.git
-[submodule "fuel/packages/oil"]
-	path = fuel/packages/oil
+[submodule "semac/packages/oil"]
+	path = semac/packages/oil
 	url = git://github.com/fuel/oil.git
