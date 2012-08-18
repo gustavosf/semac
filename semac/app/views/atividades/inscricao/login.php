@@ -11,7 +11,7 @@
 				<fieldset>
 					<input type="hidden" name="form" value="cadastro">
 					<input type="hidden" name="atividade" value="<?php echo $atividade_id ?>">
-					
+
 					<div class="control-group<?php if (isset($error['nome'])) echo ' error'; ?>">
 						<label for="nome" class="control-label">Nome Completo</label>
 						<div class="controls">
@@ -43,14 +43,13 @@
 							<?php endif; ?>
 						</div>
 					</div>
-					<hr/>
-					<center>
+					<div class="form-actions">
 						<input type="submit" class="btn btn-primary" value="Inscrever">
-					</center>
+					</div>
 				</fieldset>
 			</form>
 		</div>
-	
+
 		<div class="span6">
 			<div class="page-header">
 				<h1>Já possuo um cadastro</h1>
@@ -77,10 +76,9 @@
 							<input class="input-xlarge" name="senha" type="password">
 						</div>
 					</div>
-					<hr/>
-					<center>
+					<div class="form-actions">
 						<input type="submit" class="btn btn-primary" value="Inscrever">
-					</center>
+					</div>
 				</fieldset>
 			</form>
 		</div>

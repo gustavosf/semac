@@ -110,7 +110,7 @@ class Controller_Admin extends Controller_Semac {
 					'subject' => 'SEMAC/UFRGS - Recuperação de senha',
 					'to' => Input::post('email'),
 				), array(
-					'nome' => $user->getProfile('nome'),
+					'nome' => $user->profile_fields['nome'],
 					'email' => $user->email,
 					'senha' => $pass,
 				));

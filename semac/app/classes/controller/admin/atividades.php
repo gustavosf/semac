@@ -134,7 +134,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 			if ($data['salvo']) $atividade->save();
 
-			$data['erros'] = $val->errors();
+			$data['erros'] = $val->error();
 		}
 
 		$data['atividade'] = $atividade;
@@ -329,8 +329,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 				if ($inscrito->estaInscrito())
 				{
 					$chamada[$id]['id'] = $inscrito->id_user;
-					$chamada[$id]['nome'] = $inscrito->user->getProfile('nome');
-					$chamada[$id]['cartao'] = $inscrito->user->getProfile('cartao');
+					$chamada[$id]['nome'] = $inscrito->user->profile_fields['nome'];
+					$chamada[$id]['cartao'] = $inscrito->user->profile_fields['cartao'];
 					$chamada[$id]['presente'] = false;
 					foreach ($dia->chamadas as $k => $c)
 					{
@@ -394,8 +394,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 			foreach ($atividade->inscricoes as $id => $inscricao)
 			{
 				if ( ! $inscricao->estaInscrito()) continue;
-				$presencas[$id]['nome'] = $inscricao->user->getProfile('nome');
-				$presencas[$id]['cartao'] = $inscricao->user->getProfile('cartao');
+				$presencas[$id]['nome'] = $inscricao->user->profile_fields['nome'];
+				$presencas[$id]['cartao'] = $inscricao->user->profile_fields['cartao'];
 				foreach ($atividade->datas as $data)
 				{
 					$presencas[$id]['dias'][$data->getData()] = $data->isPresente($inscricao->user->id) ? 'P' : '-';

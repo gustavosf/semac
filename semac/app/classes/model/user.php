@@ -2,6 +2,26 @@
 
 class Model_User extends Orm\Model {
 
+	protected static $_properties = array(
+		'id',
+		'username',
+		'password',
+		'group',
+		'email',
+		'last_login',
+		'login_hash',
+		'profile_fields' => array(
+			'data_type' => 'serialize',
+		),
+		'created_at',
+	);
+
+	/* Observer para desempacotar o profile_fields */
+	protected static $_observers = array(
+		'Orm\\Observer_Typing' => array('before_save', 'after_save', 'after_load')
+	);
+
+
 	/* Relacionamentos */
 	protected static $_has_many = array(
 		'inscricoes' => array(
@@ -49,42 +69,6 @@ class Model_User extends Orm\Model {
 				return $inscricao->status;
 		}
 		return false;
-	}
-
-	/**
-	 * Provém acesso de leitura a variável guardada no profile_fields
-	 *
-	 * @var $property string
-	 * @return mixed
-	 */
-	public function getProfile($property)
-	{
-		$profile = unserialize(base64_decode($this->profile_fields));
-		if (isset($profile[$property]))
-		{
-			return $profile[$property];
-		}
-		else
-		{
-			throw new \OutOfBoundsException('Property "'.$property.'" not found in profile.');
-		}
-	}
-
-	/**
-	 * Provém acesso de escrita a variável guardada no profile_fields
-	 *
-	 * @var $property string
-	 * @var $value string
-	 */
-	public function setProfile($property, $value)
-	{
-		$profile = unserialize(base64_decode($this->profile_fields));
-		$profile[$property] = $value;
-
-		// Neste ponto eu tenho que usar base64_encode simplesmente
-		// porque o serialize e unserialize tem sérios problemas com
-		// aspas, vírgulas e principalmente acentos.
-		$this->profile_fields = base64_encode(serialize($profile));
 	}
 
 	/**
@@ -144,7 +128,7 @@ class Model_User extends Orm\Model {
 			$user->group = $gid;
 			$user->last_login = '';
 			$user->login_hash = '';
-			$user->setProfile('nome', $nome);
+			$user->profile_fields['nome'] = $nome;
 			$pass = $user->resetar_senha(); // já efetua o salvamento do registro
 		}
 

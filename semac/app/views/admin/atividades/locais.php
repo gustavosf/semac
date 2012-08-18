@@ -1,5 +1,7 @@
-<h2>Locais das Atividades</h2>
-<hr/>
+<div class="page-header">
+	<h1>Locais das Atividades</h1>
+</div>
+
 <table class="table table-striped">
 	<thead>
 		<tr>

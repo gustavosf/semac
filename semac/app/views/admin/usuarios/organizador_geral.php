@@ -18,7 +18,7 @@
 	<tbody>
 	<?php foreach ($organizadores as $id => $organizador): ?>
 		<tr>
-			<td><?php echo $organizador->getProfile('nome'); ?></td>
+			<td><?php echo $organizador->profile_fields['nome']; ?></td>
 			<td><?php echo $organizador->email; ?></td>
 			<td><a class="del" href="<?php echo URI::create('admin/usuarios/organizador_geral/'.$organizador->id.'/delete') ?>">×</a></td>
 		</tr>

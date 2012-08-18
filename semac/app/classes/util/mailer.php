@@ -27,7 +27,7 @@
 
 class Util_Mailer {
 
-	
+
 	/**
 	 * Variável que armazena o objeto phpmailer
 	 * @access protected
@@ -55,7 +55,7 @@ class Util_Mailer {
 	 * @var string
 	 */
 	public $view;
-	
+
 	/**
 	 * Define se o e-mail enviado deve ser html ou text/plain (padrão)
 	 * @access public
@@ -101,7 +101,7 @@ class Util_Mailer {
 		$mail->FromName   = $config['from']['name'];
 		$this->mail       = $mail;
 		$this->setData($data);
-		
+
 		isset($options['to'])        and $this->addTo($options['to']);
 		isset($options['cc'])        and $this->addCC($options['cc']);
 		isset($options['bcc'])       and $this->addBCC($options['bcc']);
@@ -130,7 +130,7 @@ class Util_Mailer {
 	{
 		$this->addAnAddress('cc', $cc);
 	}
-	
+
 	/**
 	 * Adiciona um endereço destinatário, como BCC
 	 *
@@ -140,7 +140,7 @@ class Util_Mailer {
 	{
 		$this->addAnAddress('bcc', $bcc);
 	}
-	
+
 	/**
 	 * Adiciona um endereço para a resposta
 	 *
@@ -181,20 +181,27 @@ class Util_Mailer {
 	 * @throws DomainException
 	 */
 	public function send() {
-		
+
 		if ( ! $this->view)	throw new \DomainException('Nenhuma view para o email foi informada.');
-		$view = View::factory('mailer/header')."\n";
-		$view .= View::factory('mailer/'.$this->view, $this->data)."\n";
-		$view .= View::factory('mailer/footer');
+		$view = View::forge('mailer/header')."\n";
+		$view .= View::forge('mailer/'.$this->view, $this->data)."\n";
+		$view .= View::forge('mailer/footer');
 		if ( ! $this->html) $view = '<pre style="font-size:12px">'.$view.'<pre>';
 		$this->mail->MsgHTML($view);
-		
+
 		$this->mail->Subject = $this->subject;
 
-		foreach ($this->to as $to)       $this->mail->addAddress($to);
-		foreach ($this->cc as $cc)       $this->mail->addCC($cc);
-		foreach ($this->bcc as $bcc)     $this->mail->addBCC($bcc);
-		foreach ($this->reply as $reply) $this->mail->addReplyTo($reply);
+		if ($forced_redirection = Config::get('mailer.forced_redirection', null))
+		{
+			$this->mail->addAddress($forced_redirection);
+		}
+		else
+		{
+			foreach ($this->to as $to)       $this->mail->addAddress($to);
+			foreach ($this->cc as $cc)       $this->mail->addCC($cc);
+			foreach ($this->bcc as $bcc)     $this->mail->addBCC($bcc);
+			foreach ($this->reply as $reply) $this->mail->addReplyTo($reply);
+		}
 
 		return $this->doSend();
 	}
@@ -206,7 +213,13 @@ class Util_Mailer {
 	 * @return boolean
 	 */
 	private function doSend() {
-		return $this->mail->Send();
+		try {
+			return $this->mail->Send();
+		} catch (phpmailerException $e) {
+			return false;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 
 }

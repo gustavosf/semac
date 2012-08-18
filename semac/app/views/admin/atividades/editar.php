@@ -1,4 +1,6 @@
-<h2>Edição de Atividade</h2><hr/>
+<div class="page-header">
+	<h1>Edição de Atividade</h1>
+</div>
 
 <?php if (!isset($atividade)): ?>
 	<div class="alert alert-error">
@@ -26,7 +28,7 @@
 				<?php endif; ?>
 			</div>
 		</div>
-		
+
 		<div class="control-group<?php echo @$erros['responsavel']?' error':'' ?>">
 			<label class="control-label" for="responsavel">Nome do Responsável</label>
 			<div class="controls">
@@ -63,10 +65,11 @@
 			<?php foreach ($atividade->getData() as $id => $data): ?>
 				<div class="controls">
 					<input type="hidden" name="id_data[]" value="<?php echo $id; ?>">
-					<input class="span2" name="data[]" type="date" value="<?php echo $data['data'] ?>"> ás 
-					<input class="span2" name="as[]" type="time" value="<?php echo $data['as'] ?>"> até 
+					<input class="span2" name="data[]" type="text" rel="date" value="<?php echo $data['data'] ?>"> ás
+					<input class="span2" name="as[]" type="time" value="<?php echo $data['as'] ?>"> até
 					<input class="span2" name="ate[]" type="time" value="<?php echo $data['ate'] ?>">
-					<a data-original-title="Adicionar nova data" class="plus" href="javascript:;" onclick="novaData(this)">+</a>
+					<a rel="tooltip" title="Adicionar nova data" class="plus" href="javascript:;" onclick="novaData(this)">+</a>
+					<a rel="tooltip" title="Remover esta data" class="del" href="javascript:;" onclick="removeData(this)">-</a>
 				</div>
 			<?php endforeach ?>
 			<?php if (isset($erros['data'])||isset($erros['as'])||isset($erros['ate'])): ?>
@@ -74,13 +77,13 @@
 			<?php endif; ?>
 		</div>
 
-		<legend>Campos Opcionais<legend>
+		<legend>Campos Opcionais</legend>
 
 		<div class="control-group<?php echo @$erros['descricao']?' error':'' ?>">
 			<label class="control-label" for="descricao">Resumo da Atividade</label>
 			<div class="controls">
 				<textarea class="span6" name="descricao" maxlength=255 id="descricao" rows="5"><?php echo $atividade->more('descricao'); ?></textarea>
-				<p class="help-block">Máximo de 255 caracteres</p>
+				<small class="help-block">Máximo de 255 caracteres</small>
 			</div>
 		</div>
 
@@ -88,7 +91,7 @@
 			<label class="control-label" for="descricao_ext">Descrição Extensa da Atividade</label>
 			<div class="controls">
 				<textarea class="span6" name="descricao_ext" id="descricao_ext" rows="10"><?php echo $atividade->more('descricao_ext'); ?></textarea>
-				<p class="help-block">Este campo aceita o formato <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a></p>
+				<small class="help-block">Este campo aceita o formato <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a></small>
 			</div>
 		</div>
 
@@ -106,30 +109,29 @@
 			</div>
 		</div>
 
-		<hr>
-		<input type="submit" class="btn btn-primary" value="Salvar">
+		<div class="form-actions">
+			<input type="submit" class="btn btn-primary" value="Salvar">
+		</div>
 	</fieldset>
 </form>
 
 <script>
 $(function() {
 	$.datepicker.setDefaults({'dateFormat': 'dd/mm/yy'});
-	$('.plus').twipsy();
+	$(document.body).tooltip({ selector: '[rel=tooltip]'});
+	$(document.body).delegate("input[rel=date]", "focusin", function(){
+		$(this).datepicker();
+	});
 });
 
-$("body").delegate("input[type=date]", "focusin", function(){
-	$(this).datepicker();
-});
 
 var novaData = function(el) {
-	var html = '<div class="controls">' +
-		'<input class="span2" name="data[]" type="date"> ás ' + 
-		'<input class="span2" name="as[]" type="time"> até ' + 
-		'<input class="span2" name="ate[]" type="time"> ' +
-		'<a data-original-title="Adicionar nova data" class="plus" href="javascript:;" onclick="novaData(this)">+</a>' +
-		'</div>';
+	html = $(el).parent().clone();
+	html.children('input[type=hidden]').val('');
 	$(el).parent().after($(html));
-	$('.plus').twipsy();
+};
+var removeData = function(el) {
+	$(el).parent().remove();
 };
 </script>
 <?php endif ?>

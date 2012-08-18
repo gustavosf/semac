@@ -17,7 +17,7 @@ class Controller_A extends Controller_Semac {
 		$data['responsavel'] = $atividade->responsavel;
 		$data['titulo'] = $atividade->titulo;
 		$data['local'] = $atividade->local;
-		$data['data'] = $atividade->getDataSerial();
+		$data['datas'] = $atividade->getData();
 		$data['descricao'] = $atividade->more('descricao');
 		$desc = new Util_Markdown;
 		$data['descricao_ext'] = $desc->transform($atividade->more('descricao_ext'));
@@ -96,7 +96,7 @@ class Controller_A extends Controller_Semac {
 					));
 					Response::redirect('a/'.$atividade->id.'/inscricao');
 				}
-				
+
 				$val = Validation::forge();
 				$val->add_field('nome', 'Nome', 'required|max_length[255]');
 				$val->add_field('matricula', 'Número de Matrícula', 'required|match_pattern[/^[0-9]{8}$/]');
@@ -104,7 +104,7 @@ class Controller_A extends Controller_Semac {
 				if ($val->run($_POST))
 				{
 					list($user, $pass) = Model_User::novo(Input::post('email'), Input::post('nome'), 'Participante');
-					$user->setProfile('cartao', Input::post('matricula'));
+					$user->profile_fields['cartao'] = Input::post('matricula');
 					$user->save();
 					$email = $user->email;
 					if ($pass)
@@ -125,7 +125,7 @@ class Controller_A extends Controller_Semac {
 				{
 					Session::set('login_errors', array(
 						'form' => 'cadastro',
-						'errors' => $val->errors(),
+						'errors' => $val->error(),
 						'values' => $_POST,
 					));
 					Response::redirect('a/'.$atividade->id.'/inscricao');

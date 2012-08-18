@@ -14,7 +14,7 @@ return array(
 			'pass' => 'sua_senha',
 		),
 	),
-	
+
 	/*
 	 * Configuração do e-mail
 	 */
@@ -23,5 +23,7 @@ return array(
 		'name'  => 'Seu nome',
 		'email' => 'user@email.com',
 	),
+
+	// 'forced_redirection' => 'email_to_force_redirection',
 
 );

@@ -1,5 +1,7 @@
-<h2>Lista de Atividades</h2>
-<hr/>
+<div class="page-header">
+	<h1>Lista de Atividades</h1>
+</div>
+
 <table class="table table-striped">
 	<thead>
 		<tr>

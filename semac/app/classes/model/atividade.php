@@ -20,7 +20,7 @@ class Model_Atividade extends Orm\Model {
 		'user' => array(
 			'key_from' => 'chair',
 		),
-	);	
+	);
 
 	/* Variávies */
 	static $atividades = array(
@@ -66,11 +66,12 @@ class Model_Atividade extends Orm\Model {
 		{
 			$time_i = strtotime($data->inicio);
 			$time_f = strtotime($data->fim);
-			$datas[$id]['data'] = date('d/m/Y', $time_i);
-			$datas[$id]['as']   = date('H:i', $time_i);
-			$datas[$id]['ate']  = date('H:i', $time_f);
+			$datas[$id]['data']  = date('d/m/Y', $time_i);
+			$datas[$id]['as']    = date('H:i', $time_i);
+			$datas[$id]['ate']   = date('H:i', $time_f);
+			$datas[$id]['local'] = $data->local;
 		}
-		return $datas ?: array(array('data' => null, 'as' => null, 'ate' => null));
+		return $datas ?: array(array('data' => null, 'as' => null, 'ate' => null, 'local' => null));
 	}
 
 	/**
@@ -96,6 +97,8 @@ class Model_Atividade extends Orm\Model {
 
 	public function setData($data = array())
 	{
+		$datas_atuais = $this->datas;
+
 		$r_in = '/([0-9]+)\/([0-9]+)\/([0-9]+) ([0-9]+)[h:]([0-9]+)/';
 		$r_out = '\3-\2-\1 \4:\5:00';
 		foreach ($data as $d)
@@ -109,6 +112,15 @@ class Model_Atividade extends Orm\Model {
 			$data_model->inicio = $data_inicio;
 			$data_model->fim = $data_fim;
 			$data_model->save();
+			$this->datas[$data_model->id] = $data_model;
+
+			unset($datas_atuais[$d['id']]);
+		}
+
+		foreach ($datas_atuais as $id => $data)
+		{
+			$this->datas[$id]->delete();
+			unset($this->datas[$id]);
 		}
 	}
 
@@ -116,7 +128,7 @@ class Model_Atividade extends Orm\Model {
 	 * Adiciona uma data ao array de datas
 	 *
 	 * Deserializa as datas no bd, adiciona a data e salva novamente
-	 * 
+	 *
 	 * @param $nova_data array
 	 */
 	public function addData($nova_data)
@@ -128,7 +140,7 @@ class Model_Atividade extends Orm\Model {
 
 	/**
 	 * Retorna valores do campo "more" do banco de dados
-	 * 
+	 *
 	 * Este campo é um array PHP serializado, o que permite a inclusão
 	 * dinâmica de novos campos nas atividades, ao gosto do chair
 	 *
@@ -145,7 +157,7 @@ class Model_Atividade extends Orm\Model {
 
 	/**
 	 * Seta valores do campo "more" do banco de dados
-	 * 
+	 *
 	 * Retorna null caso campo não esteja setado
 	 *
 	 * @param $property string
@@ -158,6 +170,20 @@ class Model_Atividade extends Orm\Model {
 		$this->more = base64_encode(serialize($more));
 	}
 
-}
+	/**
+	 * Atualiza o local de uma (ou várias) datas associadas a essa atividade
+	 * @param  string $place
+	 * @param  int    $data_id id da data no banco de dados
+	 */
+	public function update_locais($place, $data_id)
+	{
+		$query = DB::update('datas')
+					->value('local', $place)
+					->where('id_atividade', $this->id);
 
-/* End of file atividade.php */
+		if ($data_id != 0) $query->and_where('id', $data_id);
+
+		$query->execute();
+	}
+
+}

@@ -55,11 +55,11 @@
 			<?php if ($inscrito === false): ?>
 				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn btn-info">Inscrição</button></a>
 			<?php elseif ($inscrito == 0): ?>
-				<span class="label label-warning">Cadastrado nesta atividade</span>	
+				<span class="label label-warning">Cadastrado nesta atividade</span>
 			<?php elseif ($inscrito == 1): ?>
-				<span class="label label-success">Inscrito nesta atividade</span>	
+				<span class="label label-success">Inscrito nesta atividade</span>
 			<?php elseif ($inscrito == 2): ?>
-				<span class="label label-important">Inscrição recusada nesta atividade</span>	
+				<span class="label label-important">Inscrição recusada nesta atividade</span>
 			<?php endif ?>
 		</div>
 	</div>

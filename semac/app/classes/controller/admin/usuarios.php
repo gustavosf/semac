@@ -68,7 +68,7 @@ class Controller_Admin_Usuarios extends Controller_Semac {
 		{
 			$og = Model_User::find($id);
 			if ($action = 'delete') $og->ungroup('Organizador Geral');
-			$data['revogado'] = $og->getProfile('nome');
+			$data['revogado'] = $og->profile_fields['nome'];
 		}
 
 		$organizadores = Model_User::find()->where('group' ,'&', 64)->get();

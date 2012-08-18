@@ -23,7 +23,7 @@ class Controller_E extends Controller_Semac {
 		$data['title'] = $messages[array_rand($messages)];
 
 		$this->template->title = 404;
-		$this->template->content = Response::forge(View::forge('e/404', $data), 404);
+		$this->template->content = View::forge('e/404', $data);
 	}
 
 	/**
@@ -34,7 +34,8 @@ class Controller_E extends Controller_Semac {
 	 */
 	public function action_forbidden()
 	{
-		return Response::forge(View::forge('e/forbidden'), 403);
+		$this->template->title = 'Forbidden';
+		$this->template->content = View::forge('e/forbidden');
 	}
 
 }

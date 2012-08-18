@@ -18,14 +18,14 @@
 	<?php echo Asset::css('bootstrap.min.css'); ?>
 	<?php echo Asset::css('bootstrap-responsive.min.css'); ?>
 	<?php echo Asset::css('semac.css'); ?>
-	<?php echo Asset::css('smoothness/jquery-ui-1.8.16.custom.css'); ?>
+	<?php echo Asset::css('smoothness/jquery-ui-1.8.23.custom.css'); ?>
 	<?php if (isset($assets['css'])) foreach (@$assets['css'] as $asset): ?>
 		<?php echo Asset::css($asset); ?>
 	<?php endforeach; ?>
 
 	<!-- JavaScript at the bottom for fast page loading -->
 	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
-	<?php echo Asset::js('jquery/jquery-ui-1.8.16.custom.min.js'); ?>
+	<?php echo Asset::js('jquery/jquery-ui-1.8.23.custom.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-alert.js'); ?>
