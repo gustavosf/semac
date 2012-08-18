@@ -4,7 +4,7 @@
  * Controlador de Atividades
  *
  * Administração de atividades da semana acadêmica
- * 
+ *
  * @package  app
  * @extends  Controller_Semac
  */
@@ -17,7 +17,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 	public function before()
 	{
 		parent::before();
-		$this->template->menu = View::factory('admin/menu', array(
+		$this->template->menu = View::forge('admin/menu', array(
 			'action' => $this->request->action
 		));
 	}
@@ -49,12 +49,12 @@ class Controller_Admin_Atividades extends Controller_Semac
 			{
 				list($user, $pass) = Model_User::novo(Input::post('email'), Input::post('nome'), 'Chair');
 				$data['new'] = $pass ? true : false;
-				
+
 				$atividade = new Model_Atividade;
 				$atividade->chair = $user->id;
 				$atividade->tipo = Input::post('atividade');
 				$atividade->save();
-				
+
 				$data['pass'] = $pass;
 				$mail = new \Util_Mailer(array(
 					'view' => 'admin/atividades/nova',
@@ -68,10 +68,10 @@ class Controller_Admin_Atividades extends Controller_Semac
 				$mail->send();
 			}
 		}
-		
+
 		$data['atividades'] = Model_Atividade::$atividades;
 		$this->template->title = 'Nova Atividade';
-		$this->template->content = View::factory('admin/atividades/nova', $data);
+		$this->template->content = View::forge('admin/atividades/nova', $data);
 	}
 
 
@@ -88,7 +88,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$data['atividades'] = $atividades;
 
 		$this->template->title = 'Lista de Atividades';
-		$this->template->content = View::factory('admin/atividades/listar', $data);
+		$this->template->content = View::forge('admin/atividades/listar', $data);
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 		if ($_POST)
 		{
-			$val = Validation::factory();
+			$val = Validation::forge();
 			$val->add_field('titulo', 'Título', 'max_length[255]');
 			$val->add_field('responsavel', 'Responsável', 'max_length[255]');
 			$val->add_field('carga_horaria', 'Carga Horária', 'match_pattern[/^[0-9]{0,3}$/]');
@@ -118,7 +118,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$val->set_message('date_array', 'Uma das datas está formatada incorretamente!');
 			$val->set_message('time_array', 'Um dos horários está formatado incorretamente!');
 			$data['salvo'] = $val->run($_POST);
-			
+
 			$atividade->titulo = $val->validated('titulo');
 			$atividade->responsavel = $val->validated('responsavel');
 			$atividade->carga_horaria = $val->validated('carga_horaria');
@@ -138,9 +138,9 @@ class Controller_Admin_Atividades extends Controller_Semac
 		}
 
 		$data['atividade'] = $atividade;
-		
+
 		$this->template->title = 'Edição de Atividade';
-		$this->template->content = View::factory('admin/atividades/editar', $data);
+		$this->template->content = View::forge('admin/atividades/editar', $data);
 	}
 
 	/**
@@ -155,18 +155,18 @@ class Controller_Admin_Atividades extends Controller_Semac
 			->where(array('id' => $id, 'chair' => Auth::instance()->get_user_id()))
 			->get_one();
 		if ( ! $atividade->id) Response::redirect('e/forbidden');
-		
+
 		if ($_POST)
 		{
 			/* Validação do formulário (upload validado separadamente) */
-			$val = Validation::factory();
+			$val = Validation::forge();
 			$val->add_field('titulo', 'Título', 'required|max_length[255]');
 			$val->add_field('descricao', 'Descriçao', 'required|max_length[255]');
 			$val->set_message('max_length', 'Máximo de :param:1 caracteres');
 			$val->set_message('required', 'Campo :label obrigatório!');
 			$data['salvo'] = $val->run($_POST);
 			$data['erros'] = $val->errors();
-			
+
 			/* Processar e validar os uploads */
 			Upload::process(array(
 				'path'        => DOCROOT.DS.'doc'.DS.$atividade->id,
@@ -174,7 +174,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 				'create_path' => true,
 				'normalize'   => true,
 			));
-			
+
 			if ( ! Upload::is_valid())
 			{
 				$data['erros_upload'] = Upload::get_errors();
@@ -202,11 +202,11 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 		$data['atividade'] = $atividade;
 		$data['docs'] = $atividade->documentos;
-		
+
 		$data['upload'] = Upload::get_files();
 
 		$this->template->title = 'Documentos | '.$atividade->titulo;
-		$this->template->content = View::factory('admin/atividades/docs', $data);
+		$this->template->content = View::forge('admin/atividades/docs', $data);
 	}
 
 	public function action_docs_delete()
@@ -246,10 +246,10 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividades = Model_Atividade::find()
 				->where('carga_horaria', 'is not', null)
 				->get();
-			
+
 			$data['atividades'] = $atividades;
 			$this->template->title = 'Locais das Atividades';
-			$this->template->content = View::factory('admin/atividades/locais', $data);
+			$this->template->content = View::forge('admin/atividades/locais', $data);
 		}
 	}
 
@@ -261,16 +261,16 @@ class Controller_Admin_Atividades extends Controller_Semac
 	public function action_inscritos($id)
 	{
 		$data = array();
-	 	
+
 	 	$atividade = Model_Atividade::find($id);
 		if ( ! $atividade->id) Response::redirect(404);
 
 		$data['inscritos'] = $atividade->inscricoes;
 		$data['vagas'] = $atividade->vagas;
 		$data['titulo'] = $atividade->titulo;
-	
+
 		$this->template->title = 'Inscritos | '.$atividade->titulo;
-		$this->template->content = View::factory('admin/atividades/inscritos', $data);
+		$this->template->content = View::forge('admin/atividades/inscritos', $data);
 	}
 
 	/**
@@ -317,13 +317,13 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$data['id_atividade'] = $atividade->id;
 
 			$this->template->title = 'Lista de Chamada | '.$atividade->titulo;
-			$this->template->content = View::factory('admin/atividades/chamada/dias', $data);
+			$this->template->content = View::forge('admin/atividades/chamada/dias', $data);
 		}
 		else
 		{
 			$dia = Model_Data::find($dia);
 			$chamada = array();
-			
+
 			foreach ($atividade->inscricoes as $id => $inscrito)
 			{
 				if ($inscrito->estaInscrito())
@@ -346,7 +346,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$data['chamada'] = $chamada;
 
 			$this->template->title = 'Lista de Chamada | '.$atividade->titulo;
-			$this->template->content = View::factory('admin/atividades/chamada/lista', $data);
+			$this->template->content = View::forge('admin/atividades/chamada/lista', $data);
 		}
 	}
 
@@ -362,7 +362,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$user = Input::post('user');
 
 		$d = Model_Data::find($data);
-		
+
 		if ( ! $d->id OR $d->atividade->chair != Auth::instance()->get_user_id())
 		{
 			$this->response->status = 403; // forbidden
@@ -389,7 +389,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		{
 			$atividade = Model_Atividade::find($atividade);
 			if ( ! $atividade->id) Response::redirect(404);
-				
+
 			$presencas = array();
 			foreach ($atividade->inscricoes as $id => $inscricao)
 			{
@@ -408,7 +408,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$data['atividade_titulo'] = $atividade->titulo;
 			$data['presencas'] = $presencas;
 			$this->template->title = 'Lista de Chamada | '.$atividade->titulo;
-			$this->template->content = View::factory('admin/atividades/chamadas', $data);
+			$this->template->content = View::forge('admin/atividades/chamadas', $data);
 		}
 		else
 		{
@@ -416,7 +416,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$data = array();
 			$data['atividades'] = $atividades;
 			$this->template->title = 'Lista de Chamada';
-			$this->template->content = View::factory('admin/atividades/chamada/listar_atividades', $data);
+			$this->template->content = View::forge('admin/atividades/chamada/listar_atividades', $data);
 		}
 	}
 }

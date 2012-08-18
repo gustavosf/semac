@@ -1,6 +1,6 @@
 <h2>Lista de Atividades</h2>
 <hr/>
-<table>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Tipo</th>
