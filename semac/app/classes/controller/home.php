@@ -5,15 +5,13 @@ class Controller_Home extends Controller_Semac {
 	public function action_index()
 	{
 		$data = array();
-
 		$this->template->content = View::forge('home/index' ,$data);
 	}
-
 
 	public function action_atividades($tipo, $id = null)
 	{
 		$data = array();
-		
+
 		if ($id === null)
 		{
 			$desc = array(
@@ -36,10 +34,8 @@ class Controller_Home extends Controller_Semac {
 		}
 		else
 		{
-			
+
 		}
 	}
 
 }
-
-/* End of file e.php */

@@ -13,7 +13,7 @@ class Controller_E extends Controller_Semac {
 
 	/**
 	 * The 404 action for the application.
-	 * 
+	 *
 	 * @access  public
 	 * @return  void
 	 */
@@ -22,21 +22,19 @@ class Controller_E extends Controller_Semac {
 		$messages = array('Aw, crap!', 'Bloody Hell!', 'Uh Oh!', 'Nope, not here.', 'Huh?');
 		$data['title'] = $messages[array_rand($messages)];
 
-		// Set a HTTP 404 output header
-		$this->response->status = 404;
-		$this->response->body = View::forge('welcome/404', $data);
+		$this->template->title = 404;
+		$this->template->content = Response::forge(View::forge('e/404', $data), 404);
 	}
-	
+
 	/**
 	 * The forbidden action for the application.
-	 * 
+	 *
 	 * @access  public
 	 * @return  void
 	 */
 	public function action_forbidden()
 	{
-		$this->template->title = 'Forbidden';
-		$this->template->content = View::forge('e/forbidden');
+		return Response::forge(View::forge('e/forbidden'), 403);
 	}
 
 }

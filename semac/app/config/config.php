@@ -41,7 +41,7 @@ return array(
 	 *
 	 * Set this to false or remove if you using mod_rewrite.
 	 */
-	'index_file'  => 'index.php',
+	'index_file'  => false,
 
 	'profiling'  => false,
 
@@ -77,7 +77,7 @@ return array(
 	 */
 	'language'           => 'pt', // Default language
 	'language_fallback'  => 'en', // Fallback language when file isn't available for default language
-	'locale'             => 'pt_BR', // PHP set_locale() setting, null to not set
+	'locale'             => 'en_US.UTF-8', // PHP set_locale() setting, null to not set
 
 	'encoding'  => 'UTF-8',
 

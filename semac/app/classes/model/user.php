@@ -1,7 +1,7 @@
 <?php
 
 class Model_User extends Orm\Model {
-	
+
 	/* Relacionamentos */
 	protected static $_has_many = array(
 		'inscricoes' => array(
@@ -81,8 +81,8 @@ class Model_User extends Orm\Model {
 		$profile = unserialize(base64_decode($this->profile_fields));
 		$profile[$property] = $value;
 
-		// Neste ponto eu tenho que usar base64_encode simplesmente 
-		// porque o serialize e unserialize tem sérios problemas com 
+		// Neste ponto eu tenho que usar base64_encode simplesmente
+		// porque o serialize e unserialize tem sérios problemas com
 		// aspas, vírgulas e principalmente acentos.
 		$this->profile_fields = base64_encode(serialize($profile));
 	}
@@ -98,14 +98,14 @@ class Model_User extends Orm\Model {
 	public function ungroup($grupo)
 	{
 		$grupos = Auth::grupos();
-		$gid = array_search(strtolower($grupo), $grupos);		
+		$gid = array_search(strtolower($grupo), $grupos);
 		if ($this->group & $gid)
 		{
 			$this->group = $this->group - $gid;
 			$this->save();
 		}
 	}
-		
+
 	/**
 	 * Cadastro de novos usuários no sistema
 	 *
@@ -119,13 +119,13 @@ class Model_User extends Orm\Model {
 	 **/
 	public static function novo($email, $nome, $grupo)
 	{
-		
+
 		// validação e obtenção do ID do grupo
 		$grupos = Auth::grupos();
 		$gid = array_search(strtolower($grupo), $grupos);
 		if ($grupo === false)
 		{
-			throw new \DomainException('Grupo "'.$grupo.'" não existe');	
+			throw new \DomainException('Grupo "'.$grupo.'" não existe');
 		}
 
 		// Caso o usuário exista, atualiza o grupo, caso contrário cria
@@ -147,7 +147,7 @@ class Model_User extends Orm\Model {
 			$user->setProfile('nome', $nome);
 			$pass = $user->resetar_senha(); // já efetua o salvamento do registro
 		}
-		
+
 		return array($user, @$pass);
 	}
 

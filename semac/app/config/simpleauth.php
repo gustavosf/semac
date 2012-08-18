@@ -47,7 +47,7 @@ return array(
 	 * Groups as id => array(name => <string>, roles => <array>)
 	 */
 	'groups' => array(
-		-0   => array('name' => 'Banned', 'roles' => array('banned')),
+		-1   => array('name' => 'Banned', 'roles' => array('banned')),
 		0   => array('name' => 'Visitante', 'roles' => array()),
 		1   => array('name' => 'Visitante', 'roles' => array()),
 		2   => array('name' => 'Participante', 'roles' => array('participante')),
@@ -67,7 +67,7 @@ return array(
 		'banned'            => false,
 		'#'                 => array(
 			'admin' => array('login', 'logout', 'esqueci_minha_senha'),
-			'e'     => array('forbidden'),
+			'e'     => array('forbidden', '404'),
 			'a'     => array('index', 'inscricao', 'cadastro'),
 			'home'  => array('index', 'atividades'),
 		),

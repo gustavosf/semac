@@ -19,30 +19,22 @@ class Controller_Semac extends Controller_Template {
 
 		if ( ! Auth::has_access($action))
 		{
-			if (Auth::check()) \Response::redirect('e/forbidden');
+			Log::error("Action 2 > {$action}");
+			if (Auth::check()) Response::redirect('e/forbidden');
 			else
 			{
 				Cookie::set('redirect', Uri::string());
 				Response::redirect('admin/login');
 			}
 		}
-		/*
-		else
-		{
-			$auth = Auth::instance();
-			$this->template->interface_topbar = View::forge('interface/topbar', array(
-				'user' => $auth->get_screen_name()
-			));
-		}
-		*/
 	}
 
 	public function after($response)
 	{
 		$response = parent::after($response);
-		$data = array();
-		$data['user'] = @Auth::instance()->get_screen_name();
-		$this->template->interface_topbar = View::forge('interface/topbar', @$data);
+		$this->template->interface_topbar = View::forge('interface/topbar', array(
+			'user' => @Auth::instance()->get_screen_name(),
+		));
 		return $response;
 	}
 

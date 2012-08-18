@@ -15,8 +15,9 @@ class Create_users {
 			'last_login' => array('constraint' => 25, 'type' => 'varchar'),
 			'login_hash' => array('constraint' => 255, 'type' => 'varchar'),
 			'profile_fields' => array('type' => 'text'),
+			'created_at' => array('type' => 'timestamp', 'default' => \DB::expr('CURRENT_TIMESTAMP')),
 		), array('id'));
-		
+
 		// seta username e email como campos únicos (não aceitando duplicatas)
 		\DB::query('ALTER TABLE users ADD CONSTRAINT users_id UNIQUE (username, email)');
 	}

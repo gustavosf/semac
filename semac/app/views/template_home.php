@@ -11,6 +11,9 @@
 	<!-- Mobile viewport optimized: j.mp/bplateviewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<!--- favicon -->
+	<link rel="icon" type="image/x-icon" href="<?php echo Asset::get_file('favicon.ico', 'img') ?>" />
+
 	<!-- CSS: implied media="all" -->
 	<?php echo Asset::css('bootstrap.min.css'); ?>
 	<?php echo Asset::css('bootstrap-responsive.min.css'); ?>

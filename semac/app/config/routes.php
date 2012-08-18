@@ -1,13 +1,14 @@
 <?php
+
 return array(
 	'_root_'  => 'home/index',  // The default route
 	'_404_'   => 'e/404',    // The main 404 route
-	
+
 	'a/cadastro'         => 'a/cadastro',
 	'a/minhas'           => 'a/minhas',
 	'a/(:num)/inscricao' => 'a/inscricao/$1',
 	'a/(:num)'           => 'a/index/$1',
-	
+
 	/* Listagem de atividades, seguindo o código de conversão das atividades */
 	'coding_dojos'      => 'home/atividades/0',
 	'cursos'            => 'home/atividades/1',

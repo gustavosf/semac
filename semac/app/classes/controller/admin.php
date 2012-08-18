@@ -57,7 +57,6 @@ class Controller_Admin extends Controller_Semac {
 			{
 				$goto = Cookie::get('redirect', '/');
 				Cookie::delete('redirect');
-				if ($goto == 'admin') $goto = '/';
 				Response::redirect($goto);
 			}
 			else
@@ -65,6 +64,11 @@ class Controller_Admin extends Controller_Semac {
 				$data['username'] = Input::post('username');
 				$data['error'] = 'Email/Senha incorreto! Favor confira suas credenciais e tente novamente';
 			}
+		}
+		else
+		{
+			if ( ! Cookie::get('redirect'))
+				Cookie::set('redirect', Input::server('HTTP_REFERER', '/'));
 		}
 		$this->template->title = 'Identificação';
 		$this->template->content = View::forge('admin/login', $data);
