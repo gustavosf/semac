@@ -1,8 +1,8 @@
 <h2>Documentação <small><?php echo $atividade->titulo ?></small></h2><hr/>
 
 <?php if (@$salvo): ?>
-	<div class="alert-message success fade in" data-alert="alert">
-		<a class="close" href="#">×</a>
+	<div class="alert alert-success">
+		<a class="close" data-dismiss="alert" href="#">×</a>
 		<p>Os dados desta atividade foram salvos com sucesso!</p>
 	</div>
 <?php endif ?>
@@ -49,7 +49,7 @@
 				<?php endif; ?>
 			</div>
 		</div><!-- /clearfix -->
-		
+
 		<div class="clearfix<?php echo @$erros['descricao']?' error':'' ?>">
 			<label for="xlInput">Descrição</label>
 			<div class="input">
@@ -76,7 +76,7 @@ $(document).ready(function(){
 	$("a[data-document-id]").click(function(){
 		var line = $(this).parent().parent(),
 			doc = $(this).attr('data-document-id');
-		
+
 		$.post(
 			'<?php echo URI::create("admin/atividades/docs_delete"); ?>',
 			{'id': doc}
@@ -84,7 +84,7 @@ $(document).ready(function(){
 			line.fadeOut()
 		}).error(function(resp) {
 			alert('Não foi possível remover este documento');
-		});	
+		});
 	})
 });
 </script>

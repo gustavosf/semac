@@ -3,15 +3,15 @@
 		<h1><?php echo $tipo ?></h1>
 	</div>
 	<div class="row">
-		<div class="span12">
+		<div class="span8">
 			<?php if ($inscricao_efetuada === true): ?>
-				<div class="alert-message block-message success">
-					<a class="close" href="#">×</a>
+				<div class="alert alert-block alert-success">
+					<a class="close" data-dismiss="alert" href="#">×</a>
 					<p>Sua inscrição foi efetuada com sucesso!</p>
 				</div>
 			<?php elseif ($inscricao_efetuada): ?>
-				<div class="alert-message block-message error">
-					<a class="close" href="#">×</a>
+				<div class="alert alert-block alert-error">
+					<a class="close" data-dismiss="alert" href="#">×</a>
 					<p><?php echo $inscricao_efetuada ?></p>
 				</div>
 			<?php endif ?>
@@ -43,19 +43,19 @@
 			<?php endif ?>
 			<hr>
 			<?php if ($inscrito === false): ?>
-				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn large info">Inscrição</button></a>
+				<a href="<?php echo URI::create("a/{$id}/inscricao") ?>"><button class="btn btn-large btn-info">Inscrição</button></a>
 			<?php elseif ($inscrito == 0): ?>
-				<span class="label warning">Cadastrado nesta atividade</span>	
+				<span class="label label-warning">Cadastrado nesta atividade</span>
 			<?php elseif ($inscrito == 1): ?>
-				<span class="label success">Inscrito nesta atividade</span>	
+				<span class="label label-success">Inscrito nesta atividade</span>
 			<?php elseif ($inscrito == 2): ?>
-				<span class="label important">Inscrição recusada nesta atividade</span>	
+				<span class="label label-important">Inscrição recusada nesta atividade</span>
 			<?php endif ?>
 		</div>
 	</div>
 	<?php if ($shortbio): ?>
 		<div class="row">
-			<div class="span16">
+			<div class="span12">
 				<h3>Sobre <?php echo $responsavel ?>:</h3>
 				<?php echo $shortbio ?>
 			</div>
