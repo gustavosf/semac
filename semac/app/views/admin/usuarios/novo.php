@@ -1,5 +1,7 @@
-<h2>Cadastro de Usuários no Sistema</h2>
-<hr/>
+<div class="page-header">
+	<h1>Cadastro de Usuários no Sistema</h1>
+</div>
+
 <?php if ($_POST): ?>
 	<?php if (! $error): ?>
 		<div class="alert alert-block alert-success">
@@ -52,7 +54,8 @@
 		</div>
 		<hr/>
 		Submetendo este formulário, o usuário receberá um e-mail com informações para acesso ao sistema.
-		<hr/>
-		<input type="submit" class="btn btn-primary" value="Salvar">&nbsp;<input type="reset" class="btn" value="Cancelar">
+		<div class="form-actions">
+			<input type="submit" class="btn btn-primary" value="Salvar">&nbsp;<input type="reset" class="btn" value="Cancelar">
+		</div>
 	</fieldset>
 </form>

@@ -30,6 +30,11 @@
 			</td>
 		</tr>
 	<?php endforeach ?>
+	<?php if (count($atividades) === 0): ?>
+		<tr>
+			<td colspan="4" style="text-align:center">Nenhuma atividade registrada ainda</td>
+		</tr>
+	<?php endif ?>
 	</tbody>
 </table>
 

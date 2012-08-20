@@ -1,6 +1,7 @@
-<h2>Lista de Organizadores Gerais Ativos</h2>
+<div class="page-header">
+	<h1>Lista de Organizadores Gerais Ativos</h1>
+</div>
 
-<hr>
 <?php if (isset($revogado)): ?>
 	<div class="alert-message block-message success">
 		<p>Foi revogado o acesso de <strong><?php echo $revogado; ?></strong> como Organizador Geral</p>
@@ -28,6 +29,3 @@
 	<?php endif ?>
 	</tbody>
 </table>
-
-<hr>
-

@@ -30,15 +30,12 @@ class Db {
 	 */
 	public static function populate()
 	{
-		static::createuser('chair@test.mail', '12345', 16, 'Test Chair');
-		static::createuser('comex@test.mail', '12345', 32, 'Test Comex');
-		static::createuser('og@test.mail', '12345', 64, 'Test OG');
-		static::createuser('adm@test.mail', '12345', 128, 'Test Admin');
+		static::createuser('extensao@inf.ufrgs.br', '12345', 32, 'Coordenador da COMEX');
+		// static::createuser('comex@test.mail', '12345', 32, 'Test Comex');
+		// static::createuser('og@test.mail', '12345', 64, 'Test OG');
+		// static::createuser('adm@test.mail', '12345', 128, 'Test Admin');
 		return "- Criados usuários ".
-				\Cli::color('chair@test.mail', 'green').", ".
-				\Cli::color('comex@test.mail', 'green').", ".
-				\Cli::color('og@test.mail', 'green')." e ".
-				\Cli::color('adm@test.mail', 'green').", ".
+				\Cli::color('extensao@inf.ufrgs.br', 'green').", ".
 				"todos com senha ".\Cli::color('12345', 'red');
 	}
 

@@ -47,7 +47,7 @@ return array(
 	 * Groups as id => array(name => <string>, roles => <array>)
 	 */
 	'groups' => array(
-		-1   => array('name' => 'Banned', 'roles' => array('banned')),
+		-1  => array('name' => 'Banned', 'roles' => array('banned')),
 		0   => array('name' => 'Visitante', 'roles' => array()),
 		1   => array('name' => 'Visitante', 'roles' => array()),
 		2   => array('name' => 'Participante', 'roles' => array('participante')),
@@ -75,16 +75,16 @@ return array(
 			'a' => array('minhas'),
 		),
 		'secretaria' => array(
-			'admin' => array('index'),
+			'admin'      => array('index'),
 			'atividades' => array('locais'),
-			'atividades' => array('extrato_chamadas'),
+			'usuarios'   => array('extrato_chamadas'),
 		),
 		'comgrad' => array(
-			'admin' => array('index'),
+			'admin'      => array('index'),
 			'atividades' => array('extrato_chamadas'),
 		),
 		'chair' => array(
-			'admin' => array('index'),
+			'admin'      => array('index'),
 			'atividades' => array(
 				'listar',
 				'editar',
@@ -97,11 +97,12 @@ return array(
 			),
 		),
 		'comex' => array(
-			'admin' => array('index'),
-			'usuarios' => array('novo', 'organizador_geral', 'extrato_chamadas'),
+			'admin'      => array('index'),
+			'atividades' => array('locais'),
+			'usuarios'   => array('novo', 'organizador_geral', 'extrato_chamadas'),
 		),
 		'og' => array(
-			'admin' => array('index'),
+			'admin'      => array('index'),
 			'atividades' => array('nova', 'extrato_chamadas'),
 		),
 	),
