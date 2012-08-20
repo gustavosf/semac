@@ -81,10 +81,12 @@ $(document).ready(function(){
 
 		$.post(
 			'<?php echo URI::create("admin/atividades/docs_delete"); ?>',
-			{'id': doc}
-		).success(function(resp) {
-			line.fadeOut()
-		}).error(function(resp) {
+			{'id': doc},
+			function(resp) {
+				line.fadeOut()
+			},
+			'json'
+		).error(function(resp) {
 			alert('Não foi possível remover este documento');
 		});
 	})

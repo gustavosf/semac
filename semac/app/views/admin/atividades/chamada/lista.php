@@ -41,12 +41,13 @@ td > a:not(.presente) {
 <script>
 var presenca = function(data, user, el) {
 	$.post(
-		'<?php echo URI::create("admin/atividades/presenca"); ?>',
+		'<?php echo Uri::create("admin/atividades/presenca"); ?>',
 		{'data': data, 'user': user},
+		function(data) {
+			$(el).toggleClass('presente');
+		},
 		'json'
-	).success(function(data) {
-		$(el).toggleClass('presente');
-	}).error(function(data) {
+	).error(function(data) {
 		alert('Não foi possível marcar este usuário como presente');
 	})
 };

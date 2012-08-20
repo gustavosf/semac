@@ -12,6 +12,7 @@ class Auth_Login_SimpleAuth extends \Auth\Auth_Login_SimpleAuth {
 	public function get_groups()
 	{
 		if (empty($this->user)) return false;
+
 		$groups = \Config::get('simpleauth.groups');
 
 		foreach ($groups as $k => $group)
@@ -26,8 +27,23 @@ class Auth_Login_SimpleAuth extends \Auth\Auth_Login_SimpleAuth {
 			}
 		}
 
+		/* Retorna como visitante por padrão */
 		if (empty($groups)) $groups = array(array('SimpleGroup', 1));
+
 		return $groups;
+	}
+
+	/**
+	 * Extension of base driver method to default to user group instead of user id
+	 */
+	public function has_access($condition, $driver = null, $user = null)
+	{
+		$groups = $this->get_groups();
+		foreach ($groups as $group) if (parent::has_access($condition, $driver, $group))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public function get_user_id()

@@ -17,9 +17,12 @@ class Controller_Admin_Atividades extends Controller_Semac
 	public function before()
 	{
 		parent::before();
-		$this->template->menu = View::forge('admin/menu', array(
-			'action' => $this->request->action
-		));
+		if (is_object($this->template))
+		{
+			$this->template->menu = View::forge('admin/menu', array(
+				'action' => $this->request->action
+			));
+		}
 	}
 
 	/**
@@ -211,7 +214,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$this->template->content = View::forge('admin/atividades/docs', $data);
 	}
 
-	public function action_docs_delete()
+	public function post_docs_delete()
 	{
 		$id = Input::post('id');
 		$doc = Model_Documento::find()
@@ -225,7 +228,9 @@ class Controller_Admin_Atividades extends Controller_Semac
 		{
 			$doc->destroi();
 		}
-		$this->response->send_headers();
+
+		// evita renderização do template
+		$this->response();
 		die();
 	}
 
@@ -358,7 +363,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 	 *
 	 * @param $atividade int id da atividade
 	 */
-	public function action_presenca()
+	public function post_presenca()
 	{
 		$data = Input::post('data');
 		$user = Input::post('user');
@@ -375,9 +380,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 			if ($presenca === false) $this->response->status = 400;
 		}
 
-		$this->response->send_headers();
 		// evita renderização do template
-		die();
+		$this->response();
 	}
 
 	/**
@@ -422,5 +426,3 @@ class Controller_Admin_Atividades extends Controller_Semac
 		}
 	}
 }
-
-/* End of file atividades.php */

@@ -33,4 +33,5 @@
 			<a href='<?php echo URI::create('admin/atividades/listar'); ?>'>Listar Atividades</a>
 		</li>
 	<?php endif; ?>
+
 </ul>

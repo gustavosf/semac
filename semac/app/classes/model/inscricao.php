@@ -2,6 +2,28 @@
 
 class Model_Inscricao extends Orm\Model {
 
+	protected static $_properties = array(
+		'id',
+		'id_user',
+		'id_atividade',
+		'dados' => array(
+			'data_type' => 'serialize',
+		),
+		'cadastrado_em',
+		'status',
+	);
+
+
+	/* Observers */
+	protected static $_observers = array(
+		'Orm\\Observer_CreatedAt' => array(
+			'events' => array('before_insert'),
+			'mysql_timestamp' => true,
+			'property' => 'cadastrado_em',
+		),
+		'Orm\\Observer_Typing' => array('before_save', 'after_save', 'after_load')
+	);
+
 	private static $statuses = array(
 		0 => 'Cadastrado',
 		1 => 'Inscrito',
@@ -10,7 +32,7 @@ class Model_Inscricao extends Orm\Model {
 
 	/* Configuração */
 	protected static $_table_name = 'inscricoes';
-	
+
 	/* Relacionamentos */
 	protected static $_belongs_to  = array(
 		'user' => array('key_from' => 'id_user'),
@@ -74,5 +96,5 @@ class Model_Inscricao extends Orm\Model {
 		return $desc[$this->status];
 	}
 
-	
+
 }

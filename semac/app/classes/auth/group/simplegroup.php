@@ -26,6 +26,7 @@ class Auth_Group_SimpleGroup extends \Auth\Auth_Group_SimpleGroup {
 		{
 			$roles = array_merge($roles, $data['roles']);
 		}
+
 		return $roles;
 	}
 

@@ -1,14 +1,12 @@
 <?php
 
 /**
- * Admin Controller.
- *
- * Ferramentas administrativas do sistema
+ * Semac Controller.
  *
  * @package  app
- * @extends  Controller_Template
+ * @extends  Controller_Hybrid
  */
-class Controller_Semac extends Controller_Template {
+class Controller_Semac extends Controller_Hybrid {
 
 	public function before()
 	{
@@ -31,12 +29,13 @@ class Controller_Semac extends Controller_Template {
 	public function after($response)
 	{
 		$response = parent::after($response);
-		$this->template->interface_topbar = View::forge('interface/topbar', array(
-			'user' => @Auth::instance()->get_screen_name(),
-		));
+		if (is_object($this->template))
+		{
+			$this->template->interface_topbar = View::forge('interface/topbar', array(
+				'user' => @Auth::instance()->get_screen_name(),
+			));
+		}
 		return $response;
 	}
 
 }
-
-/* End of file semac.php */
