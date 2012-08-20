@@ -14,7 +14,7 @@ class Create_atividades {
 			'carga_horaria' => array('constraint' => 2, 'type' => 'int', 'null' => true),
 			'vagas' => array('constraint' => 3, 'type' => 'int', 'null' => true),
 			'detalhes' => array('type' => 'text', 'null' => true),
-			'status' => array('constraint' => 1, 'type' => 'int', 'default' => 0),
+			'status' => array('constraint' => 1, 'type' => 'int', 'null'= > true, 'default' => 0),
 			'criado_em' => array('type' => 'timestamp', 'default' => \DB::expr('CURRENT_TIMESTAMP')),
 		), array('id'));
 

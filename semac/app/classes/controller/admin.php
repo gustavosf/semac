@@ -56,6 +56,10 @@ class Controller_Admin extends Controller_Semac {
 			if ($auth->login(Input::post('username'), Input::post('password')))
 			{
 				$goto = Cookie::get('redirect', '/');
+				if (strpos($goto, '/logout') !== false OR strpos($goto, '/login') !== false)
+				{
+					$goto = '/';
+				}
 				Cookie::delete('redirect');
 				Response::redirect($goto);
 			}

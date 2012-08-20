@@ -18,10 +18,9 @@ class Controller_A extends Controller_Semac {
 		$data['titulo'] = $atividade->titulo;
 		$data['local'] = $atividade->local;
 		$data['datas'] = $atividade->getData();
-		$data['descricao'] = $atividade->more('descricao');
-		$desc = new Util_Markdown;
-		$data['descricao_ext'] = $desc->transform($atividade->more('descricao_ext'));
-		$data['shortbio'] = $atividade->more('shortbio');
+		$data['descricao'] = $atividade->more->descricao;
+		$data['descricao_ext'] = Markdown::parse($atividade->more->descricao_ext);
+		$data['shortbio'] = $atividade->more->shortbio;
 		$data['inscricao_efetuada'] = Session::get('inscrito', false);
 		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
 		$data['documentos'] = $atividade->documentos;

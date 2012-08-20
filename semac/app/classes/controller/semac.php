@@ -19,7 +19,6 @@ class Controller_Semac extends Controller_Template {
 
 		if ( ! Auth::has_access($action))
 		{
-			Log::error("Action 2 > {$action}");
 			if (Auth::check()) Response::redirect('e/forbidden');
 			else
 			{

@@ -15,7 +15,7 @@ Autoloader::add_classes(array(
 
 	/* Extendido simplegroup e auth para adicionar algumas features necessárias */
 	'Auth_Login_SimpleAuth'  => APPPATH.'classes/auth/login/simpleauth.php',
-	'Auth_Login_SimpleGroup' => APPPATH.'classes/auth/login/simplegroup.php',
+	'Auth_Group_SimpleGroup' => APPPATH.'classes/auth/group/simplegroup.php',
 
 
 ));

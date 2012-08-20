@@ -15,7 +15,7 @@
 	<?php foreach ($atividades as $id => $atividade): ?>
 		<tr>
 			<td><?php echo $atividade->getTipo(); ?></td>
-			<td><?php echo $atividade->more('titulo'); ?></td>
+			<td><?php echo $atividade->more->titulo; ?></td>
 			<td>
 				<?php foreach ($atividade->getData() as $data): ?>
 					<?php echo "{$data['data']} ás {$data['as']}-{$data['ate']}<br>" ?>

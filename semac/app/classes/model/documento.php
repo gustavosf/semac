@@ -2,10 +2,28 @@
 
 class Model_Documento extends Orm\Model {
 
+	protected static $_properties = array(
+		'id',
+		'id_atividade',
+		'arquivo',
+		'titulo',
+		'descricao',
+		'data_upload',
+	);
+
+	protected static $_observers = array(
+		'Orm\\Observer_CreatedAt' => array(
+			'events' => array('before_insert'),
+			'mysql_timestamp' => true,
+			'property' => 'data_upload',
+		),
+	);
+
 	/* Relacionamentos */
 	protected static $_belongs_to  = array(
 		'atividade' => array('key_from' => 'id_atividade'),
 	);
+
 
 	/* Métodos */
 	public static function add($doc)

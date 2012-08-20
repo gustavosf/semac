@@ -1,5 +1,7 @@
-<h2>Lista de Atividades</h2>
-<hr/>
+<div class="page-header">
+	<h1>Lista de Atividades</h1>
+</div>
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -22,7 +24,7 @@
 			</tr>
 		<?php endforeach ?>
 		<?php if ( ! sizeof($atividades)): ?>
-			<tr><td colspan=4>Você não possui nenhuma atividade associada</td></tr>
+			<tr><td colspan=4 style="text-align:center">Você não possui nenhuma atividade associada</td></tr>
 		<?php endif ?>
 	</tbody>
 </table>

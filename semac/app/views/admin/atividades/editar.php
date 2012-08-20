@@ -82,7 +82,7 @@
 		<div class="control-group<?php echo @$erros['descricao']?' error':'' ?>">
 			<label class="control-label" for="descricao">Resumo da Atividade</label>
 			<div class="controls">
-				<textarea class="span6" name="descricao" maxlength=255 id="descricao" rows="5"><?php echo $atividade->more('descricao'); ?></textarea>
+				<textarea class="span6" name="descricao" maxlength=255 id="descricao" rows="5"><?php echo @$atividade->more->descricao; ?></textarea>
 				<small class="help-block">Máximo de 255 caracteres</small>
 			</div>
 		</div>
@@ -90,7 +90,7 @@
 		<div class="control-group">
 			<label class="control-label" for="descricao_ext">Descrição Extensa da Atividade</label>
 			<div class="controls">
-				<textarea class="span6" name="descricao_ext" id="descricao_ext" rows="10"><?php echo $atividade->more('descricao_ext'); ?></textarea>
+				<textarea class="span6" name="descricao_ext" id="descricao_ext" rows="10"><?php echo @$atividade->more->descricao_ext; ?></textarea>
 				<small class="help-block">Este campo aceita o formato <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a></small>
 			</div>
 		</div>
@@ -98,14 +98,14 @@
 		<div class="control-group">
 			<label class="control-label" for="shortbio">Short-Bio do Responsável</label>
 			<div class="controls">
-				<textarea class="span6" name="shortbio" id="shortbio" rows="5"><?php echo $atividade->more('shortbio'); ?></textarea>
+				<textarea class="span6" name="shortbio" id="shortbio" rows="5"><?php echo @$atividade->more->shortbio; ?></textarea>
 			</div>
 		</div>
 
 		<div class="control-group">
 			<label class="control-label" for="afiliacao">Afiliação do Responsável</label>
 			<div class="controls">
-				<input class="span5" id="afiliacao" name="afiliacao" type="text" value="<?php echo $atividade->more('afiliacao') ?>">
+				<input class="span5" id="afiliacao" name="afiliacao" type="text" value="<?php echo @$atividade->more->afiliacao ?>">
 			</div>
 		</div>
 

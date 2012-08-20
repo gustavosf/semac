@@ -123,10 +123,12 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->responsavel = $val->validated('responsavel');
 			$atividade->carga_horaria = $val->validated('carga_horaria');
 			$atividade->vagas = $val->validated('vagas');
-			$atividade->setMore('descricao', $val->input('descricao'));
-			$atividade->setMore('descricao_ext', $val->input('descricao_ext'));
-			$atividade->setMore('shortbio', $val->input('shortbio'));
-			$atividade->setMore('afiliacao', $val->input('afiliacao'));
+
+			if ($atividade->more === null) $atividade->more = new stdClass;
+			$atividade->more->descricao = $val->input('descricao');
+			$atividade->more->descricao_ext = $val->input('descricao_ext');
+			$atividade->more->shortbio = $val->input('shortbio');
+			$atividade->more->afiliacao = $val->input('afiliacao');
 			$datas = array_map(function($i, $d, $a, $t){
 				return array('id' => $i, 'data' => $d, 'as' => $a, 'ate' => $t);
 			}, $val->input('id_data'), $val->input('data'), $val->input('as'), $val->input('ate'));
@@ -165,7 +167,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$val->set_message('max_length', 'Máximo de :param:1 caracteres');
 			$val->set_message('required', 'Campo :label obrigatório!');
 			$data['salvo'] = $val->run($_POST);
-			$data['erros'] = $val->errors();
+			$data['erros'] = $val->error();
 
 			/* Processar e validar os uploads */
 			Upload::process(array(

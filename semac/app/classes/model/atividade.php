@@ -2,6 +2,33 @@
 
 class Model_Atividade extends Orm\Model {
 
+	protected static $_properties = array(
+		'id',
+		'tipo',
+		'chair',
+		'responsavel',
+		'carga_horaria',
+		'vagas',
+		'more' => array(
+			'data_type' => 'serialize',
+		),
+		'status',
+		'criado_em',
+		'local',
+		'titulo',
+	);
+
+	/* Observers */
+	protected static $_observers = array(
+		'Orm\\Observer_CreatedAt' => array(
+			'events' => array('before_insert'),
+			'mysql_timestamp' => true,
+			'property' => 'criado_em',
+		),
+		'Orm\\Observer_Typing' => array('before_save', 'after_save', 'after_load')
+	);
+
+
 	/* Relacionamentos */
 	protected static $_has_many  = array(
 		'inscricoes' => array(
@@ -136,38 +163,6 @@ class Model_Atividade extends Orm\Model {
 		$data = $this->getData();
 		$data[] = $nova_data;
 		$this->setData($data);
-	}
-
-	/**
-	 * Retorna valores do campo "more" do banco de dados
-	 *
-	 * Este campo é um array PHP serializado, o que permite a inclusão
-	 * dinâmica de novos campos nas atividades, ao gosto do chair
-	 *
-	 * Retorna null caso campo não esteja setado
-	 *
-	 * @param $property string
-	 * @return mixed
-	 */
-	public function more($property)
-	{
-		$more = unserialize(base64_decode($this->more));
-		return @$more[$property] ?: null;
-	}
-
-	/**
-	 * Seta valores do campo "more" do banco de dados
-	 *
-	 * Retorna null caso campo não esteja setado
-	 *
-	 * @param $property string
-	 * @param $value mixed
-	 */
-	public function setMore($property, $value)
-	{
-		$more = unserialize(base64_decode($this->more));
-		$more[$property] = $value;
-		$this->more = base64_encode(serialize($more));
 	}
 
 	/**

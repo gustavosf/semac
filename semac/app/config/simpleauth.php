@@ -47,7 +47,7 @@ return array(
 	 * Groups as id => array(name => <string>, roles => <array>)
 	 */
 	'groups' => array(
-		-1  => array('name' => 'Banned', 'roles' => array('banned')),
+		// -1  => array('name' => 'Banned', 'roles' => array('banned')),
 		0   => array('name' => 'Visitante', 'roles' => array()),
 		1   => array('name' => 'Visitante', 'roles' => array()),
 		2   => array('name' => 'Participante', 'roles' => array('participante')),
@@ -103,7 +103,7 @@ return array(
 		),
 		'og' => array(
 			'admin'      => array('index'),
-			'atividades' => array('nova', 'extrato_chamadas'),
+			'atividades' => array('nova'),
 		),
 	),
 
