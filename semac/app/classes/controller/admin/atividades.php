@@ -231,7 +231,6 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 		// evita renderização do template
 		$this->response();
-		die();
 	}
 
 	/**
@@ -239,25 +238,26 @@ class Controller_Admin_Atividades extends Controller_Semac
 	 */
 	public function action_locais()
 	{
-		if ($_POST)
-		{
-			$atividade = Model_Atividade::find(Input::post('id'));
-			$atividade->local = Input::post('local');
-			$atividade->save();
-			die(); // retorna status 200 (ok)
-		}
-		else
-		{
-			$data = array();
+		$data = array();
 
-			$atividades = Model_Atividade::find()
-				->where('carga_horaria', 'is not', null)
-				->get();
+		$atividades = Model_Atividade::find()
+			->where('carga_horaria', 'is not', null)
+			->get();
 
-			$data['atividades'] = $atividades;
-			$this->template->title = 'Locais das Atividades';
-			$this->template->content = View::forge('admin/atividades/locais', $data);
-		}
+		$data['atividades'] = $atividades;
+		$this->template->title = 'Locais das Atividades';
+		$this->template->content = View::forge('admin/atividades/locais', $data);
+	}
+
+	public function post_locais()
+	{
+
+		$atividade = Model_Atividade::find(Input::post('id'));
+		$atividade->update_locais(
+			Input::post('local'),
+			Input::post('data_id')
+		);
+		$this->response(); // retorna status 200 (ok)
 	}
 
 	/**

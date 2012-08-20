@@ -29,6 +29,7 @@
 	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap-alert.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap-modal.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
