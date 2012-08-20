@@ -26,6 +26,7 @@ class Auth_Login_SimpleAuth extends \Auth\Auth_Login_SimpleAuth {
 			}
 		}
 
+		if (empty($groups)) $groups = array(array('SimpleGroup', 1));
 		return $groups;
 	}
 
