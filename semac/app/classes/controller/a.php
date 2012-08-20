@@ -98,7 +98,7 @@ class Controller_A extends Controller_Semac {
 
 				$val = Validation::forge();
 				$val->add_field('nome', 'Nome', 'required|max_length[255]');
-				$val->add_field('matricula', 'Número de Matrícula', 'required|match_pattern[/^[0-9]{8}$/]');
+				$val->add_field('matricula', 'Número de Matrícula', 'match_pattern[/^[0-9]{8}$/]');
 				$val->add_field('email', 'Email', 'required|valid_email');
 				if ($val->run($_POST))
 				{
@@ -152,10 +152,9 @@ class Controller_A extends Controller_Semac {
 		$data = array();
 		$data['inscricoes'] = $user->inscricoes;
 		$data['user_id'] = $user->id;
+
 		$this->template->title = 'Minhas Atividades';
 		$this->template->content = View::forge('atividades/minhas', $data);
 	}
 
 }
-
-/* End of file a.php */

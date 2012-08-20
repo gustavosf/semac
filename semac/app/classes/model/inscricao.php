@@ -9,8 +9,8 @@ class Model_Inscricao extends Orm\Model {
 		'dados' => array(
 			'data_type' => 'serialize',
 		),
-		'cadastrado_em',
-		'status',
+		'cadastrado_em', /* observed */
+		'status' => array('default' => 0),
 	);
 
 
@@ -95,6 +95,5 @@ class Model_Inscricao extends Orm\Model {
 		);
 		return $desc[$this->status];
 	}
-
 
 }

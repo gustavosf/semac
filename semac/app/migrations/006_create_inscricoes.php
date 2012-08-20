@@ -6,7 +6,7 @@ class Create_inscricoes {
 
 	public function up()
 	{
-		
+
 		/* Usar innodb porque permite chaves estrangeiras */
 		\DB::Query('ALTER TABLE users ENGINE = INNODB')->execute();
 		\DB::Query('ALTER TABLE atividades ENGINE = INNODB')->execute();
@@ -30,7 +30,7 @@ class Create_inscricoes {
 
 		/* Adiciona um índice UNIQUE para o par user-atividade, impedindo cadastros duplicados */
 		\DB::Query('ALTER TABLE inscricoes ADD UNIQUE (id_user, id_atividade)')->execute();
-		
+
 	}
 
 	public function down()

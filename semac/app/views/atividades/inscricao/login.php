@@ -37,7 +37,7 @@
 					<div class="control-group<?php if (isset($error['email'])) echo ' error'; ?>">
 						<label for="email" class="control-label">E-Mail</label>
 						<div class="controls">
-							<input class="input-xlarge" name="email" type="text" value="<?php echo @$username; ?>">
+							<input class="input-xlarge" name="email" type="text" value="<?php echo @$cad_email; ?>">
 							<?php if (isset($error['email'])): ?>
 								<br><span class="help-inline"><?php echo $error['email']; ?></span>
 							<?php endif; ?>
