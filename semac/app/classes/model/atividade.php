@@ -9,10 +9,8 @@ class Model_Atividade extends Orm\Model {
 		'responsavel',
 		'carga_horaria',
 		'vagas',
-		'more' => array(
-			'data_type' => 'serialize',
-		),
-		'status',
+		'more' => array('data_type' => 'serialize'),
+		'status' => array('default' => 0),
 		'criado_em',
 		'local',
 		'titulo',

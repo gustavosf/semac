@@ -25,7 +25,7 @@ class Controller_Home extends Controller_Semac {
 				7 => 'Reuniões para discutir temas relevantes em Computação compreendendo projetos de pesquisa para o INF-UFRGS',
 			);
 
-			$data['atividades'] = Model_Atividade::find()->where('tipo', $tipo)->get();
+			$data['atividades'] = Model_Atividade::find()->where('tipo', $tipo)->where('status', 1)->get();
 			$data['descricao'] = $desc[$tipo];
 			$data['tipo'] = Model_Atividade::$atividades[$tipo];
 			$data['uri'] = $this->request->uri;

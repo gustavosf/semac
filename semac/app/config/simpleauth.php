@@ -94,6 +94,7 @@ return array(
 				'docs_delete',
 				'chamada',
 				'presenca',
+				'publicar',
 			),
 		),
 		'comex' => array(

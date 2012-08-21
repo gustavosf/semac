@@ -9,6 +9,7 @@
 			<th>Título</th>
 			<th>Responsável</th>
 			<th width=100></th>
+			<th>Publicar</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -34,6 +35,15 @@
 						rel="tooltip" title="Lista de Chamada">
 						<?php echo Asset::img('ico/presenca.png'); ?></a>
 				</td>
+				<td>
+					<a href="javascript:pub(<?php echo $atividade->id ?>)" rel="tooltip" title="Publicar atividade">
+						<?php if ($atividade->status == 1): ?>
+							Público
+						<?php else: ?>
+							Privado
+						<?php endif; ?>
+					</a>
+				</td>
 			</tr>
 		<?php endforeach ?>
 		<?php if ( ! sizeof($atividades)): ?>
@@ -41,3 +51,17 @@
 		<?php endif ?>
 	</tbody>
 </table>
+
+<script>
+var pub = function (id) {
+	$.post(
+		'<?php echo Uri::create('admin/atividades/publicar') ?>',
+		{'id': id},
+		function (resp) {
+			console.log(resp);
+			$('a[href$="pub(' + id + ')"]').text(resp.publico ? 'Público' : 'Privado');
+		},
+		'json'
+	);
+};
+</script>
