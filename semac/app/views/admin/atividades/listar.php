@@ -37,7 +37,7 @@
 				</td>
 				<td>
 					<a href="javascript:pub(<?php echo $atividade->id ?>)" rel="tooltip" title="Publicar atividade">
-						<?php if ($atividade->status === 1): ?>
+						<?php if ($atividade->status == 1): ?>
 							Público
 						<?php else: ?>
 							Privado
