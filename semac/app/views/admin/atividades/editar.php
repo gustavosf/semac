@@ -54,6 +54,10 @@
 			<label class="control-label" for="vagas">Vagas</label>
 			<div class="controls">
 				<input class="span2" id="vagas" name="vagas" type="number" min=0 max=100 value="<?php echo $atividade->vagas ?>">
+				<select id="selecao" name="selecao">
+					<option value="0" <?php echo ( ! $atividade->selecao ? 'selected="selected"' : '') ?>>Por ordem de chegada</option>
+					<option value="1" <?php echo ($atividade->selecao ? 'selected="selected"' : '') ?>>Por seleção</option>
+				</select>
 				<?php if (isset($erros['vagas'])): ?>
 					<span class="help-inline"><?php echo $erros['vagas']; ?></span>
 				<?php endif; ?>
