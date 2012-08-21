@@ -16,7 +16,7 @@
 			<a href='<?php echo URI::create('admin/atividades/locais'); ?>'>Locais das Atividades</a>
 		</li>
 		<li<?php if ($action == 'extrato_chamadas') echo ' class="active"'; ?>>
-			<a href='<?php echo URI::create('admin/atividades/extrato_chamadas'); ?>'>Extrato das Chamadas</a>
+			<a href='<?php echo URI::create('admin/atividades/extrato_chamadas'); ?>'>Lista de Presenças</a>
 		</li>
 	<?php endif; ?>
 

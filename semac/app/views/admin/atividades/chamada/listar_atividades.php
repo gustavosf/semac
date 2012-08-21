@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h1>Lista de Atividades</h1>
+	<h1>Lista de Presenças</h1>
 </div>
 
 <table class="table table-striped">

@@ -98,7 +98,7 @@ return array(
 		),
 		'comex' => array(
 			'admin'      => array('index'),
-			'atividades' => array('locais'),
+			'atividades' => array('locais', 'extrato_chamadas'),
 			'usuarios'   => array('novo', 'organizador_geral', 'extrato_chamadas'),
 		),
 		'og' => array(

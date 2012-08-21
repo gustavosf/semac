@@ -1,5 +1,6 @@
-<h2>Lista de Chamada <small><?php echo $titulo; ?></small></h2>
-<hr>
+<div class="page-header">
+	<h1>Lista de Chamada <small><?php echo $titulo; ?></small></h1>
+</div>
 
 <table class="table table-striped">
 	<thead>
