@@ -11,21 +11,11 @@ class Controller_A extends Controller_Semac {
 		$user = Model_User::instanceOfThis();
 
 		$data = array();
-		$data['id'] = $id;
-		$data['nome'] = $atividade->titulo;
-		$data['tipo'] = $atividade->getTipo();
-		$data['responsavel'] = $atividade->responsavel;
-		$data['titulo'] = $atividade->titulo;
-		$data['local'] = $atividade->local;
-		$data['datas'] = $atividade->getData();
-		$data['descricao'] = $atividade->more->descricao;
-		$data['descricao_ext'] = Markdown::parse($atividade->more->descricao_ext);
-		$data['shortbio'] = $atividade->more->shortbio;
-		$data['inscricao_efetuada'] = Session::get('inscrito', false);
-		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
-		$data['documentos'] = $atividade->documentos;
+		$atividade->more->descricao_ext = Markdown::parse($atividade->more->descricao_ext);
 
-		Session::delete('inscrito');
+		$data['atividade'] = $atividade;
+		$data['inscricao_efetuada'] = Session::get_flash('inscrito', false);
+		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
 
 		$this->template->addAsset('js', 'bootstrap/bootstrap-popover.js');
 		$this->template->title = $atividade->titulo;
@@ -60,11 +50,11 @@ class Controller_A extends Controller_Semac {
 		{
 			try {
 				$ins = Model_Inscricao::inscreve(Auth::get_user_id(), $id);
-				Session::set('inscrito', true);
+				Session::set_flash('inscrito', true);
 			} catch (Database_Exception $e) {
-				Session::set('inscrito', 'Você já está inscrito nesta atividade!');
+				Session::set_flash('inscrito', 'Você já está inscrito nesta atividade!');
 			} catch (Exception $e) {
-				Session::set('inscrito', $e->getMessage());
+				Session::set_flash('inscrito', $e->getMessage());
 			}
 			Response::redirect('a/'.$id);
 		}

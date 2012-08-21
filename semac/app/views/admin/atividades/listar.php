@@ -8,7 +8,7 @@
 			<th>Tipo</th>
 			<th>Título</th>
 			<th>Responsável</th>
-			<th width=76></th>
+			<th width=100></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,6 +18,9 @@
 				<td><?php echo $atividade->titulo ?: '-'; ?></td>
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>
+					<a href="<?php echo URI::create('a/'.$atividade->id); ?>"
+						rel="tooltip" title="Página da atividade">
+						<?php echo Asset::img('ico/link.png'); ?></a>
 					<a href="<?php echo URI::create('admin/atividades/editar/'.$atividade->id); ?>"
 						rel="tooltip" title="Editar atividade">
 						<?php echo Asset::img('ico/edit.png'); ?></a>
@@ -38,8 +41,3 @@
 		<?php endif ?>
 	</tbody>
 </table>
-<script>
-$(document).ready(function(){
-	$('a[rel=tooltip]').tooltip();
-});
-</script>

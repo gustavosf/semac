@@ -103,7 +103,7 @@ return array(
 		),
 		'og' => array(
 			'admin'      => array('index'),
-			'atividades' => array('nova'),
+			'atividades' => array('nova', 'locais'),
 		),
 	),
 

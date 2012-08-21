@@ -77,5 +77,11 @@ class Model_Documento extends Orm\Model {
 		return '/'.Asset::find_file('ico/ext/file.png', 'img');
 	}
 
-
+	public function get_size()
+	{
+		$size = filesize($this->getPath(true));
+		$sizes = array('Bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+		if ($size == 0) return('n/a');
+		return (round($size/pow(1024, ($i = floor(log($size, 1024)))), 2).' '.$sizes[$i]);
+	}
 }

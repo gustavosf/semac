@@ -404,7 +404,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 				$presencas[$id]['cartao'] = $inscricao->user->profile_fields['cartao'];
 				foreach ($atividade->datas as $data)
 				{
-					$presencas[$id]['dias'][$data->getData()] = $data->isPresente($inscricao->user->id) ? 'P' : '-';
+					$presencas[$id]['dias'][$data->getData('d/m H:i')] = $data->isPresente($inscricao->user->id) ? 'P' : '-';
 				}
 			}
 
@@ -426,3 +426,4 @@ class Controller_Admin_Atividades extends Controller_Semac
 		}
 	}
 }
+

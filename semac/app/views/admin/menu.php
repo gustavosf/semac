@@ -12,9 +12,6 @@
 		<li<?php if ($action == 'organizador_geral') echo ' class="active"'; ?>>
 			<a href='<?php echo URI::create('admin/usuarios/organizador_geral'); ?>'>Organizador Geral</a>
 		</li>
-		<li<?php if ($action == 'locais') echo ' class="active"'; ?>>
-			<a href='<?php echo URI::create('admin/atividades/locais'); ?>'>Locais das Atividades</a>
-		</li>
 		<li<?php if ($action == 'extrato_chamadas') echo ' class="active"'; ?>>
 			<a href='<?php echo URI::create('admin/atividades/extrato_chamadas'); ?>'>Lista de Presenças</a>
 		</li>
@@ -24,6 +21,9 @@
 		<li class="nav-header">Organizador Geral</li>
 		<li<?php if ($action == 'nova') echo ' class="active"'; ?>>
 			<a href='<?php echo URI::create('admin/atividades/nova'); ?>'>Nova Atividade</a>
+		</li>
+		<li<?php if ($action == 'locais') echo ' class="active"'; ?>>
+			<a href='<?php echo URI::create('admin/atividades/locais'); ?>'>Locais das Atividades</a>
 		</li>
 	<?php endif; ?>
 
