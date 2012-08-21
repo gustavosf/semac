@@ -16,6 +16,8 @@ class Controller_A extends Controller_Semac {
 		$data['atividade'] = $atividade;
 		$data['inscricao_efetuada'] = Session::get_flash('inscrito', false);
 		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
+		$data['vagas'] = $atividade->vagas;
+		$data['vagas_disponiveis'] = $atividade->vagas_disponiveis();
 
 		$this->template->addAsset('js', 'bootstrap/bootstrap-popover.js');
 		$this->template->title = $atividade->titulo;

@@ -43,9 +43,14 @@ class Model_Inscricao extends Orm\Model {
 	public static function inscreve($user, $atividade)
 	{
 		$atividade = Model_Atividade::find($atividade);
-		$datas_atividade = $atividade->getData();
 		$user = Model_User::instanceOfThis();
 
+		if ( ! $atividade->vagas_disponiveis())
+		{
+			throw new Exception('O limite de vagas para esta atividade ('.$atividade->vagas.') já foi atingido.');
+		}
+
+		$datas_atividade = $atividade->getData();
 		$toRange = function($d) {
 			return array(
 				strtotime(substr($d['data'], 6).'-'.substr($d['data'],3,2).'-'.substr($d['data'],0,2).' '.str_replace('h',':',$d['as']).':00'),

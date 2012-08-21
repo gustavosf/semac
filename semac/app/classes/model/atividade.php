@@ -180,4 +180,17 @@ class Model_Atividade extends Orm\Model {
 		$query->execute();
 	}
 
+	/**
+	 * Retorna o número de vagas disponíveis
+	 * @return  mixed  número de vagas disponíveis (true para infinito)
+	 */
+	public function vagas_disponiveis()
+	{
+		$inscricoes = Model_Inscricao::find()
+			->where('id_atividade', $this->id)
+			->where('status', 1)->count();
+
+		return $this->vagas > 0 ? $this->vagas - $inscricoes : true;
+	}
+
 }
