@@ -14,6 +14,7 @@ class Model_Atividade extends Orm\Model {
 		'criado_em',
 		'local',
 		'titulo',
+		'selecao',
 	);
 
 	/* Observers */
