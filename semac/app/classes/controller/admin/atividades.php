@@ -425,5 +425,28 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$this->template->content = View::forge('admin/atividades/chamada/listar_atividades', $data);
 		}
 	}
+
+	/**
+	 * Publica / Despublica uma  atividade (toggle)
+	 * @param  int  $id  id da atividade
+	 */
+	public function post_publicar()
+	{
+		$id = Input::post('id');
+		if ($atividade = Model_Atividade::find($id))
+		{
+			$atividade->status = $atividade->status ? 0 : 1;
+			$atividade->save();
+			$this->response(array(
+				'publico' => $atividade->status,
+			));
+		}
+		else
+		{
+			$this->response(array(
+				'error' => 'Não foi encontrada atividade com este id'
+			), 500);
+		}
+	}
 }
 
