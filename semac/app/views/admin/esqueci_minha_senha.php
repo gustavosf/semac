@@ -5,7 +5,7 @@
 	<hr/>
 
 	<?php if (Session::get_flash('error')): ?>
-		<div class="alert-message error"><?php echo Session::get_flash('error'); ?></div>
+		<div class="alert alert-error"><?php echo Session::get_flash('error'); ?></div>
 		<hr/>
 	<?php endif; ?>
 

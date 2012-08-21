@@ -10,7 +10,7 @@
 
 <?php if ($salvo): ?>
 	<div class="alert alert-success fade in">
-		<a class="close" href="#">×</a>
+		<a class="close" data-dismiss="alert" href="#">×</a>
 		Os dados desta atividade foram salvos com sucesso!
 	</div>
 <?php endif ?>

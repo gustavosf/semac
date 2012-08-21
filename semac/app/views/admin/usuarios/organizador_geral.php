@@ -3,9 +3,9 @@
 </div>
 
 <?php if (isset($revogado)): ?>
-	<div class="alert-message block-message success">
+	<div class="alert alert-block alertsuccess">
 		<p>Foi revogado o acesso de <strong><?php echo $revogado; ?></strong> como Organizador Geral</p>
-	</div>	
+	</div>
 <?php endif ?>
 
 <table class="table table-striped">
