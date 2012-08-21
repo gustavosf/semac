@@ -38,8 +38,9 @@
 				</tbody>
 			</table>
 			<b>Trilha:</b> <?php //echo $trilha ?><br>
-			<hr>
-			<strong>Vagas:</strong> <?php echo $vagas ?>
+			<?php if ($vagas): ?>
+				<hr><strong>Vagas:</strong> <?php echo $vagas ?>
+			<?php endif ?>
 			<hr>
 			<strong>Documentação Extra</strong><br><br>
 			<?php foreach ($atividade->documentos as $key => $documento): ?>
