@@ -7,7 +7,7 @@ class Controller_A extends Controller_Semac {
 	public function action_index($id)
 	{
 		$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id OR $atividade->status !== 1) Response::redirect(404);
+		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
 		$user = Model_User::instanceOfThis();
 
 		$data = array();
@@ -25,7 +25,7 @@ class Controller_A extends Controller_Semac {
 	public function action_inscricao($id)
 	{
 		$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id OR $atividade->status !== 1) Response::redirect(404);
+		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
 
 		$data = array();
 		$data['atividade_id'] = $id;
@@ -69,7 +69,7 @@ class Controller_A extends Controller_Semac {
 	{
 		$data = array();
 		$atividade = Model_Atividade::find(Input::post('atividade'));
-		if ( ! $atividade->id OR $atividade->status !== 1) Response::redirect(404);
+		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
 
 		if ($_POST)
 		{

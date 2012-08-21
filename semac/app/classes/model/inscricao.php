@@ -72,6 +72,7 @@ class Model_Inscricao extends Orm\Model {
 		$ins = new Model_Inscricao(array(
 			'id_user' => $user->id,
 			'id_atividade' => $atividade->id,
+			'status' => $atividade->selecao ? 0 : 1,
 		));
 		$ins->save();
 	}
