@@ -6,12 +6,12 @@
 		<div class="span9">
 			<?php if ($inscricao_efetuada === true): ?>
 				<div class="alert alert-success alert-block">
-					<a class="close" href="#">×</a>
+					<a class="close" data-dismiss="alert" href="#">×</a>
 					<p>Sua inscrição foi efetuada com sucesso!</p>
 				</div>
 			<?php elseif ($inscricao_efetuada): ?>
-				<div class="alert-message alert-block alert-error">
-					<a class="close" href="#">×</a>
+				<div class="alert alert-block alert-error">
+					<a class="close" data-dismiss="alert" href="#">×</a>
 					<p><?php echo $inscricao_efetuada ?></p>
 				</div>
 			<?php endif ?>
@@ -39,6 +39,8 @@
 			</table>
 			<b>Trilha:</b> <?php //echo $trilha ?><br>
 			<hr>
+			<strong>Vagas:</strong> <?php echo $vagas ?>
+			<hr>
 			<strong>Documentação Extra</strong><br><br>
 			<?php foreach ($atividade->documentos as $key => $documento): ?>
 				<a href="<?php echo $documento->getPath() ?>"
@@ -53,7 +55,11 @@
 			<?php endif ?>
 			<hr>
 			<?php if ($inscrito === false): ?>
-				<a href="<?php echo URI::create("a/{$atividade->id}/inscricao") ?>"><button class="btn btn-info">Inscrição</button></a>
+				<?php if ($vagas_disponiveis === 0): ?>
+					<span class="label label-important">Limite de vagas atingido</span>
+				<?php else: ?>
+					<a href="<?php echo URI::create("a/{$atividade->id}/inscricao") ?>"><button class="btn btn-info">Inscrição</button></a>
+				<?php endif ?>
 			<?php elseif ($inscrito == 0): ?>
 				<span class="label label-warning">Cadastrado nesta atividade</span>
 			<?php elseif ($inscrito == 1): ?>

@@ -7,7 +7,7 @@ class Controller_A extends Controller_Semac {
 	public function action_index($id)
 	{
 		$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id OR $atividade->status !== 1) Response::redirect(404);
+		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
 		$user = Model_User::instanceOfThis();
 
 		$data = array();
@@ -16,6 +16,8 @@ class Controller_A extends Controller_Semac {
 		$data['atividade'] = $atividade;
 		$data['inscricao_efetuada'] = Session::get_flash('inscrito', false);
 		$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
+		$data['vagas'] = $atividade->vagas;
+		$data['vagas_disponiveis'] = $atividade->vagas_disponiveis();
 
 		$this->template->addAsset('js', 'bootstrap/bootstrap-popover.js');
 		$this->template->title = $atividade->titulo;
@@ -25,7 +27,7 @@ class Controller_A extends Controller_Semac {
 	public function action_inscricao($id)
 	{
 		$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id OR $atividade->status !== 1) Response::redirect(404);
+		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
 
 		$data = array();
 		$data['atividade_id'] = $id;
@@ -69,7 +71,7 @@ class Controller_A extends Controller_Semac {
 	{
 		$data = array();
 		$atividade = Model_Atividade::find(Input::post('atividade'));
-		if ( ! $atividade->id OR $atividade->status !== 1) Response::redirect(404);
+		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
 
 		if ($_POST)
 		{

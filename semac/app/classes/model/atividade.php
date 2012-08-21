@@ -14,6 +14,7 @@ class Model_Atividade extends Orm\Model {
 		'criado_em',
 		'local',
 		'titulo',
+		'selecao',
 	);
 
 	/* Observers */
@@ -177,6 +178,19 @@ class Model_Atividade extends Orm\Model {
 		if ($data_id != 0) $query->and_where('id', $data_id);
 
 		$query->execute();
+	}
+
+	/**
+	 * Retorna o número de vagas disponíveis
+	 * @return  mixed  número de vagas disponíveis (true para infinito)
+	 */
+	public function vagas_disponiveis()
+	{
+		$inscricoes = Model_Inscricao::find()
+			->where('id_atividade', $this->id)
+			->where('status', 1)->count();
+
+		return $this->vagas > 0 ? $this->vagas - $inscricoes : true;
 	}
 
 }

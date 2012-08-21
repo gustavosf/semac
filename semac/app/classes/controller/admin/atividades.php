@@ -126,6 +126,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->responsavel = $val->validated('responsavel');
 			$atividade->carga_horaria = $val->validated('carga_horaria');
 			$atividade->vagas = $val->validated('vagas');
+			$atividade->selecao = $val->input('selecao');
 
 			if ($atividade->more === null) $atividade->more = new stdClass;
 			$atividade->more->descricao = $val->input('descricao');
