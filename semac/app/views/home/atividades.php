@@ -1,8 +1,11 @@
-<div class="content">
-	<div class="hero-unit">
-		<h2><?php echo $tipo ?></h2>
-		<p><?php echo $descricao ?></p>
+<header class="jumbotron subhead">
+	<div class="container">
+		<h1><?php echo $tipo ?></h1>
+		<p class="lead"><?php echo $descricao ?></p>
 	</div>
+</header>
+
+<div class="container">
 	<div class="row">
 		<div class="span12">
 			<table class="table table-striped">

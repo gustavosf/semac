@@ -1,6 +1,6 @@
-<div class="row">
-	<div class="span12" style="text-align:center">
-		<h1><?php echo e($title); ?></h1>
-		<p>The page you are looking for cannot be found.</p>
+<header class="jumbotron">
+	<div class="container">
+		<h1>404</h1>
+		<p>A página que você procura não foi encontrada</p>
 	</div>
-</div>
+</header>

@@ -1,7 +1,11 @@
-<div class="content">
-	<div class="page-header">
-		<h1><?php echo $atividade->getTipo() ?></h1>
+<header class="jumbotron subhead">
+	<div class="container">
+		<h2><?php echo $atividade->titulo ?></h2>
+		<?php echo $atividade->responsavel ?>
 	</div>
+</header>
+
+<div class="container">
 	<div class="row">
 		<div class="span9">
 			<?php if ($inscricao_efetuada === true): ?>
@@ -15,8 +19,6 @@
 					<p><?php echo $inscricao_efetuada ?></p>
 				</div>
 			<?php endif ?>
-			<h2><?php echo $atividade->titulo ?> <small><?php echo $atividade->responsavel ?></small></h2>
-			<br>
 			<p><?php echo $atividade->more->descricao ?></p>
 			<?php if ($atividade->more->descricao_ext): ?>
 				<hr>

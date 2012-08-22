@@ -1,4 +1,4 @@
-<div class="content">
+<div class="container">
 	<div class="hero-unit">
 		<p>Você está tentando se inscrever na atividade <strong><?php echo $atividade ?></strong>. Para prosseguir, você precisa cadastrar-se no sistema, ou caso já possuas um registro, identificar-se utilizando as suas credenciais.</p>
 	</div>

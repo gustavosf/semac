@@ -50,9 +50,6 @@
 <body>
 	<?php echo $interface_topbar; ?>
 
-	<div class="container">
-		<?php echo $content ?>
-	</div> <!-- /container -->
-
+	<?php echo $content ?>
 </body>
 </html>

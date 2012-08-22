@@ -37,12 +37,8 @@
 </head>
 
 <body>
-
 	<?php echo $interface_topbar; ?>
-
-	<div class="container">
 	<?php echo $content; ?>
-	</div>
 
 	<!-- JavaScript at the bottom for fast page loading -->
 	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
