@@ -1,8 +1,21 @@
 <ul class="nav nav-list">
 
+	<!--
 	<li<?php if ($action == 'index') echo ' class="active"'; ?>>
 		<a href='<?php echo URI::create('admin'); ?>'>Dashboard</a>
 	</li>
+	-->
+
+	<li<?php if ($action == 'configuracoes') echo ' class="active"'; ?>>
+		<a href='<?php echo URI::create('configuracoes'); ?>'>Configurações</a>
+	</li>
+
+	<?php if (Auth::member(Auth::get_group_id('Participante'))): ?>
+		<!-- <li class="nav-header">Meus dados</li> -->
+		<li<?php if ($action == 'minhas_atividades') echo ' class="active"'; ?>>
+			<a href='<?php echo URI::create('minhas_atividades'); ?>'>Minhas atividades</a>
+		</li>
+	<?php endif; ?>
 
 	<?php if (Auth::member(Auth::get_group_id('Comex'))): ?>
 		<li class="nav-header">Administração</li>

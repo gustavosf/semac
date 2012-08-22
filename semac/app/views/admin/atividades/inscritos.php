@@ -14,8 +14,8 @@
 	<tbody>
 		<?php foreach ($inscritos as $id => $inscrito): ?>
 			<tr>
-				<td><?php echo $inscrito->user->profile_fields['nome']; ?></td>
-				<td><?php echo $inscrito->user->profile_fields['cartao']; ?></td>
+				<td><?php echo $inscrito->user->profile_fields->nome; ?></td>
+				<td><?php echo $inscrito->user->profile_fields->cartao; ?></td>
 				<td><?php echo $inscrito->cadastrado_em; ?></td>
 				<td>
 					<a href="javascript:;"

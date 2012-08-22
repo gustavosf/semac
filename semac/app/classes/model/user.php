@@ -44,7 +44,7 @@ class Model_User extends Orm\Model {
 	 * @var $id int
 	 * @return Model_User
 	 */
-	public static function instanceOfThis($id = null)
+	public static function get_from_auth($id = null)
 	{
 		static $instance;
 		if ( ! is_object($instance))
@@ -128,7 +128,7 @@ class Model_User extends Orm\Model {
 			$user->group = $gid;
 			$user->last_login = '';
 			$user->login_hash = '';
-			$user->profile_fields['nome'] = $nome;
+			$user->profile_fields->nome = $nome;
 			$pass = $user->resetar_senha(); // já efetua o salvamento do registro
 		}
 
@@ -149,6 +149,24 @@ class Model_User extends Orm\Model {
 		$this->password = Auth::instance()->hash_password($pass);
 		$this->save();
 		return $pass;
+	}
+
+	/**
+	 * Altera a senha (sem salvar)
+	 * @param  string  $old_password  Senha antiga
+	 * @param  string  $new_password  Senah nova
+	 * @return boolean                false se as senhas não conferem
+	 */
+	public function change_password($old_password, $new_password, $save = false)
+	{
+		$hashed_old_password = \Auth::instance()->hash_password($old_password);
+
+		if ($this->password !== $hashed_old_password) return false;
+		$this->password = \Auth::instance()->hash_password($new_password);
+
+		if ($save) $this->save();
+
+		return true;
 	}
 
 }

@@ -14,8 +14,9 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<?php if (Auth::has_access('a.minhas')): ?>
-							<li><a href="<?php echo URI::create('a/minhas') ?>">Minhas Atividades</a></li>
+						<li><a href="<?php echo URI::create('configuracoes') ?>">Configurações</a></li>
+						<?php if (Auth::has_access('admin.minhas_atividades')): ?>
+							<li><a href="<?php echo URI::create('minhas_atividades') ?>">Minhas Atividades</a></li>
 						<?php endif ?>
 						<?php if (Auth::has_access('atividades.listar')): ?>
 							<li><a href="<?php echo URI::create('admin/atividades/listar') ?>">Listar Atividades</a></li>
