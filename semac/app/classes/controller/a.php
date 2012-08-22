@@ -43,7 +43,7 @@ class Controller_A extends Controller_Semac {
 
 		$this->template->title = 'Inscrição > '.$atividade->titulo;
 
-		if (!Auth::member(2)) // 2 == participante
+		if (Auth::member(1)) // usuário é visitante (não-logado)
 		{
 			$data['atividade'] = $atividade->titulo;
 			$this->template->content = View::forge('atividades/inscricao/login', $data);

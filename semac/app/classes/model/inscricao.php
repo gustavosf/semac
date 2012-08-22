@@ -80,6 +80,13 @@ class Model_Inscricao extends Orm\Model {
 			'status' => $atividade->selecao ? 0 : 1,
 		));
 		$ins->save();
+
+		/* Adiciona o grupo "participante" caso o usuário já não o seja */
+		if ( ! ($user->group & 2))
+		{
+			$user->group = $user->group | 2;
+			$user->save();
+		}
 	}
 
 	public function getStatus()
