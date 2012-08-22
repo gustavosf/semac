@@ -22,7 +22,7 @@
 			<p><?php echo $atividade->more->descricao ?></p>
 			<?php if ($atividade->more->descricao_ext): ?>
 				<hr>
-				<?php echo html_entity_decode($atividade->more->descricao_ext); ?>
+				<?php echo html_entity_decode(utf8_decode($atividade->more->descricao_ext)); ?>
 				<hr>
 			<?php endif ?>
 		</div>
