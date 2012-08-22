@@ -132,6 +132,7 @@ $(function() {
 var novaData = function(el) {
 	html = $(el).parent().clone();
 	html.children('input[type=hidden]').val('');
+	html.children('input[rel=date]').attr('id', null).removeClass('hasDatepicker');
 	$(el).parent().after($(html));
 };
 var removeData = function(el) {
