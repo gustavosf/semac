@@ -44,7 +44,7 @@ class Model_User extends Orm\Model {
 	 * @var $id int
 	 * @return Model_User
 	 */
-	public static function instanceOfThis($id = null)
+	public static function get_from_auth($id = null)
 	{
 		static $instance;
 		if ( ! is_object($instance))

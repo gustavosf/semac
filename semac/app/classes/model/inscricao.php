@@ -43,7 +43,7 @@ class Model_Inscricao extends Orm\Model {
 	public static function inscreve($user, $atividade)
 	{
 		$atividade = Model_Atividade::find($atividade);
-		$user = Model_User::instanceOfThis();
+		$user = Model_User::get_from_auth();
 
 		if ( ! $atividade->vagas_disponiveis())
 		{

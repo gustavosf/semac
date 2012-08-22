@@ -8,7 +8,7 @@ class Controller_A extends Controller_Semac {
 	{
 		$atividade = Model_Atividade::find($id);
 		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
-		$user = Model_User::instanceOfThis();
+		$user = Model_User::get_from_auth();
 
 		$data = array();
 		$atividade->more->descricao_ext = Markdown::parse($atividade->more->descricao_ext);
@@ -136,17 +136,6 @@ class Controller_A extends Controller_Semac {
 		}
 
 		Response::redirect('a/'.$atividade->id.'/inscricao');
-	}
-
-	public function action_minhas()
-	{
-		$user = Model_User::instanceOfThis();
-		$data = array();
-		$data['inscricoes'] = $user->inscricoes;
-		$data['user_id'] = $user->id;
-
-		$this->template->title = 'Minhas Atividades';
-		$this->template->content = View::forge('atividades/minhas', $data);
 	}
 
 }

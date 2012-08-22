@@ -143,6 +143,27 @@ class Controller_Admin extends Controller_Semac {
 		$this->template->content = View::forge('admin/logout');
 	}
 
+
+	public function action_configuracoes()
+	{
+		$this->template->title = 'Configurações';
+		$this->template->content = View::forge('admin/configuracoes', array(
+			'user' => \User::get_user()),
+		);
+	}
+
+	public function action_minhas_atividades()
+	{
+		$user = Model_User::get_from_auth();
+		$data = array();
+		$data['inscricoes'] = $user->inscricoes;
+		$data['user_id'] = $user->id;
+
+		$this->template->title = 'Minhas Atividades';
+		$this->template->content = View::forge('atividades/minhas', $data);
+	}
+
+
 }
 
 /* End of file admin.php */
