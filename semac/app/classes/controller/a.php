@@ -7,7 +7,7 @@ class Controller_A extends Controller_Semac {
 	public function action_index($id)
 	{
 		$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
+		if ( ! $atividade OR $atividade->status != 1) throw new HttpNotFoundException;
 		$user = Model_User::get_from_auth();
 
 		$data = array();
@@ -27,7 +27,7 @@ class Controller_A extends Controller_Semac {
 	public function action_inscricao($id)
 	{
 		$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
+		if ( ! $atividade OR $atividade->status != 1) throw new HttpNotFoundException;
 
 		$data = array();
 		$data['atividade_id'] = $id;
@@ -71,7 +71,7 @@ class Controller_A extends Controller_Semac {
 	{
 		$data = array();
 		$atividade = Model_Atividade::find(Input::post('atividade'));
-		if ( ! $atividade->id OR $atividade->status != 1) Response::redirect(404);
+		if ( ! $atividade OR $atividade->status != 1) throw new HttpNotFoundException;
 
 		if ($_POST)
 		{

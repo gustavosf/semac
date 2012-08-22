@@ -271,7 +271,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$data = array();
 
 	 	$atividade = Model_Atividade::find($id);
-		if ( ! $atividade->id) Response::redirect(404);
+		if ( ! $atividade) throw new HttpNotFoundException;
 
 		$data['inscritos'] = $atividade->inscricoes;
 		$data['vagas'] = $atividade->vagas;
@@ -314,7 +314,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 	public function action_chamada($atividade, $dia = null)
 	{
 		$atividade = Model_Atividade::find($atividade);
-		if ( ! $atividade->id) Response::redirect(404);
+		if ( ! $atividade) throw new HttpNotFoundException;
 
 		$data = array();
 		$data['titulo'] = $atividade->titulo;
@@ -395,7 +395,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		if ($atividade !== null)
 		{
 			$atividade = Model_Atividade::find($atividade);
-			if ( ! $atividade->id) Response::redirect(404);
+			if ( ! $atividade) throw new HttpNotFoundException;
 
 			$presencas = array();
 			foreach ($atividade->inscricoes as $id => $inscricao)
