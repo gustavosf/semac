@@ -128,6 +128,7 @@ class Model_User extends Orm\Model {
 			$user->group = $gid;
 			$user->last_login = '';
 			$user->login_hash = '';
+			$user->profile_fields = new stdClass;
 			$user->profile_fields->nome = $nome;
 			$pass = $user->resetar_senha(); // já efetua o salvamento do registro
 		}

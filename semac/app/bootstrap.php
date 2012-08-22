@@ -29,7 +29,12 @@ Autoloader::register();
  * Fuel::STAGE
  * Fuel::PRODUCTION
  */
-Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOPMENT);
+
+
+if (isset($_SERVER['OPENSHIFT_APP_NAME']) or isset($_ENV['OPENSHIFT_APP_NAME']))
+	Fuel::$env = Fuel::PRODUCTION;
+else
+	Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOPMENT);
 
 // Initialize the framework with the config file.
 Fuel::init('config.php');
