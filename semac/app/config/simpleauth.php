@@ -72,19 +72,19 @@ return array(
 			'home'  => array('index', 'atividades'),
 		),
 		'participante' => array(
-			'a' => array('minhas'),
+			'admin' => array('configuracoes', 'minhas_atividades'),
 		),
 		'secretaria' => array(
-			'admin'      => array('index'),
+			'admin'      => array('index', 'configuracoes'),
 			'atividades' => array('locais'),
 			'usuarios'   => array('extrato_chamadas'),
 		),
 		'comgrad' => array(
-			'admin'      => array('index'),
+			'admin'      => array('index', 'configuracoes'),
 			'atividades' => array('extrato_chamadas'),
 		),
 		'chair' => array(
-			'admin'      => array('index'),
+			'admin'      => array('index', 'configuracoes'),
 			'atividades' => array(
 				'listar',
 				'editar',
@@ -98,12 +98,12 @@ return array(
 			),
 		),
 		'comex' => array(
-			'admin'      => array('index'),
+			'admin'      => array('index', 'configuracoes'),
 			'atividades' => array('locais', 'extrato_chamadas'),
 			'usuarios'   => array('novo', 'organizador_geral', 'extrato_chamadas'),
 		),
 		'og' => array(
-			'admin'      => array('index'),
+			'admin'      => array('index', 'configuracoes'),
 			'atividades' => array('nova', 'locais'),
 		),
 	),

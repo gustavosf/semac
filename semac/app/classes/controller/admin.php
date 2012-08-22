@@ -114,7 +114,7 @@ class Controller_Admin extends Controller_Semac {
 					'subject' => 'SEMAC/UFRGS - Recuperação de senha',
 					'to' => Input::post('email'),
 				), array(
-					'nome' => $user->profile_fields['nome'],
+					'nome'  => $user->profile_fields->nome,
 					'email' => $user->email,
 					'senha' => $pass,
 				));
@@ -146,21 +146,55 @@ class Controller_Admin extends Controller_Semac {
 
 	public function action_configuracoes()
 	{
+		$user = Model_User::get_from_auth();
+
+		if ($_POST)
+		{
+			if (!is_object($user->profile_fields))
+			{
+				$user->profile_fields = new stdClass;
+			}
+			$user->profile_fields->nome   = Input::post('nome');
+			$user->profile_fields->cartao = Input::post('matricula');
+
+			if (Input::post('nova_senha'))
+			{
+				if (Input::post('nova_senha') === Input::post('confirmacao_nova_senha'))
+				{
+					if ( ! $user->change_password(Input::post('senha_atual'), Input::post('nova_senha')))
+					{
+						Session::set_flash('error', 'Senha antiga não confere');
+					}
+				}
+				else
+				{
+					Session::set_flash('error', 'As novas senhas digitadas não conferem');
+				}
+			}
+
+			if ( ! Session::get_flash('error', false))
+			{
+				$user->save();
+				Session::set_flash('success', 'Seus dados foram salvos.');
+			}
+		}
+
 		$this->template->title = 'Configurações';
 		$this->template->content = View::forge('admin/configuracoes', array(
-			'user' => \User::get_user()),
-		);
+			'nome'      => @$user->profile_fields->nome,
+			'matricula' => @$user->profile_fields->cartao,
+		));
 	}
 
 	public function action_minhas_atividades()
 	{
 		$user = Model_User::get_from_auth();
-		$data = array();
-		$data['inscricoes'] = $user->inscricoes;
-		$data['user_id'] = $user->id;
 
 		$this->template->title = 'Minhas Atividades';
-		$this->template->content = View::forge('atividades/minhas', $data);
+		$this->template->content = View::forge('atividades/minhas', array(
+			'inscricoes' => $user->inscricoes,
+			'user_id'    => $user->id,
+		));
 	}
 
 

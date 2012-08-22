@@ -5,7 +5,6 @@ return array(
 	'_404_'   => 'e/404',    // The main 404 route
 
 	'a/cadastro'         => 'a/cadastro',
-	'a/minhas'           => 'a/minhas',
 	'a/(:num)/inscricao' => 'a/inscricao/$1',
 	'a/(:num)'           => 'a/index/$1',
 
@@ -27,4 +26,7 @@ return array(
 	'paineis/(:num)'           => 'home/atividades/5/$1',
 	'palestras/(:num)'         => 'home/atividades/6/$1',
 	'reunioes/(:num)'          => 'home/atividades/7/$1',
+
+	'configuracoes'     => 'admin/configuracoes',
+	'minhas_atividades' => 'admin/minhas_atividades',
 );

@@ -95,7 +95,7 @@ class Controller_A extends Controller_Semac {
 				if ($val->run($_POST))
 				{
 					list($user, $pass) = Model_User::novo(Input::post('email'), Input::post('nome'), 'Participante');
-					$user->profile_fields['cartao'] = Input::post('matricula');
+					$user->profile_fields->cartao = Input::post('matricula');
 					$user->save();
 					$email = $user->email;
 					if ($pass)
