@@ -95,6 +95,7 @@ return array(
 				'chamada',
 				'presenca',
 				'publicar',
+				'preview_descricao',
 			),
 		),
 		'comex' => array(

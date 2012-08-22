@@ -95,7 +95,10 @@
 			<label class="control-label" for="descricao_ext">Descrição Extensa da Atividade</label>
 			<div class="controls">
 				<textarea class="span6" name="descricao_ext" id="descricao_ext" rows="10"><?php echo @$atividade->more->descricao_ext; ?></textarea>
-				<small class="help-block">Este campo aceita o formato <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a></small>
+				<small class="help-block">
+					Este campo aceita o formato <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a>.<br>
+					Clique <a href="javascript:preview()">aqui</a> para prever o resultado da formatação
+				</small>
 			</div>
 		</div>
 
@@ -138,5 +141,20 @@ var novaData = function(el) {
 var removeData = function(el) {
 	$(el).parent().remove();
 };
+
+var preview = function () {
+	var text = $('#descricao_ext').val();
+	$.post(
+		'<?php echo Uri::create("admin/atividades/preview_descricao") ?>',
+		{'text': text},
+		function (resp) {
+			$.modal({
+				header: 'Preview',
+				content: resp.text,
+			});
+		},
+		'json'
+	);
+}
 </script>
 <?php endif ?>

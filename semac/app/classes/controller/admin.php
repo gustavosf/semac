@@ -197,7 +197,6 @@ class Controller_Admin extends Controller_Semac {
 		));
 	}
 
-
 }
 
 /* End of file admin.php */

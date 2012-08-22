@@ -449,5 +449,12 @@ class Controller_Admin_Atividades extends Controller_Semac
 			), 500);
 		}
 	}
+
+	public function post_preview_descricao()
+	{
+		$this->response(array(
+			'text' => Markdown::parse(Input::post('text')),
+		));
+	}
 }
 
