@@ -30,7 +30,6 @@ Autoloader::register();
  * Fuel::PRODUCTION
  */
 
-
 if (isset($_SERVER['OPENSHIFT_APP_NAME']) or isset($_ENV['OPENSHIFT_APP_NAME']))
 	Fuel::$env = Fuel::PRODUCTION;
 else

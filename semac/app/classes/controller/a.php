@@ -19,7 +19,6 @@ class Controller_A extends Controller_Semac {
 		$data['vagas'] = $atividade->vagas;
 		$data['vagas_disponiveis'] = $atividade->vagas_disponiveis();
 
-		$this->template->addAsset('js', 'bootstrap/bootstrap-popover.js');
 		$this->template->title = $atividade->titulo;
 		$this->template->content = View::forge('atividades/index', $data);
 	}

@@ -1,10 +1,10 @@
 $(document).ready(function () {
-	$('a.dropdown-toggle').dropdown(); // catch any dropdowns on the page
-	$('.alert-message').alert();
+	$('.dropdown-toggle').dropdown(); // catch any dropdowns on the page
+	$('.alert').alert();
 	$('[rel=tooltip]').tooltip();
-
 	$('[rel=popover]').popover({
-		placement: 'bottom'
+		placement: 'top',
+		trigger: 'hover'
 	});
 });
 
@@ -13,7 +13,7 @@ $.modal = function(opt) {
 	if (opt.content === undefined) opt.content = 'Hello';
 	if (opt.primary_btn === undefined) opt.primary_btn = 'Ok';
 
-	var tmpl = 
+	var tmpl =
 		$('<div class="modal fade" id="modal-window">' +
 			'<div class="modal-header">' +
 				'<a class="close" data-dismiss="modal">×</a>' +

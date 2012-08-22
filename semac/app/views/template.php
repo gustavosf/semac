@@ -43,7 +43,6 @@
 	<!-- JavaScript at the bottom for fast page loading -->
 	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap-dropdown.js'); ?>
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
