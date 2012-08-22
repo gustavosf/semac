@@ -138,4 +138,24 @@ class Controller_A extends Controller_Semac {
 		Response::redirect('a/'.$atividade->id.'/inscricao');
 	}
 
+	public function action_search()
+	{
+		$term = Input::post('search');
+
+		$atividades = Model_Atividade::find()
+			->where('status', 1)
+			->and_where_open()
+			->where('titulo', 'like', "%{$term}%")
+			->or_where('more', 'like', "%{$term}%")
+			->or_where('responsavel', 'like', "%{$term}%")
+			->and_where_close()
+			->get();
+
+		$this->template->title = 'Busca';
+		$this->template->content = View::forge('atividades/busca', array(
+			'atividades' => $atividades,
+			'termo'      => $term,
+		));
+	}
+
 }

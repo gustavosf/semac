@@ -68,7 +68,7 @@ return array(
 		'#'                 => array(
 			'admin' => array('login', 'logout', 'esqueci_minha_senha'),
 			'e'     => array('forbidden', '404'),
-			'a'     => array('index', 'inscricao', 'cadastro'),
+			'a'     => array('index', 'inscricao', 'cadastro', 'search'),
 			'home'  => array('index', 'atividades'),
 		),
 		'participante' => array(

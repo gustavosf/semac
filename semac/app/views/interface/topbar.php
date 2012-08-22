@@ -34,15 +34,23 @@
 			</div>
 			<div class="nav-collapse collapse" style="height: 0px; ">
 				<ul class="nav">
-					<li><a href="<?php echo URI::create('/coding_dojos') ?>">Coding Dojos</a></li>
-					<li><a href="<?php echo URI::create('/cursos') ?>">Cursos</a></li>
-					<li><a href="<?php echo URI::create('/lightning_talks') ?>">Lightning Talks</a></li>
-					<li><a href="<?php echo URI::create('/maratonas') ?>">Maratonas de Prog.</a></li>
-					<li><a href="<?php echo URI::create('/minicursos') ?>">Minicursos</a></li>
-					<li><a href="<?php echo URI::create('/paineis') ?>">Painéis</a></li>
-					<li><a href="<?php echo URI::create('/palestras') ?>">Palestras</a></li>
-					<li><a href="<?php echo URI::create('/reunioes') ?>">Reuniões</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Atividades <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo URI::create('/coding_dojos') ?>">Coding Dojos</a></li>
+							<li><a href="<?php echo URI::create('/cursos') ?>">Cursos</a></li>
+							<li><a href="<?php echo URI::create('/lightning_talks') ?>">Lightning Talks</a></li>
+							<li><a href="<?php echo URI::create('/maratonas') ?>">Maratonas de Prog.</a></li>
+							<li><a href="<?php echo URI::create('/minicursos') ?>">Minicursos</a></li>
+							<li><a href="<?php echo URI::create('/paineis') ?>">Painéis</a></li>
+							<li><a href="<?php echo URI::create('/palestras') ?>">Palestras</a></li>
+							<li><a href="<?php echo URI::create('/reunioes') ?>">Reuniões</a></li>
+						</ul>
+					</li>
 				</ul>
+				<form class="navbar-search pull-right" action="<?php echo Uri::create('a/search') ?>" method="post">
+					<input name="search" type="text" class="search-query pull-right" placeholder="Busca">
+				</form>
 			</div>
 		</div>
 	</div><!-- /navbar-inner -->
