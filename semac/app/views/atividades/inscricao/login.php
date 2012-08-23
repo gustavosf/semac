@@ -1,7 +1,11 @@
-<div class="container">
-	<div class="hero-unit">
+<header class="jumbotron">
+	<div class="container">
+		<h1>Inscrição</h1>
 		<p>Você está tentando se inscrever na atividade <strong><?php echo $atividade ?></strong>. Para prosseguir, você precisa cadastrar-se no sistema, ou caso já possuas um registro, identificar-se utilizando as suas credenciais.</p>
 	</div>
+</header>
+
+<div class="container">
 	<div class="row">
 		<div class="span6">
 			<div class="page-header">

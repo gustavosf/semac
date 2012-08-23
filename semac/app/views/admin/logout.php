@@ -1,11 +1,10 @@
 <header class="jumbotron">
-	<div class="container">
-		<h1>Você foi deslogado do sistema</h1>
-		<p>A página que você procura não foi encontrada</p>
+	<div class="container" style="text-align:center">
+		<h2>Você foi deslogado do sistema</h2>
 	</div>
 </header>
 
-<div class="container">
+<div class="container" style="text-align:center">
 	<p>Aguarde enquanto te redirecionamos à página principal, ou clique <a href="<?php echo Uri::create('/'); ?>">aqui</a>.</p>
 </div>
 

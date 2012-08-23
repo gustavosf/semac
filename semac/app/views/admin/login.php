@@ -1,12 +1,11 @@
-<div class="container">
+<header class="jumbotron">
+	<div class="container" style="text-align:center">
+		<h2>Identifique-se</h2>
+	</div>
+</header>
+
+<div class="container" style="padding-top:40px">
 	<div class='span6 offset3'>
-		<div style="text-align:center">
-			<h3>Área de Administração da Semana Acadêmica</h3>
-			Para acessar, você precisa digitar o seu usuário e senha
-		</div>
-
-		<hr/>
-
 		<?php if (isset($error) || Session::get_flash('error')): ?>
 			<?php $error = (@$error ?: Session::get_flash('error')) ?>
 			<div class="alert alert-error"><?php echo $error ?></div>
