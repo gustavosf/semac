@@ -25,7 +25,6 @@ class Controller_Home extends Controller_Semac {
 			$this->template->content = View::forge('home/atividades', array(
 				'tipo' => $tipo,
 				'atividades' => $tipo->atividades,
-				'uri' => $this->request->uri,
 			));
 		}
 		else
@@ -43,6 +42,7 @@ class Controller_Home extends Controller_Semac {
 			$data['inscrito'] = is_object($user) ? $user->estaInscrito($id) : false;
 			$data['vagas'] = $atividade->vagas;
 			$data['vagas_disponiveis'] = $atividade->vagas_disponiveis();
+			$data['clean_uri'] = Uri::create("atividades/{$tipo}/{$id}");
 
 			$this->template->title = $atividade->titulo;
 			$this->template->ogtags = array(

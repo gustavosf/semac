@@ -71,8 +71,10 @@
 				<span class="label label-important">Inscrição recusada nesta atividade</span>
 			<?php endif ?>
 			<hr>
-			<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo urlencode(Uri::current()); ?>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=260679840614937" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
-			<div class="g-plusone" data-size="medium" data-width="120"></div>
+			<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo $clean_uri ?>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=260679840614937" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+			<div class="g-plusone" data-size="medium" data-width="120" data-href="<?php echo $clean_uri ?>"></div>
+			<hr>
+			<img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&choe=UTF-8&chl=<?php echo urlencode(Uri::current()) ?>" class="qrcode"/>
 			<hr>
 		</div>
 	</div>

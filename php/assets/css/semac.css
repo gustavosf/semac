@@ -33,7 +33,13 @@
 
 .fb-comments, .fb-comments > span[style], .fb_iframe_widget iframe[style] { width: 100% !important; }
 
-
+.qrcode {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
+  -moz-opacity: 0.1;
+  -khtml-opacity: 0.1;
+  opacity: 0.1;
+}
 
 /* Jumbotrons
 ================================================================= */
