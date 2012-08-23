@@ -8,7 +8,7 @@ class Controller_Home extends Controller_Semac {
 		$this->template->ogtags = array(
 			'title'       => 'Semana Acadêmica da Informática',
 			'description' => 'A Semana Acadêmica do Instituto de Informática da UFRGS (SEMAC 2012/2) ocorrerá de 01 a 05 de outubro',
-			'image'       => '',
+			'image'       => Uri::base().Asset::find_file('logo-inf.gif', 'img'),
 		);
 		$this->template->content = View::forge('home/index' ,$data);
 	}

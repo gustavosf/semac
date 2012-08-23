@@ -22,7 +22,7 @@
 			<p><?php echo $atividade->more->descricao ?></p>
 			<?php if ($atividade->more->descricao_ext): ?>
 				<hr>
-				<?php echo html_entity_decode(utf8_decode($atividade->more->descricao_ext)); ?>
+				<?php echo html_entity_decode($atividade->more->descricao_ext); ?>
 				<hr>
 			<?php endif ?>
 		</div>
@@ -71,9 +71,8 @@
 				<span class="label label-important">Inscrição recusada nesta atividade</span>
 			<?php endif ?>
 			<hr>
-
 			<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo urlencode(Uri::current()); ?>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=260679840614937" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
-			<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120" data-href="<?php echo urlencode(Uri::current()) ?>"></div>
+			<div class="g-plusone" data-size="medium" data-width="120"></div>
 			<hr>
 		</div>
 	</div>

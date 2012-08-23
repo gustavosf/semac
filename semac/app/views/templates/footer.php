@@ -12,6 +12,9 @@
 					<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(Uri::base()) ?>&amp;send=true&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=260679840614937" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
 					<!-- <div class="fb-like" data-href="http://semac-inf.rhcloud.com" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div> -->
 				</li>
+				<li>
+					<div class="g-plusone" data-size="medium" data-width="120" data-href="<?php echo Uri::base() ?>"></div>
+				</li>
 				<!--
 				<li class="follow-btn">
 					<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/follow_button.1345016233.html#_=1345725155310&amp;id=twitter-widget-2&amp;lang=en&amp;screen_name=twbootstrap&amp;show_count=true&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button" style="width: 237px; height: 20px; " title="Twitter Follow Button"></iframe>

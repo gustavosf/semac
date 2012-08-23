@@ -11,7 +11,7 @@ class Controller_A extends Controller_Semac {
 		$user = Model_User::get_from_auth();
 
 		$data = array();
-		$atividade->more->descricao_ext = Markdown::parse($atividade->more->descricao_ext);
+		$atividade->more->descricao_ext = Markdown::parse(utf8_encode($atividade->more->descricao_ext));
 
 		$data['atividade'] = $atividade;
 		$data['inscricao_efetuada'] = Session::get_flash('inscrito', false);
@@ -23,7 +23,7 @@ class Controller_A extends Controller_Semac {
 		$this->template->ogtags = array(
 			'title'       => $atividade->titulo,
 			'description' => $atividade->more->descricao,
-			'image'       => '',
+			'image'       => Uri::base().Asset::find_file('logo-inf.gif', 'img'),
 		);
 		$this->template->content = View::forge('atividades/index', $data);
 	}

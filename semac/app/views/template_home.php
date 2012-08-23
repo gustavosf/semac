@@ -13,6 +13,7 @@
 
 	<!--- favicon -->
 	<link rel="icon" type="image/x-icon" href="<?php echo Asset::get_file('favicon.ico', 'img') ?>" />
+	<link rel="canonical" href="<?php echo Uri::current() ?>">
 
 	<!-- CSS: implied media="all" -->
 	<?php echo Asset::css('bootstrap.min.css'); ?>
