@@ -33,6 +33,7 @@ class Controller_Semac extends Controller_Hybrid {
 		{
 			$this->template->interface_topbar = View::forge('interface/topbar', array(
 				'user' => @Auth::instance()->get_screen_name(),
+				'tipos_atividade' => Model_Tipo_Atividade::find('all'),
 			));
 		}
 		return $response;

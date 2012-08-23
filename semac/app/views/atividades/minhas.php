@@ -15,7 +15,7 @@
 		<tr>
 			<td>
 				<?php echo $inscricao->atividade->titulo ?>
-				<a href="<?php echo URI::CREATE('a/'.$inscricao->atividade->id) ?>">
+				<a href="<?php echo URI::CREATE("atividades/{$inscricao->atividade->tipo->nome_canonico}/{$inscricao->atividade->id}") ?>">
 					<?php echo ASSET::img('ico/link.png') ?>
 				</a>
 			</td>

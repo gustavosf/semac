@@ -41,7 +41,7 @@
 			<div class="controls">
 				<select name="atividade" id="atividade">
 					<?php foreach ($atividades as $id => $atividade): ?>
-						<option value='<?php echo $id; ?>'><?php echo $atividade; ?></option>
+						<option value='<?php echo $id; ?>'><?php echo $atividade->nome; ?></option>
 					<?php endforeach ?>
 				</select>
 			</div>

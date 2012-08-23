@@ -37,18 +37,13 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Atividades <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="<?php echo URI::create('/coding_dojos') ?>">Coding Dojos</a></li>
-							<li><a href="<?php echo URI::create('/cursos') ?>">Cursos</a></li>
-							<li><a href="<?php echo URI::create('/lightning_talks') ?>">Lightning Talks</a></li>
-							<li><a href="<?php echo URI::create('/maratonas') ?>">Maratonas de Prog.</a></li>
-							<li><a href="<?php echo URI::create('/minicursos') ?>">Minicursos</a></li>
-							<li><a href="<?php echo URI::create('/paineis') ?>">Painéis</a></li>
-							<li><a href="<?php echo URI::create('/palestras') ?>">Palestras</a></li>
-							<li><a href="<?php echo URI::create('/reunioes') ?>">Reuniões</a></li>
+							<?php foreach ($tipos_atividade as $id => $tipo): ?>
+								<li><a href="<?php echo URI::create("atividades/{$tipo->nome_canonico}") ?>"><?php echo $tipo->nome ?></a></li>
+							<?php endforeach ?>
 						</ul>
 					</li>
 				</ul>
-				<form class="navbar-search" action="<?php echo Uri::create('a/search') ?>" method="post">
+				<form class="navbar-search" action="<?php echo Uri::create('busca') ?>" method="post">
 					<input name="search" type="text" class="search-query pull-right" placeholder="Busca">
 				</form>
 			</div>

@@ -15,11 +15,11 @@
 	<tbody>
 		<?php foreach ($atividades as $id => $atividade): ?>
 			<tr>
-				<td><?php echo $atividade->getTipo(); ?></td>
+				<td><?php echo $atividade->tipo->nome; ?></td>
 				<td><?php echo $atividade->titulo ?: '-'; ?></td>
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>
-					<a href="<?php echo URI::create('a/'.$atividade->id); ?>"
+					<a href="<?php echo URI::create('atividades/'.$atividade->tipo->nome_canonico.'/'.$atividade->id); ?>"
 						rel="tooltip" title="Página da atividade">
 						<?php echo Asset::img('ico/link.png'); ?></a>
 					<a href="<?php echo URI::create('admin/atividades/editar/'.$atividade->id); ?>"

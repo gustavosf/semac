@@ -7,7 +7,7 @@
 			<div class="page-header">
 				<h1>Não possuo um cadastro</h1>
 			</div>
-			<form method="post" class="form-horizontal" action="<?php echo URI::create('a/cadastro') ?>">
+			<form method="post" class="form-horizontal" action="<?php echo URI::create('cadastro') ?>">
 				<fieldset>
 					<input type="hidden" name="form" value="cadastro">
 					<input type="hidden" name="atividade" value="<?php echo $atividade_id ?>">
@@ -60,7 +60,7 @@
 					Senha inválida ou cadastro não encontrado no sistema
 				</div>
 			<?php endif ?>
-			<form method="post" class="form-horizontal" action="<?php echo URI::create('a/cadastro') ?>">
+			<form method="post" class="form-horizontal" action="<?php echo URI::create('cadastro') ?>">
 				<input type="hidden" name="form" value="login">
 				<input type="hidden" name="atividade" value="<?php echo $atividade_id ?>">
 				<fieldset>

@@ -1,7 +1,7 @@
 <header class="jumbotron subhead">
 	<div class="container">
-		<h1><?php echo $tipo ?></h1>
-		<p class="lead"><?php echo $descricao ?></p>
+		<h1><?php echo $tipo->nome ?></h1>
+		<p class="lead"><?php echo $tipo->descricao ?></p>
 	</div>
 </header>
 
@@ -17,7 +17,7 @@
 				<tbody>
 					<?php foreach ($atividades as $id => $atividade): ?>
 						<tr style='cursor:pointer'>
-							<td><a href="<?php echo URI::create('a/'.$atividade->id) ?>"><?php echo $atividade->titulo ?></a></td>
+							<td><a href="<?php echo URI::create("atividades/{$tipo->nome_canonico}/{$atividade->id}") ?>"><?php echo $atividade->titulo ?></a></td>
 							<td><?php echo $atividade->responsavel ?></td>
 							<td><?php echo str_replace("\n", "<br>", $atividade->getDataSerial()) ?></td>
 						</tr>

@@ -14,7 +14,7 @@
 	<tbody>
 		<?php foreach ($atividades as $id => $atividade): ?>
 			<tr>
-				<td><?php echo $atividade->getTipo(); ?></td>
+				<td><?php echo $atividade->tipo->nome; ?></td>
 				<td><?php echo $atividade->titulo ?: '-'; ?></td>
 				<td><?php echo $atividade->responsavel ?: '-'; ?></td>
 				<td>

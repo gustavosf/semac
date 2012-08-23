@@ -41,8 +41,9 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$errors = null;
 			if (Input::post('nome') == '') $errors['nome'] = "Nome inválido";
 			if ( ! filter_var(Input::post('email'), FILTER_VALIDATE_EMAIL)) $errors['email'] = "Email inválido";
-			$atividades = Model_Atividade::$atividades;
-			if ( ! isset($atividades[Input::post('atividade')])) $errors['atividade'] = "Atividade Inválida!";
+
+			$tipo_atividade = Model_Tipo_Atividade::find(Input::post('atividade'));
+			if ( ! $tipo_atividade) $errors['atividade'] = "Atividade Inválida!";
 
 			$data['email'] = Input::post('email');
 			$data['nome'] = Input::post('nome');
@@ -55,7 +56,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 
 				$atividade = new Model_Atividade;
 				$atividade->chair = $user->id;
-				$atividade->tipo = Input::post('atividade');
+				$atividade->id_tipo = Input::post('atividade');
 				$atividade->save();
 
 				$data['pass'] = $pass;
@@ -72,7 +73,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 			}
 		}
 
-		$data['atividades'] = Model_Atividade::$atividades;
+		$data['atividades'] = Model_Tipo_Atividade::find()->get();
 		$this->template->title = 'Nova Atividade';
 		$this->template->content = View::forge('admin/atividades/nova', $data);
 	}

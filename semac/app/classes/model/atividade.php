@@ -178,4 +178,9 @@ class Model_Atividade extends Orm\Model {
 		return $this->vagas > 0 ? $this->vagas - $inscricoes : true;
 	}
 
+	public function get_readable_id()
+	{
+		return $this->id.'-'.\Inflector::friendly_title($this->titulo, '-', true);
+	}
+
 }

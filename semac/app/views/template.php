@@ -28,6 +28,13 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
+	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
+	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
+		<?php echo Asset::js($asset); ?>
+	<?php endforeach; ?>
+	<?php echo Asset::js('application.js'); ?>
+
 	<?php if (isset($ogtags)): ?>
 		<meta property="og:title" content="<?php echo $ogtags['title'] ?>" />
 		<meta property="og:description" content="<?php echo $ogtags['description'] ?>" />
@@ -44,13 +51,6 @@
 		</div>
 	</div>
 	<?php echo View::forge('templates/footer') ?>
-
-	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
-	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>
-	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
-		<?php echo Asset::js($asset); ?>
-	<?php endforeach; ?>
-	<?php echo Asset::js('application.js'); ?>
 	<?php echo View::forge('templates/analytics') ?>
 </body>
 </html>
