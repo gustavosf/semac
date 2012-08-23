@@ -4,7 +4,7 @@ class Model_Atividade extends Orm\Model {
 
 	protected static $_properties = array(
 		'id',
-		'tipo',
+		'id_tipo',
 		'chair',
 		'responsavel',
 		'carga_horaria',
@@ -42,22 +42,18 @@ class Model_Atividade extends Orm\Model {
 		),
 	);
 
+	protected static $_has_one = array(
+		'tipo' => array(
+			'model_to' => 'Model_Tipo_Atividade',
+			'key_to'   => 'id',
+			'key_from' => 'id_tipo',
+		),
+	);
+
 	protected static $_belongs_to  = array(
 		'user' => array(
 			'key_from' => 'chair',
 		),
-	);
-
-	/* Variávies */
-	static $atividades = array(
-		0 => 'Coding Dojo',
-		1 => 'Curso',
-		2 => 'Lightning Talk',
-		3 => 'Maratona de Programação',
-		4 => 'Mini-Curso',
-		5 => 'Painel',
-		6 => 'Palestra',
-		7 => 'Reunião',
 	);
 
 	static $status = array(
@@ -65,17 +61,6 @@ class Model_Atividade extends Orm\Model {
 		1 => 'Ativo',
 		2 => 'Cancelado',
 	);
-
-	/* Métodos */
-	/**
-	 * Retorna o tipo de atividade
-	 *
-	 * @return string
-	 */
-	public function getTipo()
-	{
-		return Model_Atividade::$atividades[$this->tipo];
-	}
 
 	/**
 	 * Retorna as datas setadas
@@ -191,6 +176,11 @@ class Model_Atividade extends Orm\Model {
 			->where('status', 1)->count();
 
 		return $this->vagas > 0 ? $this->vagas - $inscricoes : true;
+	}
+
+	public function get_readable_id()
+	{
+		return $this->id.'-'.\Inflector::friendly_title($this->titulo, '-', true);
 	}
 
 }

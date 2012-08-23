@@ -1,13 +1,17 @@
-<div class="container">
-	<div class="hero-unit">
+<header class="jumbotron">
+	<div class="container">
+		<h1>Inscrição</h1>
 		<p>Você está tentando se inscrever na atividade <strong><?php echo $atividade ?></strong>. Para prosseguir, você precisa cadastrar-se no sistema, ou caso já possuas um registro, identificar-se utilizando as suas credenciais.</p>
 	</div>
+</header>
+
+<div class="container">
 	<div class="row">
 		<div class="span6">
 			<div class="page-header">
 				<h1>Não possuo um cadastro</h1>
 			</div>
-			<form method="post" class="form-horizontal" action="<?php echo URI::create('a/cadastro') ?>">
+			<form method="post" class="form-horizontal" action="<?php echo URI::create('cadastro') ?>">
 				<fieldset>
 					<input type="hidden" name="form" value="cadastro">
 					<input type="hidden" name="atividade" value="<?php echo $atividade_id ?>">
@@ -60,7 +64,7 @@
 					Senha inválida ou cadastro não encontrado no sistema
 				</div>
 			<?php endif ?>
-			<form method="post" class="form-horizontal" action="<?php echo URI::create('a/cadastro') ?>">
+			<form method="post" class="form-horizontal" action="<?php echo URI::create('cadastro') ?>">
 				<input type="hidden" name="form" value="login">
 				<input type="hidden" name="atividade" value="<?php echo $atividade_id ?>">
 				<fieldset>
