@@ -20,6 +20,11 @@ class Controller_A extends Controller_Semac {
 		$data['vagas_disponiveis'] = $atividade->vagas_disponiveis();
 
 		$this->template->title = $atividade->titulo;
+		$this->template->ogtags = array(
+			'title'       => $atividade->titulo,
+			'description' => $atividade->more->descricao,
+			'image'       => '',
+		);
 		$this->template->content = View::forge('atividades/index', $data);
 	}
 

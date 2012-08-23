@@ -5,6 +5,11 @@ class Controller_Home extends Controller_Semac {
 	public function action_index()
 	{
 		$data = array();
+		$this->template->ogtags = array(
+			'title'       => 'Semana Acadêmica da Informática',
+			'description' => 'A Semana Acadêmica do Instituto de Informática da UFRGS (SEMAC 2012/2) ocorrerá de 01 a 05 de outubro',
+			'image'       => '',
+		);
 		$this->template->content = View::forge('home/index' ,$data);
 	}
 

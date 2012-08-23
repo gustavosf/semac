@@ -30,18 +30,12 @@
 	<?php if (isset($assets['js'])) foreach (@$assets['js'] as $asset): ?>
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
-
-	<!-- scripts concatenated and minified via ant build script -->
 	<?php echo Asset::js('application.js'); ?>
-	<!-- end scripts-->
-
 
 	<?php if (isset($ogtags)): ?>
-		<!-- More ideas for your <head> here: h5bp.com/docs/#head-Tips -->
-		<!-- Facebook Open Graph: Display information -->
-		<meta property="og:title" content="" />
-		<meta property="og:description" content="" />
-		<meta property="og:image" content="" />
+		<meta property="og:title" content="<?php echo $ogtags['title'] ?>" />
+		<meta property="og:description" content="<?php echo $ogtags['description'] ?>" />
+		<meta property="og:image" content="<?php echo $ogtags['image'] ?>" />
 	<?php endif; ?>
 </head>
 
