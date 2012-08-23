@@ -34,15 +34,6 @@
 	<!-- scripts concatenated and minified via ant build script -->
 	<?php echo Asset::js('application.js'); ?>
 	<!-- end scripts-->
-
-
-	<?php if (isset($ogtags)): ?>
-		<!-- More ideas for your <head> here: h5bp.com/docs/#head-Tips -->
-		<!-- Facebook Open Graph: Display information -->
-		<meta property="og:title" content="" />
-		<meta property="og:description" content="" />
-		<meta property="og:image" content="" />
-	<?php endif; ?>
 </head>
 
 <body>

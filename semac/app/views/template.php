@@ -50,6 +50,5 @@
 	<!-- scripts concatenated and minified via ant build script -->
 	<?php echo Asset::js('application.js'); ?>
 	<!-- end scripts-->
-
 </body>
 </html>

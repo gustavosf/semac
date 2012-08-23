@@ -70,14 +70,22 @@
 			<?php elseif ($inscrito == 2): ?>
 				<span class="label label-important">Inscrição recusada nesta atividade</span>
 			<?php endif ?>
+			<hr>
 		</div>
 	</div>
+
 	<?php if ($atividade->more->shortbio): ?>
 		<div class="row">
-			<div class="span12">
+			<div class="span9">
 				<h3>Sobre <?php echo $atividade->responsavel ?>:</h3>
 				<?php echo $atividade->more->shortbio ?>
 			</div>
 		</div>
 	<?php endif ?>
+	<div class="row">
+		<div class="span9">
+			<div class="fb-comments" data-href="https://semac-inf.rhcloud.com" data-num-posts="4" data-width="470"></div>
+		</div>
+	</div>
+
 </div>

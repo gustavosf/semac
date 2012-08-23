@@ -36,8 +36,7 @@
 	color:red;
 }
 
-
-
+.fb-comments, .fb-comments > span[style], .fb_iframe_widget iframe[style] { width: 100% !important; }
 
 /* Jumbotrons
 -------------------------------------------------- */
@@ -147,3 +146,4 @@
   background: url(../img/bs-docs-masthead-pattern.png) repeat center center;
   opacity: .4;
 }
+
