@@ -35,8 +35,14 @@
 </head>
 
 <body>
-	<?php echo $interface_topbar; ?>
-	<?php echo $content; ?>
+	<?php echo View::forge('templates/facebook') ?>
+	<div class="wrapper">
+		<?php echo $interface_topbar; ?>
+		<div class="main">
+			<?php echo $content; ?>
+		</div>
+	</div>
+	<?php echo View::forge('templates/footer') ?>
 
 	<?php echo Asset::js('jquery/jquery-1.8.0.min.js'); ?>
 	<?php echo Asset::js('bootstrap/bootstrap.min.js'); ?>

@@ -37,21 +37,25 @@
 </head>
 
 <body>
-
-	<?php echo $interface_topbar; ?>
-
-	<div class="container">
-		<div class="row">
-			<div class="span3" style="margin-top:20px">
-				<div class="well sidebar-nav">
-					<?php echo $menu; ?>
+	<?php echo View::forge('templates/facebook') ?>
+	<div class="wrapper">
+		<?php echo $interface_topbar; ?>
+		<div class="main">
+			<div class="container">
+				<div class="row">
+					<div class="span3" style="margin-top:20px">
+						<div class="well sidebar-nav">
+							<?php echo $menu; ?>
+						</div>
+					</div>
+					<div class="span9 data">
+						<?php echo $content; ?>
+					</div>
 				</div>
-			</div>
-			<div class="span9 data">
-				<?php echo $content; ?>
-			</div>
+			</div> <!-- /container -->
 		</div>
-	</div> <!-- /container -->
+	</div>
+	<?php echo View::forge('templates/footer') ?>
 
 </body>
 </html>

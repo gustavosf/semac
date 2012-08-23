@@ -71,6 +71,10 @@
 				<span class="label label-important">Inscrição recusada nesta atividade</span>
 			<?php endif ?>
 			<hr>
+
+			<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo urlencode(Uri::current()); ?>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=260679840614937" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+			<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120" data-href="<?php echo urlencode(Uri::current()) ?>"></div>
+			<hr>
 		</div>
 	</div>
 
@@ -84,7 +88,7 @@
 	<?php endif ?>
 	<div class="row">
 		<div class="span9">
-			<div class="fb-comments" data-href="https://semac-inf.rhcloud.com" data-num-posts="4" data-width="470"></div>
+			<div class="fb-comments" data-href="<?php echo Uri::current() ?>" data-num-posts="4" data-width="470"></div>
 		</div>
 	</div>
 
