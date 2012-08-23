@@ -57,6 +57,6 @@
 		</div>
 	</div>
 	<?php echo View::forge('templates/footer') ?>
-
+	<?php echo View::forge('templates/analytics') ?>
 </body>
 </html>

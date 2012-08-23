@@ -51,5 +51,6 @@
 		<?php echo Asset::js($asset); ?>
 	<?php endforeach; ?>
 	<?php echo Asset::js('application.js'); ?>
+	<?php echo View::forge('templates/analytics') ?>
 </body>
 </html>

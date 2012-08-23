@@ -265,4 +265,11 @@ return array(
 		'language'  => array(),
 	),
 
+	/**
+	 * Google Analytics
+	 */
+	'analytics' => array(
+		'account' => 'UA-34287176-1',
+	),
+
 );
