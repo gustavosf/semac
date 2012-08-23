@@ -23,8 +23,22 @@
 			<?php if ($atividade->more->descricao_ext): ?>
 				<hr>
 				<?php echo html_entity_decode($atividade->more->descricao_ext); ?>
-				<hr>
 			<?php endif ?>
+			<?php if ($atividade->more->shortbio): ?>
+				<hr>
+				<div class="row">
+					<div class="span9">
+						<h3>Sobre <?php echo $atividade->responsavel ?>:</h3>
+						<?php echo $atividade->more->shortbio ?>
+					</div>
+				</div>
+			<?php endif ?>
+			<hr>
+			<div class="row">
+				<div class="span9">
+					<div class="fb-comments" data-href="<?php echo Uri::current() ?>" data-num-posts="4" data-width="470"></div>
+				</div>
+			</div>
 		</div>
 		<div class="span3">
 			<table class='table table-striped'>
@@ -75,22 +89,6 @@
 			<div class="g-plusone" data-size="medium" data-width="120" data-href="<?php echo $clean_uri ?>"></div>
 			<hr>
 			<img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&choe=UTF-8&chl=<?php echo urlencode(Uri::current()) ?>" class="qrcode"/>
-			<hr>
 		</div>
 	</div>
-
-	<?php if ($atividade->more->shortbio): ?>
-		<div class="row">
-			<div class="span9">
-				<h3>Sobre <?php echo $atividade->responsavel ?>:</h3>
-				<?php echo $atividade->more->shortbio ?>
-			</div>
-		</div>
-	<?php endif ?>
-	<div class="row">
-		<div class="span9">
-			<div class="fb-comments" data-href="<?php echo Uri::current() ?>" data-num-posts="4" data-width="470"></div>
-		</div>
-	</div>
-
 </div>

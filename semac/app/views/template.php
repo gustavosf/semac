@@ -36,9 +36,12 @@
 	<?php echo Asset::js('application.js'); ?>
 
 	<?php if (isset($ogtags)): ?>
+		<meta property="og:site_name" content="SEMAC" />
 		<meta property="og:title" content="<?php echo $ogtags['title'] ?>" />
 		<meta property="og:description" content="<?php echo $ogtags['description'] ?>" />
+		<meta property="og:type" content="article" />
 		<meta property="og:image" content="<?php echo $ogtags['image'] ?>" />
+		<link rel="image_src" href="<?php echo $ogtags['image'] ?>" />
 	<?php endif; ?>
 </head>
 
