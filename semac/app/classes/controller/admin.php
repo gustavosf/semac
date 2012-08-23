@@ -122,7 +122,7 @@ class Controller_Admin extends Controller_Semac {
 
 				Session::set_flash('success', 'Suas novas credenciais para acesso foram enviadas para o e-mail <b>'.Input::post('email').'</b>');
 
-				Response::redirect('admin/login');
+				Response::redirect('login');
 			}
 		}
 		$this->template->title = 'Recuperação de Senha';
@@ -137,7 +137,7 @@ class Controller_Admin extends Controller_Semac {
 	 */
 	public function action_logout()
 	{
-		if ( ! Auth::check()) Response::redirect('admin/login');
+		if ( ! Auth::check()) Response::redirect('login');
 		Auth::instance()->logout();
 		$this->template->title = 'Sair';
 		$this->template->content = View::forge('admin/logout');

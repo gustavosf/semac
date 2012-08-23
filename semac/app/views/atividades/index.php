@@ -61,7 +61,7 @@
 				<?php if ($vagas_disponiveis === 0): ?>
 					<span class="label label-important">Limite de vagas atingido</span>
 				<?php else: ?>
-					<a href="<?php echo URI::create("atividades/{$atividade->tipo->nome_canonico}/{$atividade->id}/inscricao") ?>"><button class="btn btn-info">Inscrição</button></a>
+					<a href="<?php echo URI::create("atividades/{$atividade->tipo->nome_canonico}/{$atividade->get_readable_id()}/inscricao") ?>"><button class="btn btn-info">Inscrição</button></a>
 				<?php endif ?>
 			<?php elseif ($inscrito == 0): ?>
 				<span class="label label-warning">Cadastrado nesta atividade</span>

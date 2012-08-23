@@ -21,7 +21,7 @@ class Controller_Semac extends Controller_Hybrid {
 			else
 			{
 				Cookie::set('redirect', Uri::string());
-				Response::redirect('admin/login');
+				Response::redirect('login');
 			}
 		}
 	}

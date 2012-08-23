@@ -16,7 +16,7 @@ class Create_tipos_atividade {
 
 		\DB::query("ALTER TABLE atividades CHANGE COLUMN tipo id_tipo int")->execute();
 
-		\Model_Tipo_Atividade::forge(array('id' => 1, 'nome' => 'Coding Dojo', 'nome_canonico' => 'coding_dojo', 'descricao' => 'Coding Dojos onde programadores se reunem para resolver um problema de maneira cooperativa e inclusiva, criando um programa usando técnicas de Test Driven Developent (TDD) e Pair Programming'))->save();
+		\Model_Tipo_Atividade::forge(array('id' => 1, 'nome' => 'Coding Dojo', 'nome_canonico' => 'coding-dojo', 'descricao' => 'Coding Dojos onde programadores se reunem para resolver um problema de maneira cooperativa e inclusiva, criando um programa usando técnicas de Test Driven Developent (TDD) e Pair Programming'))->save();
 		\Model_Tipo_Atividade::forge(array('id' => 2, 'nome' => 'Curso', 'nome_canonico' => 'curso', 'descricao' => 'Cursos blablalbal blabl ablaba lb all balb albla lb ababa bla lbal bla bla lba lba bla bla bal blabal bla bla lba lb al ba'))->save();
 		\Model_Tipo_Atividade::forge(array('id' => 3, 'nome' => 'Lightning Talk', 'nome_canonico' => 'lightning-talk', 'descricao' => 'Lightning Talks com duração de 5 minutos cada, onde são discutidos projetos em desenvolvimento, mini-cursos de alguma tecnologia, apresentações de hardware/software, cases e etc'))->save();
 		\Model_Tipo_Atividade::forge(array('id' => 4, 'nome' => 'Maratona de Programação', 'nome_canonico' => 'maratona', 'descricao' => 'Maratonas onde equipes recebem tarefas para programar em condições fora do convencional'))->save();

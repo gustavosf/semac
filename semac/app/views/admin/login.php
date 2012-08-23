@@ -36,7 +36,7 @@
 				<center>
 					<input type="submit" class="btn btn-primary" value="Acessar">&nbsp;<input type="reset" class="btn" value="Cancelar"><br>
 					<br>
-					<a href="<?php echo Uri::create('admin/esqueci_minha_senha') ?>">Esqueceu a senha?</a>
+					<a href="<?php echo Uri::create('esqueci_minha_senha') ?>">Esqueceu a senha?</a>
 				</center>
 			</fieldset>
 		</form>

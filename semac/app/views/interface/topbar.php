@@ -25,10 +25,10 @@
 							<li><a href="<?php echo URI::create('admin') ?>">Administração</a></li>
 						<?php endif ?>
 						<li class="divider"></li>
-						<li><a href="<?php echo Uri::create('admin/logout'); ?>">Sair</a></li>
+						<li><a href="<?php echo Uri::create('logout'); ?>">Sair</a></li>
 					</ul>
 				<?php else: ?>
-					<a href="<?php echo Uri::create('admin/login')?>"
+					<a href="<?php echo Uri::create('login')?>"
 						class="btn btn-primary" style="margin-top:1px;">Login</a>
 				<?php endif; ?>
 			</div>

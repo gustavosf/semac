@@ -30,6 +30,7 @@ class Controller_Home extends Controller_Semac {
 		}
 		else
 		{
+			$id = strtok($id, '-');
 			$atividade = Model_Atividade::find($id);
 			if ( ! $atividade OR $atividade->status != 1) throw new HttpNotFoundException;
 			$user = Model_User::get_from_auth();
@@ -55,6 +56,7 @@ class Controller_Home extends Controller_Semac {
 
 	public function action_inscricao($id_tipo, $id_atividade)
 	{
+		$id_atividade = strtok($id_atividade, '-');
 		$atividade = Model_Atividade::find($id_atividade);
 		if ( ! $atividade OR $atividade->status != 1) throw new HttpNotFoundException;
 
@@ -86,7 +88,7 @@ class Controller_Home extends Controller_Semac {
 			} catch (Exception $e) {
 				Session::set_flash('inscrito', $e->getMessage());
 			}
-			Response::redirect("atividades/{$id_tipo}/{$atividade->id}");
+			Response::redirect("atividades/{$id_tipo}/{$atividade->get_readable_id()}");
 		}
 	}
 
@@ -112,7 +114,7 @@ class Controller_Home extends Controller_Semac {
 						'errors' => array('email' => 'O e-mail '.Input::post('email').' já está cadastrado no sistema'),
 						'values' => $_POST
 					));
-					Response::redirect("atividades/{$atividade->tipo->nome_canonico}/{$atividade->id}/inscricao}");
+					Response::redirect("atividades/{$atividade->tipo->nome_canonico}/{$atividade->get_readable_id()}/inscricao}");
 				}
 
 				$val = Validation::forge();
@@ -146,7 +148,7 @@ class Controller_Home extends Controller_Semac {
 						'errors' => $val->error(),
 						'values' => $_POST,
 					));
-					Response::redirect("atividades/{$atividade->tipo->nome_canonico}/{$atividade->id}/inscricao");
+					Response::redirect("atividades/{$atividade->tipo->nome_canonico}/{$atividade->get_readable_id()}/inscricao");
 				}
 			}
 			elseif (Input::post('form') == 'login')
