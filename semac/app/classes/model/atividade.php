@@ -15,6 +15,7 @@ class Model_Atividade extends Orm\Model {
 		'local',
 		'titulo',
 		'selecao',
+		'tags' => array('data_type' => 'serialize', 'default' => 'a:0:{}'),
 	);
 
 	/* Observers */
