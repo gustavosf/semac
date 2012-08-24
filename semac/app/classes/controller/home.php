@@ -8,6 +8,8 @@ class Controller_Home extends Controller_Semac {
 			'title'       => 'Semana Acadêmica da Informática',
 			'description' => 'A Semana Acadêmica do Instituto de Informática da UFRGS (SEMAC 2012/2) ocorrerá de 01 a 05 de outubro',
 			'image'       => Uri::base().Asset::find_file('logo-inf.jpg', 'img'),
+			'app_id'      => Config::get('facebook.app_id'),
+			'admins'      => Config::get('facebook.admins'),
 		);
 		$this->template->content = View::forge('home/index', array(
 			'tipos_atividade' => Model_Tipo_Atividade::find('all'),
@@ -49,6 +51,8 @@ class Controller_Home extends Controller_Semac {
 				'title'       => $atividade->titulo,
 				'description' => $atividade->more->descricao,
 				'image'       => Uri::base().Asset::find_file('logo-inf.jpg', 'img'),
+				'app_id'      => Config::get('facebook.app_id'),
+				'admins'      => Config::get('facebook.admins'),
 			);
 			$this->template->content = View::forge('atividades/index', $data);
 		}

@@ -36,6 +36,8 @@
 	<?php echo Asset::js('application.js'); ?>
 
 	<?php if (isset($ogtags)): ?>
+		<meta property="fb:admins" content="<?php echo $ogtags['admins'] ?>" />
+		<meta property="fb:app_id" content="<?php echo $ogtags['app_id'] ?>" />
 		<meta property="og:site_name" content="SEMAC" />
 		<meta property="og:title" content="<?php echo $ogtags['title'] ?>" />
 		<meta property="og:description" content="<?php echo $ogtags['description'] ?>" />

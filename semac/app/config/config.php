@@ -272,4 +272,12 @@ return array(
 		'account' => 'UA-34287176-1',
 	),
 
+	/**
+	 * Facebook
+	 */
+	'facebook' => array(
+		'app_id' => '416729198375027',
+		'admins' => '734956729',
+	),
+
 );
