@@ -173,7 +173,7 @@ class Controller_Home extends Controller_Semac {
 
 	public function action_busca()
 	{
-		$term = Input::post('search');
+		$term = Input::get('q');
 
 		$atividades = Model_Atividade::find()
 			->where('status', 1)
@@ -181,6 +181,7 @@ class Controller_Home extends Controller_Semac {
 			->where('titulo', 'like', "%{$term}%")
 			->or_where('more', 'like', "%{$term}%")
 			->or_where('responsavel', 'like', "%{$term}%")
+			->or_where('tags', 'like', "%:\"{$term}\"%")
 			->and_where_close()
 			->get();
 

@@ -15,6 +15,7 @@ class Model_Atividade extends Orm\Model {
 		'local',
 		'titulo',
 		'selecao',
+		'tags' => array('data_type' => 'serialize', 'default' => 'a:0:{}'),
 	);
 
 	/* Observers */
@@ -181,6 +182,14 @@ class Model_Atividade extends Orm\Model {
 	public function get_readable_id()
 	{
 		return $this->id.'-'.\Inflector::friendly_title($this->titulo, '-', true);
+	}
+
+	public static function get_all_tags()
+	{
+		$atividades = Model_Atividade::find('all');
+		$tags = array();
+		foreach ($atividades as $atividade) $tags = array_merge($tags, $atividade->tags);
+		return array_unique($tags);
 	}
 
 }

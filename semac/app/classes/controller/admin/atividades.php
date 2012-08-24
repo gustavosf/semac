@@ -84,15 +84,15 @@ class Controller_Admin_Atividades extends Controller_Semac
 	 */
 	public function action_listar()
 	{
-		$data = array();
-
 		$atividades = Model_Atividade::find()
+			->related('tipo')
 			->where('chair', Auth::instance()->get_user_id())
 			->get();
-		$data['atividades'] = $atividades;
 
 		$this->template->title = 'Lista de Atividades';
-		$this->template->content = View::forge('admin/atividades/listar', $data);
+		$this->template->content = View::forge('admin/atividades/listar', array(
+			'atividades' => $atividades,
+		));
 	}
 
 	/**
@@ -106,6 +106,8 @@ class Controller_Admin_Atividades extends Controller_Semac
 		$atividade = Model_Atividade::find()
 			->where(array('id' => $id, 'chair' => Auth::instance()->get_user_id()))
 			->get_one();
+
+		$tags = Model_Atividade::get_all_tags();
 
 		if ($_POST)
 		{
@@ -128,8 +130,9 @@ class Controller_Admin_Atividades extends Controller_Semac
 			$atividade->carga_horaria = $val->validated('carga_horaria');
 			$atividade->vagas = $val->validated('vagas');
 			$atividade->selecao = $val->input('selecao');
+			$atividade->tags = $val->input('tags') ? explode(',', $val->input('tags')) : array();
 
-			if ($atividade->more === null) $atividade->more = new stdClass;
+			if ( ! $atividade->more) $atividade->more = new stdClass;
 			$atividade->more->descricao = $val->input('descricao');
 			$atividade->more->descricao_ext = $val->input('descricao_ext');
 			$atividade->more->shortbio = $val->input('shortbio');
@@ -145,6 +148,7 @@ class Controller_Admin_Atividades extends Controller_Semac
 		}
 
 		$data['atividade'] = $atividade;
+		$data['tags'] = $tags;
 
 		$this->template->title = 'Edição de Atividade';
 		$this->template->content = View::forge('admin/atividades/editar', $data);
