@@ -184,4 +184,12 @@ class Model_Atividade extends Orm\Model {
 		return $this->id.'-'.\Inflector::friendly_title($this->titulo, '-', true);
 	}
 
+	public static function get_all_tags()
+	{
+		$atividades = Model_Atividade::find('all');
+		$tags = array();
+		foreach ($atividades as $atividade) $tags = array_merge($tags, $atividade->tags);
+		return array_unique($tags);
+	}
+
 }

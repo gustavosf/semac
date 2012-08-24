@@ -83,6 +83,13 @@
 
 		<legend>Campos Opcionais</legend>
 
+		<div class="control-group<?php echo @$erros['tags']?' error':'' ?>">
+			<label class="control-label" for="tags">Tags</label>
+			<div class="controls">
+				<input type="text" class="span6" name="tags" id="tags">
+			</div>
+		</div>
+
 		<div class="control-group<?php echo @$erros['descricao']?' error':'' ?>">
 			<label class="control-label" for="descricao">Resumo da Atividade</label>
 			<div class="controls">
@@ -123,14 +130,24 @@
 </form>
 
 <script>
-$(function() {
+$(document).ready(function() {
 	$.datepicker.setDefaults({'dateFormat': 'dd/mm/yy'});
 	$(document.body).tooltip({ selector: '[rel=tooltip]'});
 	$(document.body).delegate("input[rel=date]", "focusin", function(){
 		$(this).datepicker();
 	});
+	$("#tags").tokenInput(
+		[<?php foreach ($tags as $id => $tag) echo "{id: '{$tag}', name: '{$tag}'},"; ?>],
+		{
+			theme: "facebook",
+			prePopulate: [<?php foreach ($atividade->tags as $id => $tag) echo "{id: '{$tag}', name: '{$tag}'},"; ?>],
+			hintText: 'Digite uma tag',
+			noResultsText: 'Nenhuma tag encontrada',
+			searchingText: 'Buscando...',
+			preventDuplicates: true
+		}
+	);
 });
-
 
 var novaData = function(el) {
 	html = $(el).parent().clone();
@@ -157,4 +174,6 @@ var preview = function () {
 	);
 }
 </script>
+
+
 <?php endif ?>

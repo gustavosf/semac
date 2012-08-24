@@ -209,10 +209,7 @@ body, html {
 /* Example tokeninput style #2: Facebook style */
 ul.token-input-list-facebook {
     overflow: hidden; 
-    height: auto !important; 
-    height: 1%;
     width: 400px;
-    border: 1px solid #8496ba;
     cursor: text;
     font-size: 12px;
     font-family: Verdana;
@@ -220,9 +217,11 @@ ul.token-input-list-facebook {
     z-index: 999;
     margin: 0;
     padding: 0;
-    background-color: #fff;
     list-style-type: none;
-    clear: left;
+    border: 1px solid #CCC;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px
 }
 
 ul.token-input-list-facebook li input {

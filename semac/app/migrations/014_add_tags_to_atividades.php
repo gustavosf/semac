@@ -7,7 +7,7 @@ class Add_tags_to_atividades {
 	public function up()
 	{
 		\DBUtil::add_fields('atividades', array(
-			'tags' => array('type' => 'varchar', 'constraint' => 255, 'null' => true),
+			'tags' => array('type' => 'text', 'null' => true, 'defailt' => 'a:0:{}'),
 		));
 	}
 
