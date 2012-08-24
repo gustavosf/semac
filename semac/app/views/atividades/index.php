@@ -53,9 +53,14 @@
 					<?php endforeach ?>
 				</tbody>
 			</table>
-			<b>Trilha:</b> <?php //echo $trilha ?><br>
 			<?php if ($vagas): ?>
 				<hr><strong>Vagas:</strong> <?php echo $vagas ?>
+			<?php endif ?>
+			<?php if ($atividade->tags): ?>
+				<hr>
+				<?php foreach ($atividade->tags as $id => $tag): ?>
+					<a href="<?php echo Uri::create("busca/?q={$tag}") ?>"><span class="label label-important"><?php echo $tag ?></span></a> 
+				<?php endforeach ?>
 			<?php endif ?>
 			<hr>
 			<strong>Documentação Extra</strong><br><br>

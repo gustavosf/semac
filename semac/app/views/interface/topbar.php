@@ -43,8 +43,8 @@
 						</ul>
 					</li>
 				</ul>
-				<form class="navbar-search" action="<?php echo Uri::create('busca') ?>" method="post">
-					<input name="search" type="text" class="search-query pull-right" placeholder="Busca">
+				<form class="navbar-search" action="<?php echo Uri::create('busca/') ?>" method="get">
+					<input name="q" type="text" class="search-query pull-right" placeholder="Busca">
 				</form>
 			</div>
 		</div>
